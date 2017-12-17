@@ -1,0 +1,3 @@
+-> será que faz sentido ter os alunos indexados por prefixo do email no contexto da base de dados uma vez que não temos esse atributo? talvez a nivel do map sim mas na bd talvez seja mais simples pesquisar pelo email já que é unico.
+-> falta representar no modelo de classes a UC (já se encontra na indexação do map de turnos mas ainda não está especificada)
+-> será que vale mesmo a pena ter indexações de maps com tuplos como key???
