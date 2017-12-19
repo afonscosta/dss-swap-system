@@ -52,7 +52,7 @@ public class SWAP {
     public boolean registo (String nome,String email, String password,Object wildcard) {
         String chave = extraiChave(email);
 
-        if (chave == null || !utentes.containsKey((chave))) {
+        if (chave == null || !utentes.containsKey((chave.substring(1)))) {
             return false;
         } else {
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
