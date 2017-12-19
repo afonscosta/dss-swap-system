@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/MarcoSilva/Dropbox/UNIVERSIDADE/3º%20Ano/Sistemas%20Distribuidos/SWAP/src/swap/business/SWAP.java</file>
-            <file>file:/Users/MarcoSilva/Dropbox/UNIVERSIDADE/3º%20Ano/Sistemas%20Distribuidos/SWAP/src/swap/data/Connect.java</file>
-            <file>file:/Users/MarcoSilva/Dropbox/UNIVERSIDADE/3º%20Ano/Sistemas%20Distribuidos/SWAP/src/swap/data/UserDAO.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/Docente.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/Utilizador.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/Turno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/SWAP.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/Aluno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/DocenteRegente.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/data/Connect.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/business/Faltas.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/swap/data/UtilizadorDAO.java</file>
         </group>
     </open-files>
 </project-private>
