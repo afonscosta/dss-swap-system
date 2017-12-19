@@ -57,7 +57,11 @@ public class SWAP {
     }
     
     public boolean autentica (String email, String password) {
-        return utentes.existePar(email,password);
+        String chave = extraiChave(email);
+        Utilizador u;
+        if(chave == null || ((u = utentes.get(chave)) == null))
+            return false;
+        return u.getPassword().equals(password);
     }
     
     public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semestre) {
