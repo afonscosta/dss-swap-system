@@ -20,8 +20,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SWAP swap = new SWAP();
-        MainWindow mw = new MainWindow(swap);
-        mw.setVisible(true);
+		SWAP swap = new SWAP();
+		new MainWindow(swap).setVisible(true);
     }
 }
