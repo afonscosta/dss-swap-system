@@ -74,7 +74,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             Aluno al = null;
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(nome,password,prioridade,numero)\n" +
-                "VALUES (?.?.?.?)\n" +
+                "VALUES (?,?,?,?)\n" +
                 Statement.RETURN_GENERATED_KEYS);
             stm.setString(1,value.getNome());
             stm.setString(2,value.getPassword());
@@ -117,6 +117,10 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     @Override
     public Utilizador put(String key, Utilizador value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void putDC(String chave, Aluno aluno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

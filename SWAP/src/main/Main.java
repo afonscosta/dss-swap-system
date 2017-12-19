@@ -5,6 +5,9 @@
  */
 package main;
 
+import presentation.MainWindow;
+import swap.business.SWAP;
+
 
 /**
  *
@@ -17,8 +20,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SGT sgt = new SGT();
-        MainWindow mw = new MainWindow(sgt);
+        SWAP swap = new SWAP();
+        MainWindow mw = new MainWindow(swap);
         mw.setVisible(true);
     }
 }
