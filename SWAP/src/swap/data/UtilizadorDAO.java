@@ -24,9 +24,6 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     private Connection conn;
     
-    public boolean chaveExiste(String chave) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     public boolean existePar(String email, String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -41,13 +41,17 @@ public class SWAP {
     
     /** USE CASES vvvvv */
     
-    public boolean registo (String nome,String email, String password) {
+    public boolean registo (String nome,String email, String password,Boolean priod) {
         String chave = extraiChave(email);
-        
-        if (chave == null || !utentes.chaveExiste(chave)) {
+
+
+        if (chave == null || !utentes.containsKey((chave)) {
             return false;
         } else {
             try {
+                switch(chave.charAt(0))  {
+
+}
                 utentes.putAluno(chave,new Aluno(nome,email,password,false,chave));
             } catch (SQLException ex) {
                 ex.printStackTrace();
