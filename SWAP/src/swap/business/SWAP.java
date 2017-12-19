@@ -6,6 +6,8 @@
 package swap.business;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import swap.data.HorarioDAO;
 import swap.data.UtilizadorDAO;
 
@@ -17,11 +19,17 @@ public class SWAP {
     
     private Utilizador sessao;
     UtilizadorDAO utentes;
-    HorarioDAO horarios;
+    //HorarioDAO horarios;
     
-    private Horario getHorario(Integer ano, Integer semestre) {
-        return horarios.getHorario(ano,semestre);
+    public SWAP () {
+        sessao = null;
+        utentes = new UtilizadorDAO();
+        //horarios = new HorarioDAO();
     }
+    
+//    private Horario getHorario(Integer ano, Integer semestre) {
+//        return horarios.getHorario(ano,semestre);
+//    }
     
     public String extraiChave (String email) {
         StringBuilder res = new StringBuilder();
@@ -41,17 +49,19 @@ public class SWAP {
     
     /** USE CASES vvvvv */
     
-    public boolean registo (String nome,String email, String password) {
+    public boolean registo (String nome,String email, String password,Object wildcard) {
         String chave = extraiChave(email);
-        
-        if (chave == null || !utentes.chaveExiste(chave)) {
+
+        if (chave == null || !utentes.containsKey((chave))) {
             return false;
         } else {
-            try {
-                utentes.putAluno(chave,new Aluno(nome,email,password,false,chave));
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+                if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
+                    try {
+                        utentes.putAluno(chave, new Aluno(nome,email,password,(Boolean) wildcard,chave));
+                } catch (SQLException ex) {
+                    Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             return true;
         }
     }
@@ -64,17 +74,17 @@ public class SWAP {
         return u.getPassword().equals(password);
     }
     
-    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semestre) {
-        Horario h = getHorario(ano,semestre);
-        UC uc = h.getUC(codUc);
-        Troca t = uc.popTrocaMaisAntiga();
-        
-        if (aceitaTroca(t)) { 
-            Aluno a1 = t.primeiro();
-            Aluno a2 = t.segundo();
-        
-            a1.alteraTurno(t);
-            a2.alteraTurno(t);
-        }
-    }
+//    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semestre) {
+//        Horario h = getHorario(ano,semestre);
+//        UC uc = h.getUC(codUc);
+//        Troca t = uc.popTrocaMaisAntiga();
+//        
+//        if (aceitaTroca(t)) { 
+//            Aluno a1 = t.primeiro();
+//            Aluno a2 = t.segundo();
+//        
+//            a1.alteraTurno(t);
+//            a2.alteraTurno(t);
+//        }
+//    }
 }
