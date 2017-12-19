@@ -3,34 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package swap.business;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import swap.business.Aluno;
-import swap.business.Troca;
-import swap.business.UC;
 import swap.data.HorarioDAO;
-import swap.business.Horario;
 import swap.data.UtilizadorDAO;
 
 /**
  *
- * @author MarcoSilva
+ * @author edgar
  */
 public class SWAP {
     
+    private Utilizador sessao;
     UtilizadorDAO utentes;
     HorarioDAO horarios;
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
     
     private Horario getHorario(Integer ano, Integer semestre) {
         return horarios.getHorario(ano,semestre);
@@ -63,7 +50,7 @@ public class SWAP {
             try {
                 utentes.putAluno(chave,new Aluno(nome,email,password,false,chave));
             } catch (SQLException ex) {
-                Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             return true;
         }
@@ -86,5 +73,4 @@ public class SWAP {
             a2.alteraTurno(t);
         }
     }
-   
 }
