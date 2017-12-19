@@ -5,10 +5,18 @@
  */
 package presentation;
 
+import swap.business.SWAP;
+
 /**
  *
  * @author edgar
  */
 public class MainWindow {
-    
+    /**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		SWAP s = new SWAP();
+		new Iniciar(s).setVisible(true);
+	}
 }
