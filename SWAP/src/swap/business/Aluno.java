@@ -20,5 +20,20 @@ public class Aluno extends Utilizador {
         this.prioritario = prioritario;
         this.numero = numero;
     }
+
+    public boolean getPrioridade() {
+        return prioritario;
+    }
+    
+    public String getNumero() {
+        return numero;
+    }
+    
+    
+    public void alteraTurno(Troca t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     
 }

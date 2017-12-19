@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import swap.business.Aluno;
 import swap.business.Troca;
 import swap.business.UC;
@@ -51,13 +54,17 @@ public class SWAP {
     
     /** USE CASES vvvvv */
     
-    public boolean registo (String email, String password) {
+    public boolean registo (String nome,String email, String password) {
         String chave = extraiChave(email);
         
         if (chave == null || !utentes.chaveExiste(chave)) {
             return false;
         } else {
-            utentes.addUtente(chave,password,email);
+            try {
+                utentes.putAluno(chave,new Aluno(nome,email,password,false,chave));
+            } catch (SQLException ex) {
+                Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return true;
         }
     }
@@ -79,5 +86,5 @@ public class SWAP {
             a2.alteraTurno(t);
         }
     }
-
+   
 }

@@ -71,5 +71,17 @@ public class Troca {
     public void setAluno2(Aluno aluno2) {
         this.aluno2 = aluno2;
     }
+
+    public Aluno primeiro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Aluno segundo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Aluno primeiro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

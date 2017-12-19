@@ -10,5 +10,13 @@ package swap.business;
  * @author edgar
  */
 public class UC {
+
+    public Troca popTrocaMaisAntiga() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Troca popTrocaMaisAntiga() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
