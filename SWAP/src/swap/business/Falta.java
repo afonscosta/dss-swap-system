@@ -9,10 +9,10 @@ package swap.business;
  *
  * @author edgar
  */
-public class Faltas {
+public class Falta {
     private Integer quantidade;
     
-    public Faltas(Integer q) {
+    public Falta(Integer q) {
         this.quantidade = q;
     }
     
