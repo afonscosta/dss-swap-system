@@ -109,7 +109,12 @@ public class Login extends javax.swing.JFrame {
         String email = this.jTextFieldEmail.getText();
 		String password = this.jTextFieldPass.getText();
 		if (s.autentica(email, password)) {
-			new AlunoMain(s).setVisible(true);
+			if (email.startsWith("a") && Character.isDigit(email.charAt(1)))
+				new AlunoMain(s).setVisible(true);
+			//else if (s.extraiChave(email).equals("dcmiei"))
+				//new DCMain(s).setVisible(true);
+			//else
+				//new DRMain(s).setVisible(true);
 			this.dispose();
 		}
     }//GEN-LAST:event_jButton1MouseClicked
