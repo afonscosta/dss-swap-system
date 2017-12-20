@@ -48,6 +48,7 @@ public class UIRegisto extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jTextFieldPP = new javax.swing.JTextField();
         jTextFieldPPC = new javax.swing.JTextField();
+        jCheckBoxPrio = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registo");
@@ -83,6 +84,8 @@ public class UIRegisto extends javax.swing.JFrame {
 
         jTextFieldPPC.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
+        jCheckBoxPrio.setText("Prioritário");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,11 +101,14 @@ public class UIRegisto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(0, 57, Short.MAX_VALUE)))
+                        .addGap(0, 57, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBoxPrio)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,7 +117,9 @@ public class UIRegisto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jCheckBoxPrio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -140,7 +148,7 @@ public class UIRegisto extends javax.swing.JFrame {
 		String pass = this.jTextFieldPP.getText();
 		String passVerifica = this.jTextFieldPPC.getText();
 		if (pass.equals(passVerifica)) {
-			s.registo(nome, email, pass, false);
+			s.registo(nome, email, pass, this.jCheckBoxPrio.isSelected());
 		}
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -182,6 +190,7 @@ public class UIRegisto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBoxPrio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
