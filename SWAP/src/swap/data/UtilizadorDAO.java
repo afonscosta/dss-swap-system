@@ -70,12 +70,15 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 		Utilizador u = null;
         try {
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Utilizador WHERE id=?");
-            stm.setInt(1, (Integer)key);
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Utilizador WHERE idUtilizadores=?");
+            stm.setString(1, (String) key);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-				//Não temos dados para preencher o aluno
-                u = new Aluno(rs.getString("nome"),rs.getString("email"), rs.getString("password"), rs.getBoolean("prioridade"),rs.getString("numero"));
+                String chave = rs.getString("idUtilizadores");
+		//Não temos dados para preencher o aluno
+                if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
+                    u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave.substring(1));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

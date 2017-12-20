@@ -71,14 +71,14 @@ public class SWAP {
         Utilizador u;
         if(chave == null || ((u = utilizadores.get(chave)) == null))
             return false;
-		if (u.getPassword().equals(password)) {
+		if (u.getPassword().equals(password) && u.getEmail().equals(email)) {
 			sessao = u;
 			return true;
 		}
         return false;
     }
     
-//    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semestre) {
+//    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
 //        Horario h = getHorario(ano,semestre);
 //        UC uc = h.getUC(codUc);
 //        Troca t = uc.popTrocaMaisAntiga();
