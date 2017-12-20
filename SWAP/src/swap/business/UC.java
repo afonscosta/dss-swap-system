@@ -58,14 +58,17 @@ public class UC {
 		Iterator<SolicitacaoTroca> iterator = t.iterator();
 		while (!encontrou && iterator.hasNext()) {
 			SolicitacaoTroca s = iterator.next();
-			
+
+                        
 			// Faz match
 			if (codTurnoS.equals(s.getCod_turnoD()) && codTurnoD.equals(s.getCod_turnoS())) {
 				//Fazer a troca propriamente dita
 				encontrou = true;
 			}
 		}
-		trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno));
+                if (!encontrou) {
+                    trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno),codUC);
+                }
 		return encontrou;
 	}
 

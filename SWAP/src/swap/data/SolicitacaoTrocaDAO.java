@@ -180,6 +180,6 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
 
 	@Override
 	public boolean add(SolicitacaoTroca e) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }

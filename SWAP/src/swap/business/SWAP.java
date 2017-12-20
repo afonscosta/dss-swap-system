@@ -88,7 +88,7 @@ public class SWAP {
     
     public boolean solicitaTurno(String codUC, String codTurnoD) {
         Aluno alunoAtual = (Aluno) sessao;
-        return alunoAtual.solicitaTurno(codUC, codTurnoD, alunoAtual.getNumero());
+        return alunoAtual.solicitaTurno(codUC, codTurnoD, "a" + alunoAtual.getNumero());
         
         
     }

@@ -46,8 +46,12 @@ public class TurnoDAO {
 				+ "FROM Utilizador AS U JOIN UtilizadorTurno AS UT ON idUtilizadores = UT.Utilizador_idUtilizadores\n "
 				+ "JOIN Turno           AS T  ON Turno_numero = T.numero AND Turno_UC_codigo = T.UC_codigo\n "
 				+ "WHERE T.UC_codigo = ? AND U.idUtilizadores = ?;");
+            
+          
+            
+            
             stm.setString(1, codUC);
-			stm.setString(1, codAluno);
+	    stm.setString(2, codAluno);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 codTurnoS = rs.getString("numero");
