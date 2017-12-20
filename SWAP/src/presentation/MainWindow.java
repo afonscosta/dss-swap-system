@@ -48,6 +48,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         jButton2.setText("Autenticar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +82,11 @@ public class MainWindow extends javax.swing.JFrame {
 			new UIRegisto(s).setVisible(true);
 			this.dispose();
         }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        new Login(s).setVisible(true);
+			this.dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
 	/**
 	 * @param args the command line arguments

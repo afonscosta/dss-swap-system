@@ -18,12 +18,12 @@ import swap.data.UtilizadorDAO;
 public class SWAP {
     
     private Utilizador sessao;
-    UtilizadorDAO utentes;
+    UtilizadorDAO utilizadores;
     //HorarioDAO horarios;
     
     public SWAP () {
         sessao = null;
-        utentes = new UtilizadorDAO();
+        utilizadores = new UtilizadorDAO();
         //horarios = new HorarioDAO();
     }
     
@@ -52,12 +52,12 @@ public class SWAP {
     public boolean registo (String nome,String email, String password,Object wildcard) {
         String chave = extraiChave(email);
 
-        if (chave == null || utentes.containsKey((chave.substring(1)))) {
+        if (chave == null || utilizadores.containsKey((chave.substring(1)))) {
             return false;
         } else {
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
                     try {
-                        utentes.putAluno(chave, new Aluno(nome,email,password,(Boolean) wildcard,chave));
+                        utilizadores.putAluno(chave, new Aluno(nome,email,password,(Boolean) wildcard,chave));
                 } catch (SQLException ex) {
                     Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -69,9 +69,13 @@ public class SWAP {
     public boolean autentica (String email, String password) {
         String chave = extraiChave(email);
         Utilizador u;
-        if(chave == null || ((u = utentes.get(chave)) == null))
+        if(chave == null || ((u = utilizadores.get(chave)) == null))
             return false;
-        return u.getPassword().equals(password);
+		if (u.getPassword().equals(password)) {
+			sessao = u;
+			return true;
+		}
+        return false;
     }
     
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semestre) {

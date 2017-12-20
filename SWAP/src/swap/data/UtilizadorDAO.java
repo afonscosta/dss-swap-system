@@ -67,7 +67,22 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     @Override
     public Utilizador get(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Utilizador u = null;
+        try {
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Utilizador WHERE id=?");
+            stm.setInt(1, (Integer)key);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+				//Não temos dados para preencher o aluno
+                u = new Aluno(rs.getString("nome"),rs.getString("email"), rs.getString("password"), rs.getBoolean("prioridade"),rs.getString("numero"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+        return u;
     }
 
     public Utilizador putAluno(String key, Aluno value) throws SQLException {

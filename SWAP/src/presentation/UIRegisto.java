@@ -150,6 +150,8 @@ public class UIRegisto extends javax.swing.JFrame {
 		if (pass.equals(passVerifica)) {
 			s.registo(nome, email, pass, this.jCheckBoxPrio.isSelected());
 		}
+		new MainWindow(s).setVisible(true);
+		this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
 	/**
