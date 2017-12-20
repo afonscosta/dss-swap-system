@@ -30,7 +30,7 @@ public class Aluno extends Utilizador {
     }
     
     
-    public void alteraTurno(Troca t) {
+    public void alteraTurno(SolicitacaoTroca t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

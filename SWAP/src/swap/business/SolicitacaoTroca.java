@@ -9,68 +9,43 @@ package swap.business;
  *
  * @author edgar
  */
-public class Troca {
+public class SolicitacaoTroca {
     
-    private Turno turno1;
-    private Turno turno2;
-    private Aluno aluno1;
-    private Aluno aluno2;
+    private String cod_turnoS;
+    private String cod_turnoD;
+    private String cod_aluno;
 
-    /**
-     * @return the turno1
-     */
-    public Turno getTurno1() {
-        return turno1;
+    public SolicitacaoTroca(String cod_turnoS, String cod_turnoD, String cod_aluno) {
+        this.cod_turnoS = cod_turnoS;
+        this.cod_turnoD = cod_turnoD;
+        this.cod_aluno = cod_aluno;
     }
 
-    /**
-     * @param turno1 the turno1 to set
-     */
-    public void setTurno1(Turno turno1) {
-        this.turno1 = turno1;
+    public String getCod_turnoS() {
+        return cod_turnoS;
     }
 
-    /**
-     * @return the turno2
-     */
-    public Turno getTurno2() {
-        return turno2;
+    public String getCod_turnoD() {
+        return cod_turnoD;
     }
 
-    /**
-     * @param turno2 the turno2 to set
-     */
-    public void setTurno2(Turno turno2) {
-        this.turno2 = turno2;
+    public String getCod_aluno() {
+        return cod_aluno;
     }
 
-    /**
-     * @return the aluno1
-     */
-    public Aluno getAluno1() {
-        return aluno1;
+    public void setCod_turnoS(String cod_turnoS) {
+        this.cod_turnoS = cod_turnoS;
     }
 
-    /**
-     * @param aluno1 the aluno1 to set
-     */
-    public void setAluno1(Aluno aluno1) {
-        this.aluno1 = aluno1;
+    public void setCod_turnoD(String cod_turnoD) {
+        this.cod_turnoD = cod_turnoD;
     }
 
-    /**
-     * @return the aluno2
-     */
-    public Aluno getAluno2() {
-        return aluno2;
+    public void setCod_aluno(String cod_aluno) {
+        this.cod_aluno = cod_aluno;
     }
 
-    /**
-     * @param aluno2 the aluno2 to set
-     */
-    public void setAluno2(Aluno aluno2) {
-        this.aluno2 = aluno2;
-    }
+    
 
     public Aluno primeiro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
