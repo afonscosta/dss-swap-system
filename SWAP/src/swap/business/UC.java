@@ -5,11 +5,25 @@
  */
 package swap.business;
 
+import swap.data.SolicitacaoTrocaDAO;
+
 /**
  *
  * @author edgar
  */
 public class UC {
+    
+    private String nome;
+    private TurnoDAO turnos;
+    private SolicitacaoTrocaDAO trocas;
+    
+    public UC (String nome) {
+        this.nome = nome;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
 
     public Troca popTrocaMaisAntiga() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,4 +34,12 @@ public class UC {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     */
+
+    Aluno checkTroca(int idTurno, Turno ta) {
+        // chamar trocaDAO aqui
+    }
+
+    void addFilaDeEspera(Aluno aThis, int idTurno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

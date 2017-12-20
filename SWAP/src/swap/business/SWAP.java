@@ -78,6 +78,13 @@ public class SWAP {
         return false;
     }
     
+    public boolean solicitaTurno(String uc, int idTurno) {
+        Aluno alunoAtual = (Aluno) sessao;
+        return alunoAtual.solicitaTurno(uc,idTurno);
+        
+        
+    }
+    
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
 //        Horario h = getHorario(ano,semestre);
 //        UC uc = h.getUC(codUc);
