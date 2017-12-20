@@ -71,27 +71,19 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
     }
 
     public Utilizador putAluno(String key, Aluno value) throws SQLException {
-            Aluno al = null;
-            System.out.println("Chamado");
            
             conn = Connect.connect();
-           // PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
-             //   "VALUES (?,?,?,?);");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
+                "VALUES (?,?,?,?);");
             
-              PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade) " +
-                "VALUES ('a321321','olga','00000',0)");
              
-//            int bool = value.getPrioridade() == true ? 1 : 0;
-//            
-//            stm.setString(2,value.getNome());
-//            stm.setString(3,value.getPassword());
-//            stm.setString(4,String.valueOf(bool));
-//            stm.setString(1,"a" + value.getNumero());
+            int bool = value.getPrioridade() == true ? 1 : 0;
+            
+            stm.setString(2,value.getNome());
+            stm.setString(3,value.getPassword());
+            stm.setString(4,String.valueOf(bool));
+            stm.setString(1, value.getNumero());
             stm.executeUpdate();
-            
-         
-            
-            al = value;
         
             Connect.close(conn);
        
