@@ -6,6 +6,7 @@
 package swap.business;
 
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import swap.data.HorarioDAO;
@@ -18,7 +19,8 @@ import swap.data.UtilizadorDAO;
 public class SWAP {
     
     private Utilizador sessao;
-    UtilizadorDAO utilizadores;
+    private UtilizadorDAO utilizadores;
+	private HorarioDAO horarios;
     //HorarioDAO horarios;
     
     public SWAP () {
@@ -77,6 +79,12 @@ public class SWAP {
 		}
         return false;
     }
+	
+	public Turno adicionaTurno (Integer capacidade, Turno.Tipo tipo, String sala, LocalTime horaInicio, LocalTime duracao) {
+		
+		Turno t = new Turno(capacidade, tipo, sala, horaInicio, duracao);
+		return t;
+	}
     
     public boolean solicitaTurno(String uc, int idTurno) {
         Aluno alunoAtual = (Aluno) sessao;

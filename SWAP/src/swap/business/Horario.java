@@ -10,9 +10,19 @@ package swap.business;
  * @author edgar
  */
 public class Horario {
+	
+	private int ano;
+	private int semestre;
+	private UcDAO ucs;
+	
+	public Horario(int ano, int semestre) {
+		this.ano = ano;
+		this.semestre = semestre;
+		ucs = new UcDAO();
+	}
 
     public UC getUC(String codUc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return ucs.get(codUC);
     }
     
 }
