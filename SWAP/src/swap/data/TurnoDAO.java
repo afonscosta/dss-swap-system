@@ -39,22 +39,25 @@ public class TurnoDAO {
     
 	//Falta fazer esta query (o que está lá dentro está mal)
 	public String getCodMyTurno(String codUC, String codAluno) {
-		Turno t = null;
+		String codTurnoS = null;
         try {
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Turno WHERE numero=?");
-            stm.setString(1, (String) key);
+            PreparedStatement stm = conn.prepareStatement("SELECT T.numero\n"
+				+ "FROM Utilizador AS U JOIN UtilizadorTurno AS UT ON idUtilizadores = UT.Utilizador_idUtilizadores\n "
+				+ "JOIN Turno           AS T  ON Turno_numero = T.numero AND Turno_UC_codigo = T.UC_codigo\n "
+				+ "WHERE T.UC_codigo = ? AND U.idUtilizadores = ?;");
+            stm.setString(1, codUC);
+			stm.setString(1, codAluno);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                t = new Turno((String) key, rs.getString("UC_codigo"), rs.getInt("capacidade"), rs.getString("Sala_numero"),
-                              rs.getInt("Horario_numero"), (LocalTime) rs.getObject("horaInicio"), (LocalTime) rs.getObject("duracao") );
+                codTurnoS = rs.getString("numero");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             Connect.close(conn);
         }
-        return t;
+        return codTurnoS;
     }
 	
     public Turno put(int key, Turno value) throws SQLException {

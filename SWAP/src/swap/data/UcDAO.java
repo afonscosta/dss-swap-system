@@ -51,7 +51,7 @@ public class UcDAO implements Map<String,UC> {
         try {
             
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("Select * FROM UC WHERE nome=?");
+            PreparedStatement stm = conn.prepareStatement("Select * FROM UC WHERE codigo=?");
             stm.setString(1,(String) key);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
