@@ -35,14 +35,14 @@ public class Aluno extends Utilizador {
     }
     
     
-    public void alteraTurno(Troca t) {
+    public void alteraTurno(SolicitacaoTroca t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     boolean solicitaTurno(String uc, int idTurno) {
         UC uct = ucs.get(uc);
         
-        Turno ta = turnos.getTurno(uc,idTurno);
+        Turno ta = turnos.get(idTurno);
         
         Aluno colega_troca = uct.checkTroca(idTurno,ta);
         

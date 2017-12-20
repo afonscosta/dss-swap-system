@@ -43,7 +43,7 @@ public class SWAP {
         }
     }
     
-    private boolean aceitaTroca(Troca t) {
+    private boolean aceitaTroca(SolicitacaoTroca t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

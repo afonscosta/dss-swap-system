@@ -6,6 +6,7 @@
 package swap.business;
 
 import swap.data.SolicitacaoTrocaDAO;
+import swap.data.TurnoDAO;
 
 /**
  *
@@ -25,7 +26,7 @@ public class UC {
         return nome;
     }
 
-    public Troca popTrocaMaisAntiga() {
+    public SolicitacaoTroca popTrocaMaisAntiga() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

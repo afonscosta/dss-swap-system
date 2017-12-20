@@ -13,23 +13,39 @@ import java.time.LocalTime;
  * @author edgar
  */
 public class Turno {
-
+/*
     public enum Tipo {
         T, TP, PL;
-    };
+    };*/
     
+    private String id;
+    private String UC_codigo;    
     private Integer capacidade;
-    private Tipo tipo;
+    private Integer horarioId;
     private String sala;
     private LocalTime horaInicio;
     private LocalTime duracao;
-    
-    public Turno (Integer capacidade, Tipo tipo, String sala, LocalTime horaInicio, LocalTime duracao) {
+   
+    public Turno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
+        this.id = id;
         this.capacidade = capacidade;
-        this.tipo = tipo;
+        this.UC_codigo = UC_codigo;
         this.sala = sala;
+        this.horarioId = horarioId;
         this.horaInicio = horaInicio;
         this.duracao = duracao;
+    }
+
+    public Integer getHorarioId() {
+        return horarioId;
+    }
+
+    public void setHorarioId(Integer horarioId) {
+        this.horarioId = horarioId;
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
@@ -46,19 +62,27 @@ public class Turno {
         this.capacidade = capacidade;
     }
 
-    /**
-     * @return the tipo
-     */
-    public Tipo getTipo() {
-        return tipo;
+    public String getUC_codigo() {
+        return UC_codigo;
+    }
+
+    public void setUC_codigo(String UC_codigo) {
+        this.UC_codigo = UC_codigo;
     }
 
     /**
+     * @return the tipo
+     
+    public Tipo getTipo() {
+        return tipo;
+    }*/
+
+    /**
      * @param tipo the tipo to set
-     */
+     
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
-    }
+    }*/
 
     /**
      * @return the sala
