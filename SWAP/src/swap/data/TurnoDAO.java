@@ -37,6 +37,26 @@ public class TurnoDAO {
         return t;
     }
     
+	//Falta fazer esta query (o que está lá dentro está mal)
+	public String getCodMyTurno(String codUC, String codAluno) {
+		Turno t = null;
+        try {
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM Turno WHERE numero=?");
+            stm.setString(1, (String) key);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                t = new Turno((String) key, rs.getString("UC_codigo"), rs.getInt("capacidade"), rs.getString("Sala_numero"),
+                              rs.getInt("Horario_numero"), (LocalTime) rs.getObject("horaInicio"), (LocalTime) rs.getObject("duracao") );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+        return t;
+    }
+	
     public Turno put(int key, Turno value) throws SQLException {
            
             conn = Connect.connect();

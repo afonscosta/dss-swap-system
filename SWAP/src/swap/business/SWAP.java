@@ -80,15 +80,15 @@ public class SWAP {
         return false;
     }
 	
-	public Turno adicionaTurno (Integer capacidade, Turno.Tipo tipo, String sala, LocalTime horaInicio, LocalTime duracao) {
-		
-		Turno t = new Turno(capacidade, tipo, sala, horaInicio, duracao);
+	public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
+	
+		Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao);
 		return t;
 	}
     
-    public boolean solicitaTurno(String uc, int idTurno) {
+    public boolean solicitaTurno(String codUC, String codTurnoD) {
         Aluno alunoAtual = (Aluno) sessao;
-        return alunoAtual.solicitaTurno(uc,idTurno);
+        return alunoAtual.solicitaTurno(codUC, codTurnoD, alunoAtual.getNumero());
         
         
     }

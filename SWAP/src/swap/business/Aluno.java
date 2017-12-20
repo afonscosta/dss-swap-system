@@ -39,20 +39,14 @@ public class Aluno extends Utilizador {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    boolean solicitaTurno(String uc, int idTurno) {
-        UC uct = ucs.get(uc);
-        
-        Turno ta = turnos.get(idTurno);
-        
-        Aluno colega_troca = uct.checkTroca(idTurno,ta);
-        
-        if (colega_troca != null) {
-            System.out.println("Ainda não");
-        } else {
-            uct.addFilaDeEspera(this,idTurno);
-        }
-        
-        return true;
+    public boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) {
+        UC uct = ucs.get(codUC);
+		
+		String codTurnoS = turnos.getCodMyTurno(codUC, codAluno);
+		
+		boolean trocou = uct.trataTroca(codUC, codTurnoS, codTurnoD, codAluno);
+		
+        return trocou;
     }
 
 

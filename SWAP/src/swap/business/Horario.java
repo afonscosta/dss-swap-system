@@ -5,6 +5,8 @@
  */
 package swap.business;
 
+import swap.data.UcDAO;
+
 /**
  *
  * @author edgar
@@ -22,7 +24,7 @@ public class Horario {
 	}
 
     public UC getUC(String codUc) {
-		return ucs.get(codUC);
+		return ucs.get(codUc);
     }
     
 }
