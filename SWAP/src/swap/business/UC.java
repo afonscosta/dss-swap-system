@@ -11,7 +11,7 @@ package swap.business;
  */
 public class UC {
 
-    public Troca popTrocaMaisAntiga() {
+    public SolicitacaoTroca popTrocaMaisAntiga() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
