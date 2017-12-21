@@ -5,6 +5,7 @@
  */
 package swap.business;
 
+import java.sql.SQLException;
 import swap.data.TurnoDAO;
 import swap.data.UcDAO;
 
@@ -46,7 +47,8 @@ public class Aluno extends Utilizador {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) {
+    public boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) throws SQLException {
+                
         UC uct = ucs.get(codUC);
 		
 	String codTurnoS = turnos.getCodMyTurno(codUC, codAluno);
@@ -56,14 +58,11 @@ public class Aluno extends Utilizador {
         return trocou;
     }
 
-    void remFilaEspera(String codUc, String id_turnoD) {
+    public void remFilaEspera(String codUc, String id_turnoD) {
         UC uct = ucs.get(codUc);
         
         String id_turnoS = turnos.getCodMyTurno(codUc, id_turnoD);
         
-        uct.remFilaEspera(this,id_turnoD,id_turnoS);
+        uct.remFilaEspera(this.getNumero(),id_turnoD,id_turnoS,codUc);
     }
-
-
-    
 }

@@ -5,7 +5,7 @@
  */
 package swap.business;
 
-import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import swap.data.SolicitacaoTrocaDAO;
@@ -49,7 +49,7 @@ public class UC {
     }
 	*/
 
-	public boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) {
+	public boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
 		boolean encontrou = false;
 		
 		// Vai buscar todas as solicitacoes que envolvem a UC codUC
@@ -63,18 +63,21 @@ public class UC {
                         
 			// Faz match
 			if (codTurnoS.equals(s.getCod_turnoD()) && codTurnoD.equals(s.getCod_turnoS())) {
-				//Fazer a troca propriamente dita
+				turnos.trocaTurnos(codUC, codAluno, codTurnoD, s.getCod_aluno(), s.getCod_turnoD());
+                                trocas.remFilaEspera(codAluno, codTurnoS, codTurnoD, codUC);
+                                trocas.remFilaEspera(s.getCod_aluno(),s.getCod_turnoS(),s.getCod_turnoD(),codUC);
 				encontrou = true;
 			}
 		}
+                
                 if (!encontrou) {
                     trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno),codUC);
                 }
 		return encontrou;
 	}
 
-    void remFilaEspera(Aluno aThis, String codTurno) {
-        trocas.remFilaEspera(aThis,codTurno);
+    void remFilaEspera(String codAluno, String id_turnoD,String id_turnoS,String codUc) {
+        trocas.remFilaEspera(codAluno,id_turnoS,id_turnoD,codUc);
     }
 
 }

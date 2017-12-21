@@ -184,14 +184,20 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
-    public void remFilaEspera(Aluno aThis, String codTurnoS, String codTurnoD) {
+    public void remFilaEspera(String codAluno, String codTurnoS, String codTurnoD,String codUc) {
+        
         conn = Connect.connect();
         try {
-            PreparedStatement stm = conn.prepareStatement("DELETE SolicitacaoTroca WHERE aluno=? AND turnoS=? AND turnoD=?");
+            PreparedStatement stm = conn.prepareStatement("DELETE FROM SolicitacaoTroca WHERE aluno=? AND turnoS=? AND turnoD=? AND UC_codigo=?");
             
-            stm.setString(1,"a" + aThis.getNumero());
+            stm.setString(1, codAluno);
             stm.setString(2, codTurnoS);
             stm.setString(3, codTurnoD);
+            stm.setString(4, codUc);
+            
+            stm.executeUpdate();
+            
+            Connect.close(conn);
             
         } catch (SQLException ex) {
             Logger.getLogger(SolicitacaoTrocaDAO.class.getName()).log(Level.SEVERE, null, ex);

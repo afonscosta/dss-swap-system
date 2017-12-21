@@ -7,7 +7,10 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -122,7 +125,11 @@ public class AlunoMain extends javax.swing.JFrame {
         String uc = this.jTextFieldUC.getText();
 		String turno = this.jTextFieldTurno.getText();
 		
-		s.solicitaTurno(uc, turno);
+            try {
+                s.solicitaTurno(uc, turno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jButtonSolicitaMouseClicked
 
 	/**

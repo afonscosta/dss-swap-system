@@ -52,8 +52,9 @@ public class SWAP {
     
     public boolean registo (String nome,String email, String password,Object wildcard) {
         String chave = extraiChave(email);
-
-        if (chave == null || utilizadores.containsKey((chave.substring(1)))) {
+        String chaveClone = chave;
+        
+        if (chave == null || utilizadores.containsKey((chaveClone.substring(1)))) {
             return false;
         } else {
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
@@ -85,15 +86,17 @@ public class SWAP {
 		return t;
 	}
     
-    public boolean solicitaTurno(String codUC, String codTurnoD) {
+    public boolean solicitaTurno(String codUC, String codTurnoD) throws SQLException {
         Aluno alunoAtual = (Aluno) sessao;
-        return alunoAtual.solicitaTurno(codUC, codTurnoD, "a" + alunoAtual.getNumero());
+        return alunoAtual.solicitaTurno(codUC, codTurnoD, alunoAtual.getNumero());
         
         
     }
     
     public void removeSolicitacaoTurno(String codUc,String codTurno) {
         Aluno alunoAtual = (Aluno) sessao;
+        
+        System.out.println("alunoAtual.remFilaEspera(" + codUc + "," + codTurno + ")");
         
         alunoAtual.remFilaEspera(codUc,codTurno);
     }

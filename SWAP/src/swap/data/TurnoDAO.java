@@ -84,4 +84,50 @@ public class TurnoDAO {
        
             return value;
     }
+
+	public void trocaTurnos(String codUC, String codAluno1, String codTurnoD1, String codAluno2, String codTurnoD2) throws SQLException {
+		conn = Connect.connect();
+                
+		//Troca o turno do aluno1
+		PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+			+ "SET Turno_numero = ?\n"
+			+ "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
+
+		stm.setString(1, codTurnoD1);
+		stm.setString(2, codAluno1);
+		stm.setString(3, codUC);
+		stm.executeUpdate();
+
+		//Troca o turno do aluno2
+		PreparedStatement stm1 = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+			+ "SET Turno_numero = ?\n"
+			+ "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
+
+		stm1.setString(1, codTurnoD2);
+		stm1.setString(2, codAluno2);
+		stm1.setString(3, codUC);
+		stm1.executeUpdate();
+
+		//Troca as faltas do aluno1
+		PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
+			+ "SET Turno_numero = ?\n"
+			+ "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
+
+		stm2.setString(1, codTurnoD1);
+		stm2.setString(2, codAluno1);
+		stm2.setString(3, codUC);
+		stm2.executeUpdate();
+
+		//Troca as faltas do aluno2
+		PreparedStatement stm3 = conn.prepareStatement("UPDATE Falta\n"
+			+ "SET Turno_numero = ?\n"
+			+ "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
+
+		stm3.setString(1, codTurnoD2);
+		stm3.setString(2, codAluno2);
+		stm3.setString(3, codUC);
+		stm3.executeUpdate();
+			
+        Connect.close(conn);
+	}
 }

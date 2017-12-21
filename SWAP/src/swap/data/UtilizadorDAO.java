@@ -77,7 +77,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
                 String chave = rs.getString("idUtilizadores");
 		//Não temos dados para preencher o aluno
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
-                    u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave.substring(1));
+                    u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave );
                 }
             }
         } catch (SQLException e) {
