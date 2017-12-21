@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import swap.business.Aluno;
+import swap.business.Docente;
 import swap.business.Utilizador;
 
 public class UtilizadorDAO implements Map<String,Utilizador> {
@@ -41,7 +42,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             conn = Connect.connect();
             String sql = "SELECT `nome` FROM `Utilizador` WHERE `idUtilizadores`=?;";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1,Integer.parseInt(key.toString()));
+            stm.setString(1,(String) key);
             ResultSet rs = stm.executeQuery();
             r = rs.next();
         } catch (Exception e) {
@@ -91,10 +92,10 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
              
             int bool = value.getPrioridade() == true ? 1 : 0;
             
+            stm.setString(1, value.getNumero());
             stm.setString(2,value.getNome());
             stm.setString(3,value.getPassword());
             stm.setString(4,String.valueOf(bool));
-            stm.setString(1, value.getNumero());
             stm.executeUpdate();
         
             Connect.close(conn);
@@ -102,6 +103,22 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             return value;
     }
 
+    
+    public Utilizador putDocente(String key, Docente value) throws SQLException {
+        conn = Connect.connect();
+        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,uc,regente) VALUES(?,?,?,?,?);");
+        stm.setString(1,key);
+        stm.setString(2,value.getNome());
+        stm.setString(3,value.getPassword());
+        stm.setString(4,value.getUC());
+        stm.setInt(5,value.getRegente());
+        stm.executeUpdate();
+        
+        Connect.close(conn);
+        
+       return value;
+    }
+    
     @Override
     public Utilizador remove(Object key) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -140,5 +157,6 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
     public void putDC(String chave, Aluno aluno) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 
 }

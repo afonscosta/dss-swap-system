@@ -177,14 +177,15 @@ public class UIRegisto extends javax.swing.JFrame {
 		String pass = this.jTextFieldPP.getText();
 		String passVerifica = this.jTextFieldPPC.getText();
 		String chave = s.extraiChave(email);
+                String uc = null;
 		if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
-			docente = true;
+			aluno = true;
 		}
 		else if (chave.equals("dcmiei")) {
 			dc = true;
 		}
 		else {
-			String uc = this.jTextFieldUC.getText();
+			uc = this.jTextFieldUC.getText();
 			docente = true;
 		}
 		if (pass.equals(passVerifica) && aluno) {
@@ -194,7 +195,8 @@ public class UIRegisto extends javax.swing.JFrame {
 			s.registo(nome, email, pass, null, -1);
 		}
 		else if (pass.equals(passVerifica) && docente) {
-			s.registo(nome, email, pass, uc, this.jCheckBoxPrio.isSelected());
+                        int pressed = (this.jCheckBoxRegente.isSelected()) ? 1 : 0;
+			s.registo(nome, email, pass, uc, pressed );
 		}
 		new MainWindow(s).setVisible(true);
 		this.dispose();

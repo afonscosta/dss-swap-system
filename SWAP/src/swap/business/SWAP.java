@@ -41,18 +41,32 @@ public class SWAP {
     
     /* USE CASES */
     
-    public boolean registo (String nome,String email, String password,Object wildcard) {
+    public boolean registo (String nome,String email, String password,Object wildcard,int regente) {
+//        System.out.println(nome);
+//        System.out.println(email);
+//        System.out.println(password);
+//        System.out.println(wil);
+//        System.out.println(nome);
+
         String chave = extraiChave(email);
-        String chaveClone = chave;
         
-        if (chave == null || utilizadores.containsKey((chaveClone.substring(1)))) {
+        if (chave == null || utilizadores.containsKey(chave)) {
             return false;
         } else {
-                if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
+                if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
                     try {
-                        utilizadores.putAluno(chave, new Aluno(nome,email,password,(Boolean) wildcard,chave));
+                        utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
                 } catch (SQLException ex) {
                     Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    } else if (chave.equals("dcmiei")) { // é direção de curso
+                        
+                    } else { // é docente regente
+                        try {
+                        utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             return true;
@@ -71,11 +85,11 @@ public class SWAP {
         return false;
     }
 	
-	public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
+    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
 	
-		Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao);
-		return t;
-	}
+        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao);
+	return t;
+    }
     
     public boolean solicitaTurno(String codUC, String codTurnoD) throws SQLException {
         Aluno alunoAtual = (Aluno) sessao;
