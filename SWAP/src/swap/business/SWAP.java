@@ -53,21 +53,20 @@ public class SWAP {
         if (chave == null || utilizadores.containsKey(chave)) {
             return false;
         } else {
+             try {
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
-                    try {
+                
                         utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
-                } catch (SQLException ex) {
-                    Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
                     } else if (chave.equals("dcmiei")) { // é direção de curso
-                        
+                        utilizadores.putDirecaoCurso(chave,email,password);
                     } else { // é docente regente
-                        try {
-                        utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
-                    } catch (SQLException ex) {
+                       
+                        utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente)); 
+                }
+                 } catch (SQLException ex) {
                         Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
 
             return true;
         }

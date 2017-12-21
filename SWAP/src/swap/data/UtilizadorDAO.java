@@ -83,7 +83,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         return u;
     }
 
-    public Utilizador putAluno(String key, Aluno value) throws SQLException {
+    public void putAluno(String key, Aluno value) throws SQLException {
            
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
@@ -99,12 +99,10 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             stm.executeUpdate();
         
             Connect.close(conn);
-       
-            return value;
     }
 
     
-    public Utilizador putDocente(String key, Docente value) throws SQLException {
+    public void putDocente(String key, Docente value) throws SQLException {
         conn = Connect.connect();
         PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,uc,regente) VALUES(?,?,?,?,?);");
         stm.setString(1,key);
@@ -115,9 +113,19 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         stm.executeUpdate();
         
         Connect.close(conn);
-        
-       return value;
     }
+    
+        public void putDirecaoCurso(String chave, String email, String password) throws SQLException {
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,email,password) VALUES(?,?,?);");
+            stm.setString(1,chave);
+            stm.setString(2,email);
+            stm.setString(3,password);
+            stm.executeUpdate();
+            
+            Connect.close(conn);
+    }
+    
     
     @Override
     public Utilizador remove(Object key) {
@@ -157,6 +165,8 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
     public void putDC(String chave, Aluno aluno) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+
 
 
 }
