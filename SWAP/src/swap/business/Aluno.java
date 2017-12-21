@@ -56,6 +56,14 @@ public class Aluno extends Utilizador {
         return trocou;
     }
 
+    void remFilaEspera(String codUc, String id_turnoD) {
+        UC uct = ucs.get(codUc);
+        
+        String id_turnoS = turnos.getCodMyTurno(codUc, id_turnoD);
+        
+        uct.remFilaEspera(this,id_turnoD,id_turnoS);
+    }
+
 
     
 }

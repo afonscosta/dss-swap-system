@@ -5,6 +5,7 @@
  */
 package swap.business;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import swap.data.SolicitacaoTrocaDAO;
@@ -71,5 +72,9 @@ public class UC {
                 }
 		return encontrou;
 	}
+
+    void remFilaEspera(Aluno aThis, String codTurno) {
+        trocas.remFilaEspera(aThis,codTurno);
+    }
 
 }

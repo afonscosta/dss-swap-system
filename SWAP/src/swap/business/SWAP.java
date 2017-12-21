@@ -20,8 +20,7 @@ public class SWAP {
     
     private Utilizador sessao;
     private UtilizadorDAO utilizadores;
-	private HorarioDAO horarios;
-    //HorarioDAO horarios;
+    private HorarioDAO horarios;
     
     public SWAP () {
         sessao = null;
@@ -91,6 +90,12 @@ public class SWAP {
         return alunoAtual.solicitaTurno(codUC, codTurnoD, "a" + alunoAtual.getNumero());
         
         
+    }
+    
+    public void removeSolicitacaoTurno(String codUc,String codTurno) {
+        Aluno alunoAtual = (Aluno) sessao;
+        
+        alunoAtual.remFilaEspera(codUc,codTurno);
     }
     
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {

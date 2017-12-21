@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import swap.business.Aluno;
 import swap.business.SolicitacaoTroca;
 
 /**
@@ -182,4 +183,20 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
 	public boolean add(SolicitacaoTroca e) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
+
+    public void remFilaEspera(Aluno aThis, String codTurnoS, String codTurnoD) {
+        conn = Connect.connect();
+        try {
+            PreparedStatement stm = conn.prepareStatement("DELETE SolicitacaoTroca WHERE aluno=? AND turnoS=? AND turnoD=?");
+            
+            stm.setString(1,"a" + aThis.getNumero());
+            stm.setString(2, codTurnoS);
+            stm.setString(3, codTurnoD);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SolicitacaoTrocaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
 }
