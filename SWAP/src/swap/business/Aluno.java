@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swap.business;
 
 import java.sql.SQLException;
 import swap.data.TurnoDAO;
 import swap.data.UcDAO;
 
-
-/**
- *
- * @author edgar
- */
 public class Aluno extends Utilizador {
     
     private boolean prioritario;
@@ -37,14 +27,13 @@ public class Aluno extends Utilizador {
         return numero;
     }
     
-
     @Override
     public String getNome() {
-        return super.getNome(); //To change body of generated methods, choose Tools | Templates.
+        return super.getNome();
     }
     
     public void alteraTurno(SolicitacaoTroca t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) throws SQLException {

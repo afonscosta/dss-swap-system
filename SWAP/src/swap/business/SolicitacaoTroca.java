@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swap.business;
 
-/**
- *
- * @author edgar
- */
 public class SolicitacaoTroca {
     
     private String cod_turnoS;
@@ -48,17 +39,10 @@ public class SolicitacaoTroca {
     
 
     public Aluno primeiro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public Aluno segundo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-	/*
-    public Aluno primeiro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
-    
+        throw new UnsupportedOperationException("Not supported yet.");
+    }    
 }

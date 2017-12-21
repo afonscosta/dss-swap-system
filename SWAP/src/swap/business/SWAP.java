@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swap.business;
 
 import java.sql.SQLException;
@@ -12,10 +7,6 @@ import java.util.logging.Logger;
 import swap.data.HorarioDAO;
 import swap.data.UtilizadorDAO;
 
-/**
- *
- * @author edgar
- */
 public class SWAP {
     
     private Utilizador sessao;
@@ -45,10 +36,10 @@ public class SWAP {
     }
     
     private boolean aceitaTroca(SolicitacaoTroca t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    /** USE CASES vvvvv */
+    /* USE CASES */
     
     public boolean registo (String nome,String email, String password,Object wildcard) {
         String chave = extraiChave(email);

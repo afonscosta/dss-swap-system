@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swap.data;
 
 import java.sql.Connection;
@@ -11,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import swap.business.Turno;
 import java.time.LocalTime;
-/**
- *
- * @author Daniel Maia
- */
+
 public class TurnoDAO {
+    
     private Connection conn;
     
     public Turno get(Object key) {
-		Turno t = null;
+	
+        Turno t = null;
+        
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM Turno WHERE numero=?");
@@ -34,21 +29,21 @@ public class TurnoDAO {
         } finally {
             Connect.close(conn);
         }
+        
         return t;
     }
     
-	//Falta fazer esta query (o que está lá dentro está mal)
-	public String getCodMyTurno(String codUC, String codAluno) {
-		String codTurnoS = null;
+    //Falta fazer esta query (o que está lá dentro está mal)
+    public String getCodMyTurno(String codUC, String codAluno) {
+        
+        String codTurnoS = null;
+        
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("SELECT T.numero\n"
 				+ "FROM Utilizador AS U JOIN UtilizadorTurno AS UT ON idUtilizadores = UT.Utilizador_idUtilizadores\n "
 				+ "JOIN Turno           AS T  ON Turno_numero = T.numero AND Turno_UC_codigo = T.UC_codigo\n "
 				+ "WHERE T.UC_codigo = ? AND U.idUtilizadores = ?;");
-            
-          
-            
             
             stm.setString(1, codUC);
 	    stm.setString(2, codAluno);
@@ -61,73 +56,74 @@ public class TurnoDAO {
         } finally {
             Connect.close(conn);
         }
+        
         return codTurnoS;
     }
 	
     public Turno put(int key, Turno value) throws SQLException {
            
-            conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Horario_numero,Sala_numero,horaI,duracao)\n" +
-                "VALUES (?,?,?,?,?,?);");
-            
-            
-            stm.setString(1,value.getId());
-            stm.setString(2,value.getUC_codigo());
-            stm.setInt(3, value.getCapacidade());
-            stm.setInt(4,value.getHorarioId());
-            stm.setString(5, value.getSala());
-            stm.setObject(6, value.getHoraInicio());
-            stm.setObject(7,value.getDuracao());
-            stm.executeUpdate();
-        
-            Connect.close(conn);
+        conn = Connect.connect();
+        PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Horario_numero,Sala_numero,horaI,duracao)\n" +
+                                                      "VALUES (?,?,?,?,?,?);");
+        stm.setString(1,value.getId());
+        stm.setString(2,value.getUC_codigo());
+        stm.setInt(3, value.getCapacidade());
+        stm.setInt(4,value.getHorarioId());
+        stm.setString(5, value.getSala());
+        stm.setObject(6, value.getHoraInicio());
+        stm.setObject(7,value.getDuracao());
+        stm.executeUpdate();
+
+        Connect.close(conn);
        
-            return value;
+        return value;
     }
 
-	public void trocaTurnos(String codUC, String codAluno1, String codTurnoD1, String codAluno2, String codTurnoD2) throws SQLException {
-		conn = Connect.connect();
+    public void trocaTurnos(String codUC, String codAluno1, String codTurnoD1, String codAluno2, String codTurnoD2) throws SQLException {
+
+        conn = Connect.connect();
                 
-		//Troca o turno do aluno1
-		PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+	//Troca o turno do aluno1
+	PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
 			+ "SET Turno_numero = ?\n"
 			+ "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
 
-		stm.setString(1, codTurnoD1);
-		stm.setString(2, codAluno1);
-		stm.setString(3, codUC);
-		stm.executeUpdate();
+	stm.setString(1, codTurnoD1);
+	stm.setString(2, codAluno1);
+	stm.setString(3, codUC);
+	stm.executeUpdate();
 
-		//Troca o turno do aluno2
-		PreparedStatement stm1 = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+	//Troca o turno do aluno2
+	PreparedStatement stm1 = conn.prepareStatement("UPDATE UtilizadorTurno\n"
 			+ "SET Turno_numero = ?\n"
 			+ "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
 
-		stm1.setString(1, codTurnoD2);
-		stm1.setString(2, codAluno2);
-		stm1.setString(3, codUC);
-		stm1.executeUpdate();
+	stm1.setString(1, codTurnoD2);
+	stm1.setString(2, codAluno2);
+	stm1.setString(3, codUC);
+	stm1.executeUpdate();
 
-		//Troca as faltas do aluno1
-		PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
+	//Troca as faltas do aluno1
+	PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
 			+ "SET Turno_numero = ?\n"
 			+ "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
 
-		stm2.setString(1, codTurnoD1);
-		stm2.setString(2, codAluno1);
-		stm2.setString(3, codUC);
-		stm2.executeUpdate();
+	stm2.setString(1, codTurnoD1);
+	stm2.setString(2, codAluno1);
+	stm2.setString(3, codUC);
+	stm2.executeUpdate();
 
-		//Troca as faltas do aluno2
-		PreparedStatement stm3 = conn.prepareStatement("UPDATE Falta\n"
+	//Troca as faltas do aluno2
+	PreparedStatement stm3 = conn.prepareStatement("UPDATE Falta\n"
 			+ "SET Turno_numero = ?\n"
 			+ "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
 
-		stm3.setString(1, codTurnoD2);
-		stm3.setString(2, codAluno2);
-		stm3.setString(3, codUC);
-		stm3.executeUpdate();
-			
+	stm3.setString(1, codTurnoD2);
+	stm3.setString(2, codAluno2);
+	stm3.setString(3, codUC);
+	stm3.executeUpdate();
+
         Connect.close(conn);
-	}
+    }
+
 }

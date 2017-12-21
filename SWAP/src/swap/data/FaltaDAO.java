@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swap.data;
 
 import java.sql.Connection;
@@ -12,10 +7,6 @@ import java.sql.SQLException;
 import swap.business.Aluno;
 import swap.business.Falta;
 
-/**
- *
- * @author MarcoSilva
- */
 public class FaltaDAO {
     
     private Connection conn;
@@ -36,7 +27,7 @@ public class FaltaDAO {
     return r;
     }
     
-    //so será utilizado no caso de a instância ainda não existir na tabela
+    //só será utilizado no caso de a instância ainda não existir na tabela
     public Falta putFalta(String key, Falta value, Aluno aluno, String UC) throws SQLException {
            
             conn = Connect.connect();
