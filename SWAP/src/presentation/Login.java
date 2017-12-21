@@ -112,10 +112,10 @@ public class Login extends javax.swing.JFrame {
 		if (s.autentica(email, password)) {
 			if (email.startsWith("a") && Character.isDigit(email.charAt(1)))
 				new AlunoMain(s).setVisible(true);
-			//else if (s.extraiChave(email).equals("dcmiei"))
-				//new DCMain(s).setVisible(true);
-			//else
-				//new DRMain(s).setVisible(true);
+			else if (s.extraiChave(email).equals("dcmiei"))
+				new AnalisarTrocas(s).setVisible(true);
+			else
+				new CarregarHorario(s).setVisible(true);
 			this.dispose();
 		}
     }//GEN-LAST:event_jButton1MouseClicked
