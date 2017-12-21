@@ -5,6 +5,7 @@
  */
 package swap.business;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import swap.data.SolicitacaoTrocaDAO;
@@ -48,7 +49,7 @@ public class UC {
     }
 	*/
 
-	public boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) {
+	public boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
 		boolean encontrou = false;
 		
 		// Vai buscar todas as solicitacoes que envolvem a UC codUC
@@ -62,7 +63,7 @@ public class UC {
                         
 			// Faz match
 			if (codTurnoS.equals(s.getCod_turnoD()) && codTurnoD.equals(s.getCod_turnoS())) {
-				//Fazer a troca propriamente dita
+				turnos.trocaTurnos(codUC, codAluno, codTurnoD, s.getCod_aluno(), s.getCod_turnoD());
 				encontrou = true;
 			}
 		}
