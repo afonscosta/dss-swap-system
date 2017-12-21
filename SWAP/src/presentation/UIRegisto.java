@@ -225,7 +225,9 @@ public class UIRegisto extends javax.swing.JFrame {
     private void jTextFieldEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusGained
         this.jTextFieldUC.setEnabled(false);
 		this.jCheckBoxRegente.setEnabled(false);
+		this.jCheckBoxRegente.setSelected(false);
 		this.jCheckBoxPrio.setEnabled(false);
+		this.jCheckBoxPrio.setSelected(false);
     }//GEN-LAST:event_jTextFieldEmailFocusGained
 
 	/**
