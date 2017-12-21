@@ -49,6 +49,9 @@ public class UIRegisto extends javax.swing.JFrame {
         jTextFieldPP = new javax.swing.JTextField();
         jTextFieldPPC = new javax.swing.JTextField();
         jCheckBoxPrio = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldUC = new javax.swing.JTextField();
+        jCheckBoxRegente = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registo");
@@ -79,12 +82,24 @@ public class UIRegisto extends javax.swing.JFrame {
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jTextFieldEmail.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextFieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldEmailFocusLost(evt);
+            }
+        });
 
         jTextFieldPP.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jTextFieldPPC.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jCheckBoxPrio.setText("Prioritário");
+
+        jLabel6.setText("UC (Sigla)");
+
+        jCheckBoxRegente.setText("Regente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,22 +108,27 @@ public class UIRegisto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldNome)
                     .addComponent(jTextFieldEmail)
                     .addComponent(jTextFieldPP)
                     .addComponent(jTextFieldPPC)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBoxPrio))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(0, 57, Short.MAX_VALUE))
+                        .addGap(0, 38, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldUC)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBoxPrio)))
+                        .addComponent(jCheckBoxRegente)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,6 +155,12 @@ public class UIRegisto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jCheckBoxRegente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -143,16 +169,62 @@ public class UIRegisto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        String nome = this.jTextFieldNome.getText();
+        boolean docente = false;
+		boolean aluno = false;
+		boolean dc = false;
+		String nome = this.jTextFieldNome.getText();
 		String email = this.jTextFieldEmail.getText();
 		String pass = this.jTextFieldPP.getText();
 		String passVerifica = this.jTextFieldPPC.getText();
-		if (pass.equals(passVerifica)) {
-			s.registo(nome, email, pass, this.jCheckBoxPrio.isSelected());
+		String chave = s.extraiChave(email);
+		if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
+			docente = true;
+		}
+		else if (chave.equals("dcmiei")) {
+			dc = true;
+		}
+		else {
+			String uc = this.jTextFieldUC.getText();
+			docente = true;
+		}
+		if (pass.equals(passVerifica) && aluno) {
+			s.registo(nome, email, pass, this.jCheckBoxPrio.isSelected(), -1);
+		}
+		else if (pass.equals(passVerifica) && dc) {
+			s.registo(nome, email, pass, null, -1);
+		}
+		else if (pass.equals(passVerifica) && docente) {
+			s.registo(nome, email, pass, uc, this.jCheckBoxPrio.isSelected());
 		}
 		new MainWindow(s).setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jTextFieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusLost
+        String email = this.jTextFieldEmail.getText();
+		String chave = s.extraiChave(email);
+		if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
+			this.jTextFieldUC.setEnabled(false);
+			this.jCheckBoxRegente.setEnabled(false);
+			this.jCheckBoxPrio.setEnabled(true);
+		}
+		else if (chave.equals("dcmiei")) {
+			this.jTextFieldUC.setEnabled(false);
+			this.jCheckBoxPrio.setEnabled(false);
+			this.jCheckBoxRegente.setEnabled(false);
+		}
+		else {
+			this.jTextFieldUC.setEnabled(true);
+			this.jCheckBoxRegente.setEnabled(true);
+			this.jCheckBoxPrio.setEnabled(false);
+		}
+    }//GEN-LAST:event_jTextFieldEmailFocusLost
+
+    private void jTextFieldEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEmailFocusGained
+        this.jTextFieldUC.setEnabled(false);
+		this.jCheckBoxRegente.setEnabled(false);
+		this.jCheckBoxPrio.setEnabled(false);
+    }//GEN-LAST:event_jTextFieldEmailFocusGained
 
 	/**
 	 * @param args the command line arguments
@@ -193,14 +265,17 @@ public class UIRegisto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBoxPrio;
+    private javax.swing.JCheckBox jCheckBoxRegente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPP;
     private javax.swing.JTextField jTextFieldPPC;
+    private javax.swing.JTextField jTextFieldUC;
     // End of variables declaration//GEN-END:variables
 }
