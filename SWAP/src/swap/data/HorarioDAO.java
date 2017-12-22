@@ -1,14 +1,12 @@
 package swap.data;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import swap.business.Horario;
 import swap.business.Tuplo;
+import swap.business.UC;
 
 public class HorarioDAO implements Map<Tuplo, Horario>{
 	
@@ -111,5 +109,18 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
     public Set<Entry<Tuplo, Horario>> entrySet() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    public UC getUC(String codUC) throws SQLException {
+       conn = Connect.connect();
+       String sql = "SELECT * FROM UC WHERE codigo=?";
+       PreparedStatement stm = conn.prepareStatement(sql);
+       stm.setString(1,codUC);
+       ResultSet rs = stm.executeQuery();
+
+       if (rs.next()) {
+          return new UC(rs.getString("nome"));
+       }
+
+       return null;
+    }
 }

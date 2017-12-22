@@ -1,6 +1,10 @@
 package swap.business;
 
+import swap.data.FaltaDAO;
+
+import java.sql.SQLException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Turno {
 
@@ -17,6 +21,8 @@ public class Turno {
     private String sala;
     private LocalTime horaInicio;
     private LocalTime duracao;
+
+    private FaltaDAO faltas;
    
     public Turno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
         this.id = id;
@@ -90,4 +96,18 @@ public class Turno {
         this.duracao = duracao;
     }
 
+    public void marcaFaltas(ArrayList<String> alunos, String codTurno, String codUc) {
+        try {
+            for (String a : alunos) {
+                if (faltas.containsKey(codTurno, codUc, a)) {
+                    // linha ja existe, incrementar nr
+                    faltas.incFalta(a, codTurno, codUc);
+                } else {
+                    // primeira falta, adicionar registo
+                    faltas.putFalta(a,codTurno,codUc);
+                }
+
+            }
+        } catch (SQLException e) {}
+    }
 }

@@ -126,4 +126,24 @@ public class TurnoDAO {
         Connect.close(conn);
     }
 
+    public Turno getTurno(String codTurno) throws SQLException {
+        
+        conn = Connect.connect();
+        String sql = "SELECT * FROM Turno WHERE numero=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1,codTurno);
+        ResultSet rs = stm.executeQuery();
+        
+        if (rs.next()) {
+            return new Turno(rs.getString("numero"),
+                    rs.getString("UC_codigo"),
+                    rs.getInt("capacidade"),
+                    rs.getString("sala"),
+                    rs.getInt("Horario_numero"),
+                    (LocalTime)rs.getObject("horaI"),
+                    (LocalTime)rs.getObject("duracao"));
+        }
+        
+        return null;
+    }
 }

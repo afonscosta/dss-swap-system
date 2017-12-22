@@ -69,4 +69,13 @@ public class UC {
         trocas.remFilaEspera(codAluno,id_turnoS,id_turnoD,codUc);
     }
 
+    public void marcaFaltas(ArrayList<String> alunos, String codTurno) {
+        Turno t = null;
+        try {
+            t = turnos.getTurno(codTurno);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        t.marcaFaltas(alunos,codTurno);
+    }
 }

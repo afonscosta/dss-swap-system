@@ -15,7 +15,7 @@ import swap.business.Utilizador;
 public class UtilizadorDAO implements Map<String,Utilizador> {
 
     private Connection conn;
-    
+
     public boolean existePar(String email, String password) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -37,7 +37,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
     @Override
     public boolean containsKey(Object key) {
         boolean r = false;
-        
+
         try {
             conn = Connect.connect();
             String sql = "SELECT `nome` FROM `Utilizador` WHERE `idUtilizadores`=?;";
@@ -48,7 +48,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         } catch (Exception e) {
             throw new NullPointerException(e.getMessage());
         }
-    return r;
+        return r;
     }
 
 
@@ -59,9 +59,9 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     @Override
     public Utilizador get(Object key) {
-	
+
         Utilizador u = null;
-        
+
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM Utilizador WHERE idUtilizadores=?");
@@ -69,7 +69,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 String chave = rs.getString("idUtilizadores");
-		//Não temos dados para preencher o aluno
+                //Não temos dados para preencher o aluno
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
                     u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave );
                 } else if (chave.equals("dcmiei")) {
@@ -83,29 +83,29 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         } finally {
             Connect.close(conn);
         }
-        
+
         return u;
     }
 
     public void putAluno(String key, Aluno value) throws SQLException {
-           
-            conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
+
+        conn = Connect.connect();
+        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
                 "VALUES (?,?,?,?);");
-            
-             
-            int bool = value.getPrioridade() == true ? 1 : 0;
-            
-            stm.setString(1, value.getNumero());
-            stm.setString(2,value.getNome());
-            stm.setString(3,value.getPassword());
-            stm.setString(4,String.valueOf(bool));
-            stm.executeUpdate();
-        
-            Connect.close(conn);
+
+
+        int bool = value.getPrioridade() == true ? 1 : 0;
+
+        stm.setString(1, value.getNumero());
+        stm.setString(2,value.getNome());
+        stm.setString(3,value.getPassword());
+        stm.setString(4,String.valueOf(bool));
+        stm.executeUpdate();
+
+        Connect.close(conn);
     }
 
-    
+
     public void putDocente(String key, Docente value) throws SQLException {
         conn = Connect.connect();
         PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,uc,regente) VALUES(?,?,?,?,?);");
@@ -115,22 +115,22 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         stm.setString(4,value.getUC());
         stm.setInt(5,value.getRegente());
         stm.executeUpdate();
-        
+
         Connect.close(conn);
     }
-    
-        public void putDirecaoCurso(String chave, String nome, String password) throws SQLException {
-            conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
-            stm.setString(1,chave);
-            stm.setString(2,nome);
-            stm.setString(3,password);
-            stm.executeUpdate();
-            
-            Connect.close(conn);
+
+    public void putDirecaoCurso(String chave, String nome, String password) throws SQLException {
+        conn = Connect.connect();
+        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
+        stm.setString(1,chave);
+        stm.setString(2,nome);
+        stm.setString(3,password);
+        stm.executeUpdate();
+
+        Connect.close(conn);
     }
-    
-    
+
+
     @Override
     public Utilizador remove(Object key) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -171,18 +171,18 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
     }
 
     public int isRegente(String chave) throws SQLException {
+
         conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("SELECT regente FROM Utilizador WHERE idUtilizadores=?");
+        String sql = "SELECT regente FROM Utilizador WHERE idUtilizadores=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1, chave);
-        
         ResultSet rs = stm.executeQuery();
-        
+
+        int res = (rs.next()) ? rs.getInt("regente") : -1;
+
         Connect.close(conn);
-        
-        if (rs.next()) {
-            return rs.getInt("regente");
-        }
-        return -1;
+
+        return res;
     }
 
 
