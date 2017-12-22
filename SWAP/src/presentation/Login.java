@@ -109,14 +109,18 @@ public class Login extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         String email = this.jTextFieldEmail.getText();
 		String password = this.jTextFieldPass.getText();
+		String chave = s.extraiChave(email);
 		if (s.autentica(email, password)) {
-			if (email.startsWith("a") && Character.isDigit(email.charAt(1)))
+			if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
 				new AlunoMain(s).setVisible(true);
-			else if (s.extraiChave(email).equals("dcmiei"))
-                            new CarregarHorario(s).setVisible(true);
-				
-			else
-                            new AnalisarTrocas(s).setVisible(true);
+			else if (chave.equals("dcmiei"))
+				new CarregarHorario(s).setVisible(true);
+			else {
+				if (s.isRegente(chave))
+					new AnalisarTrocas(s).setVisible(true);
+				else
+					new ModificarTurno(s).setVisible(true);
+			}
 			this.dispose();
 		}
     }//GEN-LAST:event_jButton1MouseClicked
