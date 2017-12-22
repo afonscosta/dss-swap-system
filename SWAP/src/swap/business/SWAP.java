@@ -39,11 +39,23 @@ public class SWAP {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public boolean isRegente(String chave) {
+        int isRegente = -1;
+        
+        try {
+            isRegente = utilizadores.isRegente(chave);
+        } catch (SQLException ex) {
+            Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return (isRegente == 1);
+    }
+    
     /* USE CASES */
     
     public boolean registo (String nome,String email, String password,Object wildcard,int regente) {
 //        System.out.println(nome);
-//        System.out.println(email);
+        System.out.println(email);
 //        System.out.println(password);
 //        System.out.println(wil);
 //        System.out.println(nome);
@@ -59,7 +71,7 @@ public class SWAP {
                         utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
                 
                     } else if (chave.equals("dcmiei")) { // é direção de curso
-                        utilizadores.putDirecaoCurso(chave,email,password);
+                        utilizadores.putDirecaoCurso(chave,nome,password);
                     } else { // é docente regente
                        
                         utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente)); 

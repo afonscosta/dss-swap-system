@@ -72,6 +72,10 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 		//Não temos dados para preencher o aluno
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
                     u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave );
+                } else if (chave.equals("dcmiei")) {
+                    u = new DirecaoCurso(rs.getString("nome"),rs.getString("idUtilizadores") + "@di.uminho.pt",rs.getString("password"));
+                } else {
+                    u = new Docente(rs.getString("nome"),rs.getString("idUtilizadores") + "@di.uminho.pt",rs.getString("password"),rs.getString("uc"),rs.getInt("regente"));
                 }
             }
         } catch (SQLException e) {
@@ -115,11 +119,11 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         Connect.close(conn);
     }
     
-        public void putDirecaoCurso(String chave, String email, String password) throws SQLException {
+        public void putDirecaoCurso(String chave, String nome, String password) throws SQLException {
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,email,password) VALUES(?,?,?);");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
             stm.setString(1,chave);
-            stm.setString(2,email);
+            stm.setString(2,nome);
             stm.setString(3,password);
             stm.executeUpdate();
             
@@ -164,6 +168,21 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     public void putDC(String chave, Aluno aluno) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public int isRegente(String chave) throws SQLException {
+        conn = Connect.connect();
+        PreparedStatement stm = conn.prepareStatement("SELECT regente FROM Utilizador WHERE idUtilizadores=?");
+        stm.setString(1, chave);
+        
+        ResultSet rs = stm.executeQuery();
+        
+        Connect.close(conn);
+        
+        if (rs.next()) {
+            return rs.getInt("regente");
+        }
+        return -1;
     }
 
 
