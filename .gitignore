@@ -1,2 +1,6 @@
 /SWAP/build/
 /SWAP/dist/
+.idea/
+SWAP/SWAP.iml
+out/
+SWAP/nbproject/private/private.xml
