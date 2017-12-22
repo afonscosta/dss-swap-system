@@ -55,6 +55,11 @@ public class ModificarTurno extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton3.setText("Lista dos alunos");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel2.setText("INFO DO TURNO");
@@ -145,6 +150,10 @@ public class ModificarTurno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        new ListaAlunosTurno(s).setVisible(true);
+    }//GEN-LAST:event_jButton3MouseClicked
 
 	/**
 	 * @param args the command line arguments
