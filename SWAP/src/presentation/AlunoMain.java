@@ -22,7 +22,7 @@ import swap.business.SWAP;
  */
 public class AlunoMain extends javax.swing.JFrame {
 
-	SWAP s;
+	private SWAP s;
 	private DefaultTableModel t;
 	/**
 	 * Creates new form AlunoMain

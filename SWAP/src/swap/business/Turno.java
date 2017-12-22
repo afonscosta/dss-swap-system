@@ -96,15 +96,15 @@ public class Turno {
         this.duracao = duracao;
     }
 
-    public void marcaFaltas(ArrayList<String> alunos, String codTurno, String codUc) {
+    public void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
         try {
             for (String a : alunos) {
-                if (faltas.containsKey(codTurno, codUc, a)) {
+                if (faltas.containsKey(codTurno, codUC, a)) {
                     // linha ja existe, incrementar nr
-                    faltas.incFalta(a, codTurno, codUc);
+                    faltas.incFalta(a, codTurno, codUC);
                 } else {
                     // primeira falta, adicionar registo
-                    faltas.putFalta(a,codTurno,codUc);
+                    faltas.putFalta(a,codTurno,codUC);
                 }
 
             }

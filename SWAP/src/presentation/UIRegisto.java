@@ -13,7 +13,7 @@ import swap.business.SWAP;
  */
 public class UIRegisto extends javax.swing.JFrame {
 
-	SWAP s;
+	private SWAP s;
 	
 	/**
 	 * Creates new form Registo

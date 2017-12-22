@@ -12,7 +12,7 @@ import swap.business.SWAP;
  */
 public class Login extends javax.swing.JFrame {
 
-	SWAP s;
+	private SWAP s;
 	
 	/**
 	 * Creates new form Login

@@ -13,7 +13,7 @@ import swap.business.SWAP;
  */
 public class AnalisarTrocas extends javax.swing.JFrame {
 
-	SWAP s;
+	private SWAP s;
 	
 	/**
 	 * Creates new form AnalisarTrocas

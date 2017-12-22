@@ -111,7 +111,7 @@ public class SWAP {
         alunoAtual.remFilaEspera(codUc,codTurno);
     }
 
-    public void marcaFaltas(String codUC,String turno, ArrayList<String> alunos) {
+    public void marcaFaltas(String codUC,String codTurno, ArrayList<String> alunos) {
         UC uc = null;
         try {
             uc = horarios.getUC(codUC);
@@ -119,10 +119,15 @@ public class SWAP {
             e.printStackTrace();
         }
 
-        uc.marcaFaltas(alunos,turno);
+        uc.marcaFaltas(alunos, codUC, codTurno);
 
     }
 
+	//Esta função devolve um hashmap dos alunos de um determinado turno
+	public Map<String, Aluno> void getAlunos(String codUC, String codTurno) {
+		
+	}
+	
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
 //        Horario h = getHorario(ano,semestre);
 //        UC uc = h.getUC(codUc);

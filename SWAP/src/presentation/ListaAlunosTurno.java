@@ -5,8 +5,12 @@
  */
 package presentation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import swap.business.Aluno;
 import swap.business.SWAP;
 
 /**
@@ -16,7 +20,11 @@ import swap.business.SWAP;
 public class ListaAlunosTurno extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
-	SWAP s;
+	private SWAP s;
+	private Map<String, Aluno> alunosTurno;
+	private String codUC;
+	private String codTurno;
+	private ArrayList<String> alunosFalta;
 	
 	/**
      * Creates new form MainInterface
@@ -35,9 +43,13 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
     /**
      * Creates new form MainInterface
      */
-    public ListaAlunosTurno(SWAP s) {
+    public ListaAlunosTurno(SWAP s, String codUC, String codTurno) {
         initComponents();
+		this.alunosFalta = new ArrayList<>();
 		this.s = s;
+		this.codUC = codUC;
+		this.codTurno = codTurno;
+		this.alunosTurno = s.getAlunos(codUC, codTurno);
 		t = new DefaultTableModel();
 		t.addColumn("Número");
 		t.addColumn("Nome");
@@ -51,6 +63,9 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 //		f.getAlunosF().entrySet()
 //					  .stream()
 //					  .forEachOrdered(s -> t.addRow(new Object[]{s.getKey(), s.getValue().getNome()}));
+		alunosTurno.entrySet()
+				   .stream()
+				   .forEachOrdered(a -> t.addRow(new Object[]{a.getKey(), a.getValue().getNome()}));
     }
 
     /**
@@ -66,6 +81,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -122,6 +138,14 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
+        jMenuItem1.setText("Submeter faltas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Sair");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -166,20 +190,25 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-//        if (evt.getClickCount() == 2) {
-//			int row = jTable1.rowAtPoint(evt.getPoint());
-//			int col = jTable1.columnAtPoint(evt.getPoint());
-//			if (row >= 0 && col >= 0) {
-//				int num = (int) jTable1.getValueAt(row, 0);
-//				InfoSocioInterface is = new InfoSocioInterface(f, num);
-//				is.setVisible(true);
-//			}
-//		}
+        if (evt.getClickCount() == 2) {
+			int row = jTable1.rowAtPoint(evt.getPoint());
+			int col = jTable1.columnAtPoint(evt.getPoint());
+			if (row >= 0 && col >= 0) {
+				String chave = (String) jTable1.getValueAt(row, 0);
+				InfoAluno is = new InfoAluno(s, alunosFalta, codUC, codTurno, alunosTurno.get(chave));
+				is.setVisible(true);
+			}
+		}
     }//GEN-LAST:event_jTable1MousePressed
 
     private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
 		System.exit(0);
     }//GEN-LAST:event_windowClosingCustom
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        s.marcaFaltas(codUC, codTurno, alunosFalta);
+		alunosFalta.clear();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 	
 	
@@ -224,6 +253,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
