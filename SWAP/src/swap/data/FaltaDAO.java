@@ -38,7 +38,7 @@ public class FaltaDAO {
     public void putFalta(String aluno, String codTurno, String codUc) throws SQLException {
 
         conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Falta(quantidade, utilizador, Turno_numero, Turno_UC_codigo)\n" +
+        PreparedStatement stm = conn.prepareStatement("INSERT INTO Falta(quant, utilizador, Turno_numero, Turno_UC_codigo)\n" +
                 "VALUES (1,?,?,?);");
 
         stm.setString(1, aluno);
@@ -51,10 +51,11 @@ public class FaltaDAO {
 
     public void incFalta(String a, String codTurno, String codUc) throws SQLException {
         conn = Connect.connect();
+
         PreparedStatement stm = conn.prepareStatement("UPDATE Falta SET quant = quant + 1 WHERE utilizador = ? AND Turno_numero = ? AND Turno_UC_codigo=?");
         stm.setString(1,a);
         stm.setString(2,codTurno);
-        stm.setString(1,codUc);
+        stm.setString(3,codUc);
         stm.executeUpdate();
 
         Connect.close(conn);

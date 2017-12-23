@@ -32,6 +32,7 @@ public class Turno {
         this.horarioId = horarioId;
         this.horaInicio = horaInicio;
         this.duracao = duracao;
+        this.faltas = new FaltaDAO();
     }
 
     public Integer getHorarioId() {

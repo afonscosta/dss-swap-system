@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import swap.business.Aluno;
 import swap.business.Turno;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TurnoDAO {
     
@@ -126,24 +130,46 @@ public class TurnoDAO {
         Connect.close(conn);
     }
 
-    public Turno getTurno(String codTurno) throws SQLException {
-        
+    public Turno getTurno(String codTurno,String cod_UC) throws SQLException {
+
         conn = Connect.connect();
-        String sql = "SELECT * FROM Turno WHERE numero=?";
+        String sql = "SELECT * FROM Turno WHERE numero=? AND UC_codigo=?";
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1,codTurno);
+        stm.setString(2,cod_UC);
         ResultSet rs = stm.executeQuery();
-        
+
         if (rs.next()) {
             return new Turno(rs.getString("numero"),
                     rs.getString("UC_codigo"),
                     rs.getInt("capacidade"),
-                    rs.getString("sala"),
+                    rs.getString("Sala_numero"),
                     rs.getInt("Horario_numero"),
-                    (LocalTime)rs.getObject("horaI"),
-                    (LocalTime)rs.getObject("duracao"));
+                    rs.getTime("horaI").toLocalTime(),
+                    rs.getTime("duracao").toLocalTime());
         }
-        
+
         return null;
+    }
+
+    public Map<String,Aluno> getAlunos(String codUC, String codTurno) throws SQLException {
+        Map<String,Aluno> res = new HashMap<>();
+
+        conn = Connect.connect();
+        String sql = "SELECT * FROM UtilizadorTurno \n " +
+                "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n " +
+                "WHERE Turno_UC_codigo = ? AND Turno_numero = ?;";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1,codUC);
+        stm.setString(2,codTurno);
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            res.put(rs.getString("Utilizador_idUtilizadores"),
+                    new Aluno(rs.getString("nome"),rs.getString("idUtilizadores")+"@alunos.uminho.pt",rs.getString("password"),
+                            rs.getBoolean("prioridade"),rs.getString("idUtilizadores")));
+        }
+
+        return res;
     }
 }

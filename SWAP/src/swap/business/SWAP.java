@@ -3,6 +3,7 @@ package swap.business;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import swap.data.HorarioDAO;
@@ -125,7 +126,8 @@ public class SWAP {
 
 	//Esta função devolve um hashmap dos alunos de um determinado turno
 	public Map<String, Aluno> getAlunos(String codUC, String codTurno) {
-		
+        Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
+        return doc.getAlunos(codUC,codTurno);
 	}
 	
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {

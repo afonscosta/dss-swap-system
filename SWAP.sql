@@ -5,8 +5,8 @@ INSERT INTO UC () VALUES ('ALG','Algoritmos');
 INSERT INTO Horario () VALUES(2,3,2);
 INSERT INTO Horario () VALUES(1,3,2);
 
-INSERT INTO Utilizador() VALUES ('a79089','edgar','213',0);
-INSERT INTO Utilizador() VALUES ('a99999','joao','123',0);
+INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade) VALUES ('a79089','edgar','213',0);
+INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade) VALUES ('a99999','joao','123',0);
 
 
 INSERT INTO Sala () VALUES('101',200);

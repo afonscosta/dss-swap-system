@@ -72,7 +72,7 @@ public class UC {
     public void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
         Turno t = null;
         try {
-            t = turnos.getTurno(codTurno);
+            t = turnos.getTurno(codTurno,codUC);
         } catch (SQLException e) {
             e.printStackTrace();
         }
