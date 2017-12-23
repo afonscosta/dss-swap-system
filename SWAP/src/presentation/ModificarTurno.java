@@ -14,6 +14,7 @@ import swap.business.SWAP;
 public class ModificarTurno extends javax.swing.JFrame {
 
 	private SWAP s;
+	private boolean isRegente;
 	
 	/**
 	 * Creates new form ModificarTurno
@@ -25,8 +26,10 @@ public class ModificarTurno extends javax.swing.JFrame {
 	/**
 	 * Creates new form ModificarTurno
 	 */
-	public ModificarTurno(SWAP s) {
+	public ModificarTurno(SWAP s, boolean isRegente) {
 		this.s = s;
+		this.isRegente = isRegente;
+		this.jButtonAnalisarTrocas.setEnabled(isRegente);
 		initComponents();
 	}
 
@@ -51,6 +54,7 @@ public class ModificarTurno extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButtonAnalisarTrocas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modificar turno");
@@ -138,6 +142,13 @@ public class ModificarTurno extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Modificar");
 
+        jButtonAnalisarTrocas.setText("Analisar trocas");
+        jButtonAnalisarTrocas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonAnalisarTrocasMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +161,8 @@ public class ModificarTurno extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonAnalisarTrocas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)))
@@ -166,7 +178,8 @@ public class ModificarTurno extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButtonAnalisarTrocas))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,6 +191,10 @@ public class ModificarTurno extends javax.swing.JFrame {
 		String codTurno = this.jTextFieldTurno.getText();
 		new ListaAlunosTurno(s, codUC, codTurno).setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButtonAnalisarTrocasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAnalisarTrocasMouseClicked
+        new AnalisarTrocas(s).setVisible(true);
+    }//GEN-LAST:event_jButtonAnalisarTrocasMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -218,6 +235,7 @@ public class ModificarTurno extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAnalisarTrocas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

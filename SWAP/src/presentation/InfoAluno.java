@@ -21,6 +21,7 @@ public class InfoAluno extends javax.swing.JFrame {
 	private String codUC;
 	private String codTurno;
 	private List<String> alunosFalta;
+	private int numFaltas;
 	
 	/**
 	 * Creates new form InfoSocioInterface
@@ -38,6 +39,7 @@ public class InfoAluno extends javax.swing.JFrame {
 	 */
 	public InfoAluno(SWAP s, List<String> alunosFalta, String codUC, String codTurno, Aluno a) {
 		initComponents();
+		this.numFaltas = 0;
 		this.s = s;
 		this.alunosFalta = alunosFalta;
 		this.codUC = codUC;
@@ -49,6 +51,8 @@ public class InfoAluno extends javax.swing.JFrame {
 		jTextFieldNome.setText(a.getNome());
 		jTextFieldEmail.setEditable(false);
 		jTextFieldEmail.setText(a.getEmail());
+		jTextFieldCount.setEditable(false);
+		jTextFieldCount.setText(Integer.toString(numFaltas));
 	}
 
 	/**
@@ -74,6 +78,7 @@ public class InfoAluno extends javax.swing.JFrame {
         jLabelCurso = new javax.swing.JLabel();
         jLabelMorada = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jTextFieldCount = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Informação do Sócio");
@@ -149,6 +154,8 @@ public class InfoAluno extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonMarcarFalta))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -168,7 +175,8 @@ public class InfoAluno extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonMarcarFalta)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelNum, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
@@ -206,6 +214,8 @@ public class InfoAluno extends javax.swing.JFrame {
 
     private void jButtonMarcarFaltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarcarFaltaMouseClicked
 		alunosFalta.add(a.getNumero());
+		numFaltas++;
+		this.jTextFieldCount.setText(Integer.toString(numFaltas));
     }//GEN-LAST:event_jButtonMarcarFaltaMouseClicked
 
     private void windowCloserCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowCloserCustom
@@ -261,6 +271,7 @@ public class InfoAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMorada;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNum;
+    private javax.swing.JTextField jTextFieldCount;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNum;

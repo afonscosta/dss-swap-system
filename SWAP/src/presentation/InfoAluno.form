@@ -66,6 +66,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jTextFieldCount" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonMarcarFalta" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -94,6 +96,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonMarcarFalta" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldCount" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabelNum" min="-2" pref="14" max="-2" attributes="0"/>
@@ -210,6 +213,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Informa&#xe7;&#xe3;o do aluno"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldCount">
     </Component>
   </SubComponents>
 </Form>

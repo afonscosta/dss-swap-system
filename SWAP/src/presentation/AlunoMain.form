@@ -40,10 +40,12 @@
                           </Group>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="156" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButtonRemoveSolicitacao" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonSolicita" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -67,8 +69,11 @@
                   <Component id="jTextFieldTurno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonSolicita" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonSolicita" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveSolicitacao" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="169" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,6 +108,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Turno"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonRemoveSolicitacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remove solicita&#xe7;&#xe3;o"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonRemoveSolicitacaoMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

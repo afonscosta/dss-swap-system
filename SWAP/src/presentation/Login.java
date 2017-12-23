@@ -116,10 +116,10 @@ public class Login extends javax.swing.JFrame {
 			else if (chave.equals("dcmiei"))
 				new CarregarHorario(s).setVisible(true);
 			else {
-				if (s.isRegente(chave))
-					new AnalisarTrocas(s).setVisible(true);
-				else
-					new ModificarTurno(s).setVisible(true);
+//				if (s.isRegente(chave))
+//					new AnalisarTrocas(s).setVisible(true);
+//				else
+					new ModificarTurno(s, s.isRegente(chave)).setVisible(true);
 			}
 			this.dispose();
 		}

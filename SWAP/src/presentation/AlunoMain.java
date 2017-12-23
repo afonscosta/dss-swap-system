@@ -5,15 +5,10 @@
  */
 package presentation;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.sql.SQLException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import swap.business.SWAP;
 
 /**
@@ -34,6 +29,7 @@ public class AlunoMain extends javax.swing.JFrame {
 	
 	/**
 	 * Creates new form AlunoMain
+	 * @param s
 	 */
 	public AlunoMain(SWAP s) {
 		this.s = s;
@@ -55,6 +51,7 @@ public class AlunoMain extends javax.swing.JFrame {
         jTextFieldUC = new javax.swing.JTextField();
         jTextFieldTurno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jButtonRemoveSolicitacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +68,13 @@ public class AlunoMain extends javax.swing.JFrame {
         jLabel4.setText("UC");
 
         jLabel5.setText("Turno");
+
+        jButtonRemoveSolicitacao.setText("Remove solicitação");
+        jButtonRemoveSolicitacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRemoveSolicitacaoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,9 +94,11 @@ public class AlunoMain extends javax.swing.JFrame {
                                 .addGap(126, 126, 126)
                                 .addComponent(jLabel5))
                             .addComponent(jLabel1))
-                        .addGap(0, 96, Short.MAX_VALUE))
+                        .addGap(0, 156, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonRemoveSolicitacao)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonSolicita)))
                 .addContainerGap())
         );
@@ -110,8 +116,10 @@ public class AlunoMain extends javax.swing.JFrame {
                     .addComponent(jTextFieldUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSolicita)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSolicita)
+                    .addComponent(jButtonRemoveSolicitacao))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,12 +131,19 @@ public class AlunoMain extends javax.swing.JFrame {
         String uc = this.jTextFieldUC.getText();
 		String turno = this.jTextFieldTurno.getText();
 		
-            try {
-                s.solicitaTurno(uc, turno);
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoMain.class.getName()).log(Level.SEVERE, null, ex);
-            }
+		try {
+			s.solicitaTurno(uc, turno);
+		} catch (SQLException ex) {
+			Logger.getLogger(AlunoMain.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }//GEN-LAST:event_jButtonSolicitaMouseClicked
+
+    private void jButtonRemoveSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRemoveSolicitacaoMouseClicked
+        String uc = this.jTextFieldUC.getText();
+		String turno = this.jTextFieldTurno.getText();
+		
+		s.removeSolicitacaoTurno(uc, turno);
+    }//GEN-LAST:event_jButtonRemoveSolicitacaoMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -166,6 +181,7 @@ public class AlunoMain extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonRemoveSolicitacao;
     private javax.swing.JButton jButtonSolicita;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
