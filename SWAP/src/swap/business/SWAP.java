@@ -124,7 +124,7 @@ public class SWAP {
     }
 
 	//Esta função devolve um hashmap dos alunos de um determinado turno
-	public Map<String, Aluno> void getAlunos(String codUC, String codTurno) {
+	public Map<String, Aluno> getAlunos(String codUC, String codTurno) {
 		
 	}
 	
