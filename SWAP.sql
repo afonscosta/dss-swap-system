@@ -11,17 +11,13 @@ INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade) VALUES ('a99999'
 
 INSERT INTO Sala () VALUES('101',200);
 
-INSERT INTO Turno () VALUES('TP2','ALG',20,1,'101','09:00:00','01:00:00');
+INSERT INTO Turno () VALUES('TP2','ALG',20,1,'101','09:00:00','01:00:00',15);
+INSERT INTO Turno() VALUES('TP1','ALG',20,1,'101','09:00:00','01:00:00',15);
+INSERT INTO Turno() VALUES('TP4','ALG',20,1,'101','09:00:00','01:00:00',15);
+INSERT INTO Turno() VALUES('TP10','ALG',1,1,'101','14:00:00','01:00:00',15);
 
 INSERT INTO UtilizadorTurno() VALUES('a79089','TP2','ALG');
 INSERT INTO UtilizadorTurno() VALUES('a79089','TP10','ALG');
-INSERT INTO UtilizadorTurno() VALUES('a12312','TP1','ALG');
-
-INSERT INTO Turno() VALUES('TP1','ALG',20,1,'101','09:00:00','01:00:00');
-INSERT INTO Turno() VALUES('TP4','ALG',20,1,'101','09:00:00','01:00:00');
-INSERT INTO Turno() VALUES('TP10','ALG',1,1,'101','14:00:00','01:00:00');
-
-
 INSERT INTO UtilizadorTurno() VALUES('a99999','TP1','ALG');
 
 

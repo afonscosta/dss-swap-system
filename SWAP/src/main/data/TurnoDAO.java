@@ -25,8 +25,13 @@ public class TurnoDAO {
             stm.setString(1, (String) key);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                t = new Turno((String) key, rs.getString("UC_codigo"), rs.getInt("capacidade"), rs.getString("Sala_numero"),
-                        rs.getInt("Horario_numero"), (LocalTime) rs.getObject("horaInicio"), (LocalTime) rs.getObject("duracao") );
+                t = new Turno((String) key, rs.getString("UC_codigo"),
+                        rs.getInt("capacidade"),
+                        rs.getString("Sala_numero"),
+                        rs.getInt("Horario_numero"),
+                        rs.getTime("horaInicio").toLocalTime(),
+                        rs.getTime("duracao").toLocalTime(),
+                        rs.getInt("aulasPrevistas"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,7 +151,8 @@ public class TurnoDAO {
                     rs.getString("Sala_numero"),
                     rs.getInt("Horario_numero"),
                     rs.getTime("horaI").toLocalTime(),
-                    rs.getTime("duracao").toLocalTime());
+                    rs.getTime("duracao").toLocalTime(),
+                    rs.getInt("aulasPrevistas"));
         }
 
         return null;

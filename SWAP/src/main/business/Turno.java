@@ -21,10 +21,11 @@ public class Turno {
     private String sala;
     private LocalTime horaInicio;
     private LocalTime duracao;
+    private Integer aulasPrevistas;
 
     private FaltaDAO faltas;
    
-    public Turno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
+    public Turno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas) {
         this.id = id;
         this.capacidade = capacidade;
         this.UC_codigo = UC_codigo;
@@ -32,6 +33,7 @@ public class Turno {
         this.horarioId = horarioId;
         this.horaInicio = horaInicio;
         this.duracao = duracao;
+        this.aulasPrevistas = aulasPrevistas;
         this.faltas = new FaltaDAO();
     }
 
@@ -97,7 +99,7 @@ public class Turno {
         this.duracao = duracao;
     }
 
-    public void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
+    void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
         try {
             for (String a : alunos) {
                 if (faltas.containsKey(codTurno, codUC, a)) {

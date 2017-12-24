@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.Map;
 
 public class Docente extends Utilizador {
-    String uc;
-    int regente; /* 0 nao regente, 1 regente (para adicionar em sql) */
-    TurnoDAO turnosLeciona;
+    private String uc;
+    private int regente; /* 0 nao regente, 1 regente (para adicionar em sql) */
+    private TurnoDAO turnosLeciona;
 
     public Docente(String nome, String email, String password, String uc, int regente) {
         super(nome, email, password);

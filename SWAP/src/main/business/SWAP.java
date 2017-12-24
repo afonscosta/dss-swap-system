@@ -69,6 +69,7 @@ public class SWAP {
 
                 } else if (chave.equals("dcmiei")) { // é direção de curso
                     utilizadores.putDirecaoCurso(chave,nome,password);
+
                 } else { // é docente regente
 
                     utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
@@ -93,9 +94,9 @@ public class SWAP {
         return false;
     }
 
-    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao) {
+    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas) {
 
-        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao);
+        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao,aulasPrevistas);
         return t;
     }
 

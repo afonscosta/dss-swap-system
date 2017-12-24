@@ -36,7 +36,7 @@ public class Aluno extends Utilizador {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) throws SQLException {
+    boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) throws SQLException {
         boolean trocou = false;
 
         UC uct = ucs.get(codUC);
@@ -52,7 +52,7 @@ public class Aluno extends Utilizador {
         return trocou;
     }
 
-    public void remFilaEspera(String codUc, String id_turnoD) {
+    void remFilaEspera(String codUc, String id_turnoD) {
         UC uct = ucs.get(codUc);
 
         String id_turnoS = turnos.getCodMyTurno(codUc, this.numero);

@@ -22,8 +22,8 @@ public class Login extends javax.swing.JFrame {
 	}
 
 	public Login(SWAP s) {
-		this.s = s;
 		initComponents();
+		this.s = s;
 	}
 
 	/**

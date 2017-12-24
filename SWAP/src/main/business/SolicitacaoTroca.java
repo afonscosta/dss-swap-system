@@ -24,15 +24,15 @@ public class SolicitacaoTroca {
         return cod_aluno;
     }
 
-    public void setCod_turnoS(String cod_turnoS) {
+    void setCod_turnoS(String cod_turnoS) {
         this.cod_turnoS = cod_turnoS;
     }
 
-    public void setCod_turnoD(String cod_turnoD) {
+    void setCod_turnoD(String cod_turnoD) {
         this.cod_turnoD = cod_turnoD;
     }
 
-    public void setCod_aluno(String cod_aluno) {
+    void setCod_aluno(String cod_aluno) {
         this.cod_aluno = cod_aluno;
     }
 
