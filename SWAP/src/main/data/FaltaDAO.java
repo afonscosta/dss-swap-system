@@ -1,11 +1,9 @@
-package swap.data;
+package main.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import swap.business.Aluno;
-import swap.business.Falta;
 
 public class FaltaDAO {
 

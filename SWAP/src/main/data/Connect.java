@@ -1,4 +1,4 @@
-package swap.data;
+package main.data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

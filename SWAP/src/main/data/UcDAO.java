@@ -1,4 +1,4 @@
-package swap.data;
+package main.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import swap.business.UC;
+import main.business.UC;
 
 public class UcDAO implements Map<String,UC> {
     

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation;
+package main.presentation;
 
 import java.util.List;
-import swap.business.Aluno;
-import swap.business.SWAP;
+import main.business.Aluno;
+import main.business.SWAP;
 
 /**
  *

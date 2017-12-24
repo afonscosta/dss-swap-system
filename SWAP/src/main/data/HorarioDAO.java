@@ -1,12 +1,12 @@
-package swap.data;
+package main.data;
 
 import java.sql.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import swap.business.Horario;
-import swap.business.Tuplo;
-import swap.business.UC;
+import main.business.Horario;
+import main.business.Tuplo;
+import main.business.UC;
 
 public class HorarioDAO implements Map<Tuplo, Horario>{
 	

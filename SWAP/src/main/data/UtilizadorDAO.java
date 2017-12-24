@@ -1,16 +1,15 @@
-package swap.data;
+package main.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import swap.business.Aluno;
-import swap.business.Docente;
-import swap.business.Utilizador;
+import main.business.Aluno;
+import main.business.Docente;
+import main.business.Utilizador;
 
 public class UtilizadorDAO implements Map<String,Utilizador> {
 

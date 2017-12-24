@@ -1,4 +1,4 @@
-package swap.business;
+package main.business;
 
 public class SolicitacaoTroca {
     

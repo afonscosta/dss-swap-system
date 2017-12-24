@@ -1,4 +1,4 @@
-package swap.data;
+package main.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import swap.business.Aluno;
-import swap.business.SolicitacaoTroca;
+
+import main.business.SolicitacaoTroca;
 
 public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
     
@@ -170,7 +170,7 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void remFilaEspera(String codAluno, String codTurnoS, String codTurnoD,String codUc) {
+    public void remFilaEspera(String codAluno, String codTurnoD, String codTurnoS,String codUc) {
         conn = Connect.connect();
         try {
             PreparedStatement stm = conn.prepareStatement("DELETE FROM SolicitacaoTroca WHERE aluno=? AND turnoS=? AND turnoD=? AND UC_codigo=?");

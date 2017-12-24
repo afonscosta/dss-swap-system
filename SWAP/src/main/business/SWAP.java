@@ -1,4 +1,4 @@
-package swap.business;
+package main.business;
 
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import swap.data.HorarioDAO;
-import swap.data.UtilizadorDAO;
+import main.data.HorarioDAO;
+import main.data.UtilizadorDAO;
 
 public class SWAP {
 

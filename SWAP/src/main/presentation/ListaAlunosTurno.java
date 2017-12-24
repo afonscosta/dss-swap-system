@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation;
+package main.presentation;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import swap.business.Aluno;
-import swap.business.SWAP;
+import main.business.Aluno;
+import main.business.SWAP;
 
 /**
  *

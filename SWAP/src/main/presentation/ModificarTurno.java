@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation;
+package main.presentation;
 
-import swap.business.SWAP;
+import main.business.SWAP;
 
 /**
  *
@@ -27,10 +27,10 @@ public class ModificarTurno extends javax.swing.JFrame {
 	 * Creates new form ModificarTurno
 	 */
 	public ModificarTurno(SWAP s, boolean isRegente) {
+        initComponents();
 		this.s = s;
 		this.isRegente = isRegente;
-		this.jButtonAnalisarTrocas.setEnabled(isRegente);
-		initComponents();
+		this.jButtonAnalisarTrocas.setEnabled(this.isRegente);
 	}
 
 	/**

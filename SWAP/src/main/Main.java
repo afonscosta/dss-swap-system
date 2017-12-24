@@ -1,7 +1,7 @@
 package main;
 
-import presentation.MainWindow;
-import swap.business.SWAP;
+import main.presentation.MainWindow;
+import main.business.SWAP;
 
 public class Main {
 
