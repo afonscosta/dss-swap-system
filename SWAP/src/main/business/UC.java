@@ -40,7 +40,7 @@ public class UC {
     }
     */
 
-    public boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
+    boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
         boolean encontrou = false;
 
         // Vai buscar todas as solicitações que envolvem a UC codUC
@@ -69,7 +69,7 @@ public class UC {
         trocas.remFilaEspera(codAluno,id_turnoD,id_turnoS,codUc);
     }
 
-    public void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
+    void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
         Turno t = null;
         try {
             t = turnos.getTurno(codTurno,codUC);
@@ -79,7 +79,7 @@ public class UC {
         t.marcaFaltas(alunos, codUC, codTurno);
     }
 
-    public boolean trataPrioritario(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
+    boolean trataPrioritario(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
         Turno t = turnos.getTurno(codTurnoD,codUC);
         int capacidade = t.getCapacidade();
         int lotacao = turnos.getLotacao(codTurnoD,codUC);

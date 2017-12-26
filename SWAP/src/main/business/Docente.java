@@ -25,7 +25,7 @@ public class Docente extends Utilizador {
         return this.uc;
     }
 
-    public Map<String,Aluno> getAlunos(String codUC, String codTurno) {
+    Map<String,Aluno> getAlunos(String codUC, String codTurno) {
         Map<String,Aluno> res = null;
         try {
             res = turnosLeciona.getAlunos(codUC,codTurno);
