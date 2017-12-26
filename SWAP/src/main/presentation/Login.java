@@ -166,7 +166,7 @@ public class Login extends javax.swing.JFrame {
 	
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         String email = this.jTextFieldEmail.getText();
-		String password = this.jPasswordFieldPass.getPassword().toString();
+		String password = new String(this.jPasswordFieldPass.getPassword());
 		String chave;
 		if ((chave = this.checkEmail(email)) != null) {
 			if (password != null && !password.equals("")) {

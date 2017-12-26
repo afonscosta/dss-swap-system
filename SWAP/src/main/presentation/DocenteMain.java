@@ -43,6 +43,7 @@ public class DocenteMain extends javax.swing.JFrame {
     public DocenteMain(SWAP s, boolean regente) {
         initComponents();
 		this.s = s;
+		this.ucs = new ArrayList<>();
 		this.turnos = s.getMyTurnos();
 		for ( Turno t : turnos) {
 			if (!ucs.contains(t.getUC_codigo()))
@@ -62,7 +63,7 @@ public class DocenteMain extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
 //		jTable1.getColumnModel().getColumn(3).setPreferredWidth(479);
 		for (int i = 0; i < turnos.size(); i++) {
 			Turno tn = turnos.get(i);
@@ -147,8 +148,6 @@ public class DocenteMain extends javax.swing.JFrame {
                 jButtonAnalisarTrocasMouseClicked(evt);
             }
         });
-
-        jComboBoxUCs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jMenu1.setText("File");
 

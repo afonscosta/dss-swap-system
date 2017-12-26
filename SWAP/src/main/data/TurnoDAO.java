@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import main.business.Aluno;
 import main.business.Turno;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TurnoDAO {
 
@@ -158,22 +161,26 @@ public class TurnoDAO {
         return null;
     }
 
-    public Map<String,Aluno> getAlunos(String codUC, String codTurno) throws SQLException {
-        Map<String,Aluno> res = new HashMap<>();
+    public ArrayList<String[]> getAlunos(String codUC, String codTurno) throws SQLException {
+        ArrayList<String[]> res = new ArrayList<>();
 
         conn = Connect.connect();
         String sql = "SELECT * FROM UtilizadorTurno \n " +
                 "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n " +
-                "WHERE Turno_UC_codigo = ? AND Turno_numero = ?;";
+                "WHERE Turno_UC_codigo = ? AND Turno_numero = ? AND uc IS NULL;";
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1,codUC);
         stm.setString(2,codTurno);
         ResultSet rs = stm.executeQuery();
 
         while (rs.next()) {
-            res.put(rs.getString("Utilizador_idUtilizadores"),
-                    new Aluno(rs.getString("nome"),rs.getString("idUtilizadores")+"@alunos.uminho.pt",rs.getString("password"),
-                            rs.getBoolean("prioridade"),rs.getString("idUtilizadores")));
+			String[] aluno = new String[5];
+			aluno[0] = rs.getString("idUtilizadores");
+			aluno[1] = rs.getString("nome");
+			aluno[2] = rs.getString("idUtilizadores") + "@alunos.uminho.pt";
+			aluno[3] = rs.getString("password");
+			aluno[4] = rs.getString("prioridade");
+            res.add(aluno);
         }
 
         return res;
@@ -226,4 +233,35 @@ public class TurnoDAO {
         Connect.close(conn);
 
     }
+
+	public ArrayList<Turno> getTurnos(String codDocente) {
+		ArrayList<Turno> res = new ArrayList<>();
+
+        conn = Connect.connect();
+        String sql = "SELECT * "
+			+ "FROM UtilizadorTurno JOIN Turno "
+			+ "ON Turno_numero = numero AND Turno_UC_codigo = UC_codigo "
+			+ "WHERE Utilizador_idUtilizadores = ?;";
+        PreparedStatement stm;
+		try {
+			stm = conn.prepareStatement(sql);
+			stm.setString(1,codDocente);
+			ResultSet rs = stm.executeQuery();
+
+			while (rs.next()) {
+				res.add(new Turno(rs.getString("numero"),
+					              rs.getString("UC_codigo"),
+								  rs.getInt("capacidade"),
+								  rs.getString("Sala_numero"),
+								  rs.getInt("Horario_numero"),
+					              rs.getTime("horaI").toLocalTime(),
+								  rs.getTime("duracao").toLocalTime(),
+				                  rs.getInt("aulasPrevistas")));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(TurnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+        return res;
+	}
 }

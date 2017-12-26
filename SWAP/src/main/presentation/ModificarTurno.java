@@ -31,7 +31,16 @@ public class ModificarTurno extends javax.swing.JFrame {
 	public ModificarTurno(SWAP s, boolean isRegente, Turno turno) {
         initComponents();
 		this.s = s;
+		
 		this.turno = turno;
+		this.jTextFieldCodUC.setText(turno.getUC_codigo());
+		this.jTextFieldCodTurno.setText(turno.getId());
+		this.jTextFieldCapacidade.setText(turno.getCapacidade().toString());
+		this.jTextFieldSala.setText(turno.getSala());
+		this.jTextFieldHoraInicio.setText(turno.getHoraInicio().toString());
+		this.jTextFieldDuracao.setText(turno.getDuracao().toString());
+		this.jTextFieldAulasPrevistas.setText(turno.getAulasPrevistas().toString());
+		
 		this.isRegente = isRegente;
 		this.jTextFieldCodUC.setEditable(isRegente);
 		this.jTextFieldCodTurno.setEditable(isRegente);

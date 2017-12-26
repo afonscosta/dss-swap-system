@@ -231,8 +231,8 @@ public class Registo extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 		String nome = this.jTextFieldNome.getText();
 		String email = this.jTextFieldEmail.getText();
-		String pass = this.jPasswordFieldPass.getPassword().toString();
-		String passVerifica = this.jPasswordFieldPassConf.getPassword().toString();
+		String pass = new String(this.jPasswordFieldPass.getPassword());
+		String passVerifica = new String(this.jPasswordFieldPassConf.getPassword());
 //		String chave = s.extraiChave(email);
 		String uc = null;
 

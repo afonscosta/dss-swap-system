@@ -37,6 +37,14 @@ public class Turno {
         this.faltas = new FaltaDAO();
     }
 
+	public Integer getAulasPrevistas() {
+		return aulasPrevistas;
+	}
+	
+	public void setAulasPrevistas (Integer ap) {
+		this.aulasPrevistas = ap;
+	}
+	
     public Integer getHorarioId() {
         return horarioId;
     }

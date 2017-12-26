@@ -20,7 +20,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
 	private SWAP s;
-	private Map<String, Aluno> alunosTurno;
+	private ArrayList<String[]> alunosTurno;
 	private String codUC;
 	private String codTurno;
 	private ArrayList<String> alunosFalta;
@@ -57,9 +57,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(479);
-		alunosTurno.entrySet()
-				   .stream()
-				   .forEachOrdered(a -> t.addRow(new Object[]{a.getKey(), a.getValue().getNome()}));
+		alunosTurno.forEach(a -> t.addRow(new Object[]{a[0], a[1]}));
     }
 
     /**
@@ -172,7 +170,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-		System.exit(0);
+		this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
@@ -181,7 +179,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 			int col = jTable1.columnAtPoint(evt.getPoint());
 			if (row >= 0 && col >= 0) {
 				String chave = (String) jTable1.getValueAt(row, 0);
-				InfoAluno is = new InfoAluno(s, alunosFalta, codUC, codTurno, alunosTurno.get(chave));
+				InfoAluno is = new InfoAluno(s, alunosFalta, codUC, codTurno, s.getAluno(chave));
 				is.setVisible(true);
 			}
 		}

@@ -6,7 +6,6 @@
 package main.presentation;
 
 import java.util.List;
-import main.business.Aluno;
 import main.business.SWAP;
 
 /**
@@ -17,7 +16,9 @@ public class InfoAluno extends javax.swing.JFrame {
 
 	private SWAP s;
 	private String chaveAluno;
-	private Aluno a;
+	private String codAluno;
+	private String nome;
+	private String email;
 	private String codUC;
 	private String codTurno;
 	private List<String> alunosFalta;
@@ -28,29 +29,27 @@ public class InfoAluno extends javax.swing.JFrame {
 	 */
 	public InfoAluno() {
 		initComponents();
-		s = new SWAP();
-		a = null;
-		codUC = null;
-		codTurno = null;
 	}
 	
 	/**
 	 * Creates new form InfoSocioInterface
 	 */
-	public InfoAluno(SWAP s, List<String> alunosFalta, String codUC, String codTurno, Aluno a) {
+	public InfoAluno(SWAP s, List<String> alunosFalta, String codUC, String codTurno, String[] aluno) {
 		initComponents();
 		this.numFaltas = 0;
 		this.s = s;
 		this.alunosFalta = alunosFalta;
 		this.codUC = codUC;
 		this.codTurno = codTurno;
-		this.a = a;
+		this.codAluno = aluno[0];
+		this.nome = aluno[1];
+		this.email = aluno[2];
 		jTextFieldNum.setEditable(false);
-		jTextFieldNum.setText(a.getNumero());
+		jTextFieldNum.setText(codAluno);
 		jTextFieldNome.setEditable(false);
-		jTextFieldNome.setText(a.getNome());
+		jTextFieldNome.setText(nome);
 		jTextFieldEmail.setEditable(false);
-		jTextFieldEmail.setText(a.getEmail());
+		jTextFieldEmail.setText(email);
 		jTextFieldCount.setEditable(false);
 		jTextFieldCount.setText(Integer.toString(numFaltas));
 	}
@@ -214,7 +213,7 @@ public class InfoAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     private void jButtonMarcarFaltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarcarFaltaMouseClicked
-		alunosFalta.add(a.getNumero());
+		alunosFalta.add(codAluno);
 		numFaltas++;
 		this.jTextFieldCount.setText(Integer.toString(numFaltas));
     }//GEN-LAST:event_jButtonMarcarFaltaMouseClicked

@@ -127,9 +127,9 @@ public class SWAP {
     }
 
     //Esta função devolve um hashmap dos alunos de um determinado turno
-    public Map<String, Aluno> getAlunos(String codUC, String codTurno) {
-    Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
-    return doc.getAlunos(codUC,codTurno);
+    public ArrayList<String[]> getAlunos(String codUC, String codTurno) {
+		Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
+		return doc.getAlunos(codUC,codTurno);
     }
 	
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
@@ -154,7 +154,19 @@ public class SWAP {
 	}
 
 	public ArrayList<Turno> getMyTurnos() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ArrayList<Turno> res = null;
+		String chave = this.extraiChave(sessao.getEmail());
+		if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
+
+			Aluno a = (Aluno) utilizadores.get(this.extraiChave(sessao.getEmail()));
+			res = a.getTurnos(this.extraiChave(sessao.getEmail()));
+
+		} else if (!chave.equals("dcmiei")) {
+			Docente d = (Docente) utilizadores.get(this.extraiChave(sessao.getEmail()));
+			res = d.getTurnos(this.extraiChave(sessao.getEmail()));
+
+		}
+		return res;
 	}
 
 	public boolean existeUC(String uc) {
@@ -177,5 +189,22 @@ public class SWAP {
 
 	public void docenteRemoveSolicitacaoTurno(String codAluno, String codUC, String codTurnoD) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public String getNomeAluno(String codAluno) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public String getEmailAluno(String codAluno) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public String[] getAluno(String chave) {
+		Aluno a = (Aluno) utilizadores.get(chave);
+		String[] res = new String[3];
+		res[0] = a.getNumero();
+		res[1] = a.getNome();
+		res[2] = a.getEmail();
+		return res;
 	}
 }

@@ -3,7 +3,7 @@ package main.business;
 import main.data.TurnoDAO;
 
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Docente extends Utilizador {
     private String uc;
@@ -25,8 +25,8 @@ public class Docente extends Utilizador {
         return this.uc;
     }
 
-    Map<String,Aluno> getAlunos(String codUC, String codTurno) {
-        Map<String,Aluno> res = null;
+    ArrayList<String[]> getAlunos(String codUC, String codTurno) {
+        ArrayList<String[]> res = null;
         try {
             res = turnosLeciona.getAlunos(codUC,codTurno);
         } catch (SQLException e) {
@@ -35,4 +35,10 @@ public class Docente extends Utilizador {
 
         return res;
     }
+
+	ArrayList<Turno> getTurnos(String codDocente) {
+		return turnosLeciona.getTurnos(codDocente);
+	}
+
+
 }

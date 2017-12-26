@@ -1,6 +1,7 @@
 package main.business;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import main.data.TurnoDAO;
 import main.data.UcDAO;
 
@@ -59,4 +60,8 @@ public class Aluno extends Utilizador {
 
         uct.remFilaEspera(this.getNumero(),id_turnoD,id_turnoS,codUc);
     }
+
+	ArrayList<Turno> getTurnos(String codDocente) {
+		return turnos.getTurnos(codDocente);
+	}
 }
