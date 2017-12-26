@@ -5,7 +5,9 @@
  */
 package main.presentation;
 
+import java.util.ArrayList;
 import main.business.SWAP;
+import main.business.SolicitacaoTroca;
 
 /**
  *
@@ -14,6 +16,10 @@ import main.business.SWAP;
 public class AnalisarTrocas extends javax.swing.JFrame {
 
 	private SWAP s;
+	private String codUC;
+	private ArrayList<SolicitacaoTroca> solicitacoes;
+	//Diz qual a solicitacao que está pronta a ser analisada
+	private int solicitacaoON;
 	
 	/**
 	 * Creates new form AnalisarTrocas
@@ -25,9 +31,19 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 	/**
 	 * Creates new form AnalisarTrocas
 	 */
-	public AnalisarTrocas(SWAP s) {
-		this.s = s;
+	public AnalisarTrocas(SWAP s, String codUC) {
 		initComponents();
+		this.jLabelInvalidoPesqCodAluno.setVisible(false);
+		this.jLabelSolicitacoesVazia.setVisible(false);
+		this.s = s;
+		this.codUC = codUC;
+		
+		this.solicitacoes = s.getSolicitacoes(codUC);
+		this.trataSeExisteSolicitacaoTroca();
+		
+		this.jTextFieldCodAluno.setEditable(false);
+		this.jTextFieldTurnoS.setEditable(false);
+		this.jTextFieldTurnoD.setEditable(false);
 	}
 
 	/**
@@ -40,22 +56,24 @@ public class AnalisarTrocas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jTextFieldPesqCodAluno = new javax.swing.JTextField();
+        jButtonPesquisar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jTextFieldCodAluno = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldTurnoS = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldTurnoD = new javax.swing.JTextField();
+        jLabelSolicitacoesVazia = new javax.swing.JLabel();
+        jButtonRejeitar = new javax.swing.JButton();
+        jButtonAceitar = new javax.swing.JButton();
+        jButtonAvancar = new javax.swing.JButton();
+        jLabelInvalidoPesqCodAluno = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Analisar trocas");
@@ -63,56 +81,115 @@ public class AnalisarTrocas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Insira o número do aluno que pretende pesquisar.");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextFieldPesqCodAluno.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextFieldPesqCodAluno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldPesqCodAlunoFocusGained(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TP1", "TP2", "TP3", "TP4", "TP5" }));
-
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Pesquisar");
+        jButtonPesquisar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonPesquisarMouseClicked(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setText("INFO TROCA");
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setText("Número do aluno");
 
-        jLabel4.setText("Docente Regente");
+        jTextFieldCodAluno.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel4.setText("Turno de origem");
+
+        jTextFieldTurnoS.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setText("Turno de destino");
+
+        jTextFieldTurnoD.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jLabelSolicitacoesVazia.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabelSolicitacoesVazia.setText("Não existe mais solicitações nesta UC");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSolicitacoesVazia)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldCodAluno, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(173, 173, 173)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldTurnoS, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldTurnoD, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelSolicitacoesVazia)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldCodAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTurnoD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTurnoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Rejeitar");
+        jButtonRejeitar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonRejeitar.setText("Rejeitar");
+        jButtonRejeitar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRejeitarMouseClicked(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setText("Aceitar");
+        jButtonAceitar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonAceitar.setText("Aceitar");
+        jButtonAceitar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonAceitarMouseClicked(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setText("Avançar");
+        jButtonAvancar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonAvancar.setText("Avançar");
+        jButtonAvancar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonAvancarMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("^ Para continuar carregue em Editar -> Modificar turno");
+        jLabelInvalidoPesqCodAluno.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelInvalidoPesqCodAluno.setText("Inválido!");
 
         jMenuBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
@@ -125,15 +202,6 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Editar");
-        jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-
-        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem2.setText("Modificar turno");
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,55 +211,124 @@ public class AnalisarTrocas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 90, Short.MAX_VALUE))
+                    .addComponent(jTextFieldPesqCodAluno)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonAceitar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonRejeitar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addComponent(jButtonAvancar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabelInvalidoPesqCodAluno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonPesquisar)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPesqCodAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonPesquisar)
+                    .addComponent(jLabelInvalidoPesqCodAluno))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonRejeitar)
+                    .addComponent(jButtonAceitar)
+                    .addComponent(jButtonAvancar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+	private void trataSeExisteSolicitacaoTroca () {
+		if (solicitacoes.size() > 0) {
+			solicitacaoON = 0;
+			this.jButtonAceitar.setEnabled(true);
+			this.jButtonRejeitar.setEnabled(true);
+			this.jButtonAvancar.setEnabled(true);
+			this.jButtonPesquisar.setEnabled(true);
+			this.printSolicitacaoTroca();
+		}
+		else {
+			solicitacaoON = -1;
+			this.jLabelSolicitacoesVazia.setVisible(true);
+			this.jButtonAceitar.setEnabled(false);
+			this.jButtonRejeitar.setEnabled(false);
+			this.jButtonAvancar.setEnabled(false);
+			this.jButtonPesquisar.setEnabled(false);
+		}
+	}
+	
+	private void printSolicitacaoTroca () {
+		SolicitacaoTroca st = solicitacoes.get(solicitacaoON);
+		String codAluno = st.getCod_aluno();
+		String codTurnoS = st.getCod_turnoS();
+		String codTurnoD = st.getCod_turnoD();
+		this.jTextFieldCodAluno.setText(codAluno);
+		this.jTextFieldTurnoS.setText(codTurnoS);
+		this.jTextFieldTurnoD.setText(codTurnoD);
+	}
+	
+    private void jButtonPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPesquisarMouseClicked
+        String pesqCodAluno = this.jTextFieldPesqCodAluno.getText();
+		if (pesqCodAluno != null && !pesqCodAluno.equals("")) {
+			for (int i = 0; i < solicitacoes.size(); i++) {
+				SolicitacaoTroca st = solicitacoes.get(i);
+				String codAluno = st.getCod_aluno();
+				if (codAluno.equals(pesqCodAluno))
+					solicitacaoON = i;
+					this.printSolicitacaoTroca();
+			}
+		}
+		else
+			this.jLabelInvalidoPesqCodAluno.setVisible(true);
+			
+    }//GEN-LAST:event_jButtonPesquisarMouseClicked
+
+    private void jTextFieldPesqCodAlunoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldPesqCodAlunoFocusGained
+        this.jLabelInvalidoPesqCodAluno.setVisible(false);
+    }//GEN-LAST:event_jTextFieldPesqCodAlunoFocusGained
+
+    private void jButtonAceitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAceitarMouseClicked
+   		String codAluno = this.jTextFieldCodAluno.getText();
+		String codTurnoS = this.jTextFieldTurnoS.getText();
+		String codTurnoD = this.jTextFieldTurnoD.getText();
+		s.mudaTurno(codAluno, codTurnoS, codTurnoD);
+		s.docenteRemoveSolicitacaoTurno(codAluno, codUC, codTurnoD);
+		solicitacoes.remove(solicitacaoON);
+		this.trataSeExisteSolicitacaoTroca();
+    }//GEN-LAST:event_jButtonAceitarMouseClicked
+
+    private void jButtonRejeitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRejeitarMouseClicked
+        String codAluno = this.jTextFieldCodAluno.getText();
+		String codTurnoD = this.jTextFieldTurnoD.getText();
+		s.docenteRemoveSolicitacaoTurno(codAluno, codUC, codTurnoD);
+		solicitacoes.remove(solicitacaoON);
+		this.trataSeExisteSolicitacaoTroca();
+    }//GEN-LAST:event_jButtonRejeitarMouseClicked
+
+    private void jButtonAvancarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAvancarMouseClicked
+        this.solicitacaoON++;
+		this.printSolicitacaoTroca();
+    }//GEN-LAST:event_jButtonAvancarMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -229,22 +366,24 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonAceitar;
+    private javax.swing.JButton jButtonAvancar;
+    private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonRejeitar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelInvalidoPesqCodAluno;
+    private javax.swing.JLabel jLabelSolicitacoesVazia;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldCodAluno;
+    private javax.swing.JTextField jTextFieldPesqCodAluno;
+    private javax.swing.JTextField jTextFieldTurnoD;
+    private javax.swing.JTextField jTextFieldTurnoS;
     // End of variables declaration//GEN-END:variables
 }

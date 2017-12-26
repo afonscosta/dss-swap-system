@@ -6,57 +6,50 @@
 package main.presentation;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import main.business.Aluno;
 import main.business.SWAP;
-import main.business.Turno;
+import main.business.SolicitacaoTroca;
 
 /**
  *
  * @author rokai
  */
-public class AlunoMain extends javax.swing.JFrame {
+public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
 	private SWAP s;
-	private ArrayList<Turno> turnos;
+	private HashMap<String, SolicitacaoTroca> solicitacoes;
+	private String uc;
+	private String turnoD;
 	
 	/**
      * Creates new form MainInterface
      */
-    public AlunoMain() {
+    public AlunoSolicitacoesTurno() {
         initComponents();
-//		t = new DefaultTableModel();
-//		t.addColumn("Número");
-//		t.addColumn("Nome");
-//		jTable1.setModel(t);
-//		jTable1.setDefaultEditor(Object.class, null);
-//		jTable1.getColumnModel().getColumn(0).setWidth(20);
-//		this.s = new SWAP();
     }
 	
     /**
      * Creates new form MainInterface
      */
-    public AlunoMain(SWAP s) {
+    public AlunoSolicitacoesTurno(SWAP s) {
         initComponents();
+		this.uc = null;
+		this.turnoD = null;
 		this.s = s;
-		this.turnos = s.getMyTurnos();
+		this.solicitacoes = s.getSolicitacoes();
 		t = new DefaultTableModel();
 		t.addColumn("UC");
-		t.addColumn("Turno");
-//		t.addColumn("Dia");
-		t.addColumn("Hora");
+		t.addColumn("Turno destino");
 		jTable1.setModel(t);
 		jTable1.setDefaultEditor(Object.class, null);
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
-		jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-		jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
-//		jTable1.getColumnModel().getColumn(3).setPreferredWidth(479);
-		turnos.forEach(tn -> t.addRow(new Object[]{tn.getUC_codigo(), tn.getId(), tn.getHoraInicio()}));
+		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(1).setPreferredWidth(479);
+		solicitacoes.entrySet()
+					.forEach(e -> t.addRow(new Object[]{e.getKey(), e.getValue().getCod_turnoD()}));
     }
 
     /**
@@ -70,11 +63,11 @@ public class AlunoMain extends javax.swing.JFrame {
 
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButtonRemSolicitacao = new javax.swing.JButton();
+        jButtonNewSolicitacao = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
@@ -114,12 +107,31 @@ public class AlunoMain extends javax.swing.JFrame {
         jTable1.setFocusable(false);
         jTable1.setGridColor(new java.awt.Color(153, 153, 153));
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(-100);
             jTable1.getColumnModel().getColumn(0).setHeaderValue("Número");
             jTable1.getColumnModel().getColumn(1).setHeaderValue("Nome");
         }
+
+        jButtonRemSolicitacao.setText("Remove solicitação");
+        jButtonRemSolicitacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRemSolicitacaoMouseClicked(evt);
+            }
+        });
+
+        jButtonNewSolicitacao.setText("Nova solicitação");
+        jButtonNewSolicitacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonNewSolicitacaoMouseClicked(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -134,34 +146,31 @@ public class AlunoMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-
-        jMenuItem1.setText("Solicitações");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonRemSolicitacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNewSolicitacao)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRemSolicitacao)
+                    .addComponent(jButtonNewSolicitacao))
                 .addContainerGap())
         );
 
@@ -172,13 +181,29 @@ public class AlunoMain extends javax.swing.JFrame {
 		System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        if (evt.getClickCount() == 1) {
+			int row = jTable1.rowAtPoint(evt.getPoint());
+			int col = jTable1.columnAtPoint(evt.getPoint());
+			if (row >= 0 && col >= 0) {
+				this.uc = (String) jTable1.getValueAt(row, 0);
+				this.turnoD = (String) jTable1.getValueAt(row, 1);
+			}
+		}
+    }//GEN-LAST:event_jTable1MousePressed
+
     private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
 		System.exit(0);
     }//GEN-LAST:event_windowClosingCustom
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new AlunoSolicitacoesTurno(s).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jButtonNewSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNewSolicitacaoMouseClicked
+        new AlunoSolicitaTurno(s).setVisible(true);
+    }//GEN-LAST:event_jButtonNewSolicitacaoMouseClicked
+
+    private void jButtonRemSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRemSolicitacaoMouseClicked
+		if (uc != null && turnoD != null)
+			s.removeSolicitacaoTurno(uc, turnoD);
+    }//GEN-LAST:event_jButtonRemSolicitacaoMouseClicked
 
 	
 	
@@ -199,30 +224,32 @@ public class AlunoMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlunoMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoSolicitacoesTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlunoMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoSolicitacoesTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlunoMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoSolicitacoesTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlunoMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoSolicitacoesTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlunoMain().setVisible(true);
+                new AlunoSolicitacoesTurno().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonNewSolicitacao;
+    private javax.swing.JButton jButtonRemSolicitacao;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;

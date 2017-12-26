@@ -3,6 +3,7 @@ package main.business;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -144,4 +145,37 @@ public class SWAP {
 //            a2.alteraTurno(t);
 //        }
 //    }
+
+	//Hash com todas as solicitações de um dado aluno
+	// key -> codUC
+	// value -> solicitacao da respetiva UC
+	public HashMap<String, SolicitacaoTroca> getSolicitacoes() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public ArrayList<Turno> getMyTurnos() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public boolean existeUC(String uc) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public boolean existeTurno(String uc, String turno) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	//Todas as solicitações de um dada UC
+	public ArrayList<SolicitacaoTroca> getSolicitacoes(String uc) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	//Não precisa de remover a solicitacao
+	public void mudaTurno(String codAluno, String codTurnoS, String codTurnoD) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public void docenteRemoveSolicitacaoTurno(String codAluno, String codUC, String codTurnoD) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 }

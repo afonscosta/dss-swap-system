@@ -57,11 +57,6 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(479);
-//		f = fa.clone();
-//		f.addObserver(this);
-//		f.getAlunosF().entrySet()
-//					  .stream()
-//					  .forEachOrdered(s -> t.addRow(new Object[]{s.getKey(), s.getValue().getNome()}));
 		alunosTurno.entrySet()
 				   .stream()
 				   .forEachOrdered(a -> t.addRow(new Object[]{a.getKey(), a.getValue().getNome()}));
@@ -82,8 +77,6 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
@@ -155,12 +148,6 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("View");
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -249,8 +236,6 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
