@@ -12,6 +12,15 @@ public class Connect {
     
     public static Connection connect(){
         try{
+			if (System.getProperty("user.name").equals("rokai")) {
+				String PASSWORD1 = "pass";
+				String URL1 = "localhost";
+				String TABLE1 = "SWAP";
+				String USERNAME1 = "user";
+				Class.forName("org.mariadb.jdbc.Driver");
+				Connection cn = DriverManager.getConnection("jdbc:mariadb://"+URL1+"/"+TABLE1+"?user="+USERNAME1+"&password="+PASSWORD1);
+				return cn;
+			}
             Class.forName("com.mysql.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://"+URL+"/"
                     +TABLE+"?user="+USERNAME+"&password="+PASSWORD);
