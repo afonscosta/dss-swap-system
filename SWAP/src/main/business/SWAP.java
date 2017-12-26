@@ -126,11 +126,11 @@ public class SWAP {
 
     }
 
-	//Esta função devolve um hashmap dos alunos de um determinado turno
-	public Map<String, Aluno> getAlunos(String codUC, String codTurno) {
-        Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
-        return doc.getAlunos(codUC,codTurno);
-	}
+    //Esta função devolve um hashmap dos alunos de um determinado turno
+    public Map<String, Aluno> getAlunos(String codUC, String codTurno) {
+    Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
+    return doc.getAlunos(codUC,codTurno);
+    }
 	
 //    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
 //        Horario h = getHorario(ano,semestre);
