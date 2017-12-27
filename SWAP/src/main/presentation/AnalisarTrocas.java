@@ -17,7 +17,7 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 
 	private SWAP s;
 	private String codUC;
-	private ArrayList<SolicitacaoTroca> solicitacoes;
+	private ArrayList<String[]> solicitacoes;
 	//Diz qual a solicitacao que está pronta a ser analisada
 	private int solicitacaoON;
 	
@@ -38,7 +38,7 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 		this.s = s;
 		this.codUC = codUC;
 		
-		this.solicitacoes = s.getSolicitacoes(codUC);
+		this.solicitacoes = s.getSolicitacoesUC(codUC);
 		this.trataSeExisteSolicitacaoTroca();
 		
 		this.jTextFieldCodAluno.setEditable(false);
@@ -278,10 +278,10 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 	}
 	
 	private void printSolicitacaoTroca () {
-		SolicitacaoTroca st = solicitacoes.get(solicitacaoON);
-		String codAluno = st.getCod_aluno();
-		String codTurnoS = st.getCod_turnoS();
-		String codTurnoD = st.getCod_turnoD();
+		String[] st = solicitacoes.get(solicitacaoON);
+		String codAluno = st[0];
+		String codTurnoS = st[1];
+		String codTurnoD = st[2];
 		this.jTextFieldCodAluno.setText(codAluno);
 		this.jTextFieldTurnoS.setText(codTurnoS);
 		this.jTextFieldTurnoD.setText(codTurnoD);
@@ -291,8 +291,8 @@ public class AnalisarTrocas extends javax.swing.JFrame {
         String pesqCodAluno = this.jTextFieldPesqCodAluno.getText();
 		if (pesqCodAluno != null && !pesqCodAluno.equals("")) {
 			for (int i = 0; i < solicitacoes.size(); i++) {
-				SolicitacaoTroca st = solicitacoes.get(i);
-				String codAluno = st.getCod_aluno();
+				String[] st = solicitacoes.get(i);
+				String codAluno = st[0];
 				if (codAluno.equals(pesqCodAluno))
 					solicitacaoON = i;
 					this.printSolicitacaoTroca();
@@ -311,8 +311,7 @@ public class AnalisarTrocas extends javax.swing.JFrame {
    		String codAluno = this.jTextFieldCodAluno.getText();
 		String codTurnoS = this.jTextFieldTurnoS.getText();
 		String codTurnoD = this.jTextFieldTurnoD.getText();
-		s.mudaTurno(codAluno, codTurnoS, codTurnoD);
-		s.docenteRemoveSolicitacaoTurno(codAluno, codUC, codTurnoD);
+		s.analisaTroca(codAluno,codUC,codTurnoS,codTurnoD,true);
 		solicitacoes.remove(solicitacaoON);
 		this.trataSeExisteSolicitacaoTroca();
     }//GEN-LAST:event_jButtonAceitarMouseClicked
@@ -320,7 +319,8 @@ public class AnalisarTrocas extends javax.swing.JFrame {
     private void jButtonRejeitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRejeitarMouseClicked
         String codAluno = this.jTextFieldCodAluno.getText();
 		String codTurnoD = this.jTextFieldTurnoD.getText();
-		s.docenteRemoveSolicitacaoTurno(codAluno, codUC, codTurnoD);
+        String codTurnoS = this.jTextFieldTurnoS.getText();
+        s.analisaTroca(codAluno,codUC,codTurnoS,codTurnoD,false);
 		solicitacoes.remove(solicitacaoON);
 		this.trataSeExisteSolicitacaoTroca();
     }//GEN-LAST:event_jButtonRejeitarMouseClicked

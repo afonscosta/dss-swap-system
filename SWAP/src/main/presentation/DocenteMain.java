@@ -55,7 +55,7 @@ public class DocenteMain extends javax.swing.JFrame {
 		t.addColumn("ID");
 		t.addColumn("UC");
 		t.addColumn("Turno");
-//		t.addColumn("Dia");
+		t.addColumn("Dia");
 		t.addColumn("Hora");
 		jTable1.setModel(t);
 		jTable1.setDefaultEditor(Object.class, null);
@@ -63,16 +63,22 @@ public class DocenteMain extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-//		jTable1.getColumnModel().getColumn(3).setPreferredWidth(479);
+		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
 		for (int i = 0; i < turnos.size(); i++) {
 			Turno tn = turnos.get(i);
-			t.addRow(new Object[]{i, tn.getUC_codigo(), tn.getId(), tn.getHoraInicio()});
+			t.addRow(new Object[]{i, tn.getUC_codigo(), tn.getId(),parseIntDia(tn.getDiaSemana()) ,tn.getHoraInicio()});
 		}
 		
 		for (String uc : ucs) {
 			this.jComboBoxUCs.addItem(uc);
 		}
+    }
+
+    private String parseIntDia(int diaSemana) {
+        String[] arr = {"Segunda","Terça","Quarta","Quinta","Sexta"};
+
+        return (arr[diaSemana] + "-feira");
     }
 
     /**

@@ -2,6 +2,9 @@ package main.business;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import main.data.SolicitacaoTrocaDAO;
 import main.data.TurnoDAO;
 import main.data.UcDAO;
 
@@ -11,6 +14,7 @@ public class Aluno extends Utilizador {
     private String numero;
     private UcDAO ucs;
     private TurnoDAO turnos;
+    private SolicitacaoTrocaDAO trocas;
 
     public Aluno(String nome, String email, String password, boolean prioritario,String numero) {
         super(nome, email, password);
@@ -18,6 +22,7 @@ public class Aluno extends Utilizador {
         this.numero = numero;
         this.ucs = new UcDAO();
         this.turnos = new TurnoDAO();
+        this.trocas = new SolicitacaoTrocaDAO();
     }
 
     public boolean getPrioridade() {
@@ -64,4 +69,18 @@ public class Aluno extends Utilizador {
 	ArrayList<Turno> getTurnos(String codDocente) {
 		return turnos.getTurnos(codDocente);
 	}
+
+    void moveTurno(String codUc, String codTurnoS, String codTurnoD, String codAluno) {
+        UC uct = ucs.get(codUc);
+
+        try {
+            uct.trataPrioritario(codUc,codTurnoS,codTurnoD,codAluno);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HashMap<String,String[]> getSolicitacoes(String codAluno) {
+        return trocas.getSolicitacoesAluno(codAluno);
+    }
 }

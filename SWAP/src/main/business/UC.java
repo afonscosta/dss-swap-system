@@ -71,11 +71,7 @@ public class UC {
 
     void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
         Turno t = null;
-        try {
-            t = turnos.getTurno(codTurno,codUC);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        t = turnos.getTurno(codTurno,codUC);
         t.marcaFaltas(alunos, codUC, codTurno);
     }
 
@@ -93,5 +89,9 @@ public class UC {
         }
 
         return trocado;
+    }
+
+    ArrayList<String[]> getSolicitacoes(String uc) {
+        return trocas.getSolicitacoes(uc);
     }
 }

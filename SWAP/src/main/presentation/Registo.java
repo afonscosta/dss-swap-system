@@ -284,6 +284,8 @@ public class Registo extends javax.swing.JFrame {
 				this.jCheckBoxRegente.setSelected(false);
 				this.jCheckBoxPrio.setEnabled(true);
 				this.aluno = true;
+				this.dc = false;
+				this.docente = false;
 			}
 			else if (chave.equals("dcmiei")) {
 				this.jTextFieldUC.setEnabled(false);
@@ -292,6 +294,8 @@ public class Registo extends javax.swing.JFrame {
 				this.jCheckBoxRegente.setEnabled(false);
 				this.jCheckBoxRegente.setSelected(false);
 				this.dc = true;
+				this.aluno = false;
+				this.docente = false;
 			}
 			else {
 				this.jTextFieldUC.setEnabled(true);
@@ -299,6 +303,8 @@ public class Registo extends javax.swing.JFrame {
 				this.jCheckBoxPrio.setEnabled(false);
 				this.jCheckBoxPrio.setSelected(false);
 				this.docente = true;
+				this.aluno = false;
+				this.dc = false;
 			}
 		}
 		else

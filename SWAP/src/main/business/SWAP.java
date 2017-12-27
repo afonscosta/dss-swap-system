@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.data.HorarioDAO;
@@ -95,9 +94,9 @@ public class SWAP {
         return false;
     }
 
-    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas) {
+    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
 
-        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao,aulasPrevistas);
+        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao,aulasPrevistas,diaSemana);
         return t;
     }
 
@@ -128,83 +127,71 @@ public class SWAP {
 
     //Esta função devolve um hashmap dos alunos de um determinado turno
     public ArrayList<String[]> getAlunos(String codUC, String codTurno) {
-		Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
-		return doc.getAlunos(codUC,codTurno);
+        Docente doc = (Docente) utilizadores.get(extraiChave(sessao.getEmail()));
+        return doc.getAlunos(codUC,codTurno);
     }
-	
-//    public void analisaTrocaMaisAntiga(String codUc, Integer ano, Integer semest) {
-//        Horario h = getHorario(ano,semestre);
-//        UC uc = h.getUC(codUc);
-//        Troca t = uc.popTrocaMaisAntiga();
-//        
-//        if (aceitaTroca(t)) { 
-//            Aluno a1 = t.primeiro();
-//            Aluno a2 = t.segundo();
-//        
-//            a1.alteraTurno(t);
-//            a2.alteraTurno(t);
-//        }
-//    }
 
-	//Hash com todas as solicitações de um dado aluno
-	// key -> codUC
-	// value -> solicitacao da respetiva UC
-	public HashMap<String, SolicitacaoTroca> getSolicitacoes() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    public void analisaTroca(String codAluno,String codUc,String codTurnoS,String codTurnoD,boolean aceita) {
 
-	public ArrayList<Turno> getMyTurnos() {
-		ArrayList<Turno> res = null;
-		String chave = this.extraiChave(sessao.getEmail());
-		if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
+        docenteRemoveSolicitacaoTurno(codAluno,codUc,codTurnoD,codTurnoS);
 
-			Aluno a = (Aluno) utilizadores.get(this.extraiChave(sessao.getEmail()));
-			res = a.getTurnos(this.extraiChave(sessao.getEmail()));
+        if (aceita) {
+            Aluno a = (Aluno) utilizadores.get(codAluno);
+            a.moveTurno(codUc,codTurnoS,codTurnoD,codAluno);
 
-		} else if (!chave.equals("dcmiei")) {
-			Docente d = (Docente) utilizadores.get(this.extraiChave(sessao.getEmail()));
-			res = d.getTurnos(this.extraiChave(sessao.getEmail()));
 
-		}
-		return res;
-	}
+        }
+    }
 
-	public boolean existeUC(String uc) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    public ArrayList<Turno> getMyTurnos() {
+        ArrayList<Turno> res = null;
+        String chave = this.extraiChave(sessao.getEmail());
+        if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
 
-	public boolean existeTurno(String uc, String turno) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+            Aluno a = (Aluno) utilizadores.get(this.extraiChave(sessao.getEmail()));
+            res = a.getTurnos(this.extraiChave(sessao.getEmail()));
 
-	//Todas as solicitações de um dada UC
-	public ArrayList<SolicitacaoTroca> getSolicitacoes(String uc) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+        } else if (!chave.equals("dcmiei")) {
+            Docente d = (Docente) utilizadores.get(this.extraiChave(sessao.getEmail()));
+            res = d.getTurnos(this.extraiChave(sessao.getEmail()));
 
-	//Não precisa de remover a solicitacao
-	public void mudaTurno(String codAluno, String codTurnoS, String codTurnoD) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+        }
+        return res;
+    }
 
-	public void docenteRemoveSolicitacaoTurno(String codAluno, String codUC, String codTurnoD) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    public boolean existeUC(String uc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	public String getNomeAluno(String codAluno) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    public boolean existeTurno(String uc, String turno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	public String getEmailAluno(String codAluno) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    //Todas as solicitações de um dada UC
+    public ArrayList<String[]> getSolicitacoesUC(String uc) {
+        Docente docente = (Docente) sessao;
 
-	public String[] getAluno(String chave) {
-		Aluno a = (Aluno) utilizadores.get(chave);
-		String[] res = new String[3];
-		res[0] = a.getNumero();
-		res[1] = a.getNome();
-		res[2] = a.getEmail();
-		return res;
-	}
+        return docente.getSolicitacoes(uc);
+    }
+
+    public void docenteRemoveSolicitacaoTurno(String codAluno, String codUC, String codTurnoD,String codTurnoS) {
+        Docente docenteAtual = (Docente) sessao;
+
+        docenteAtual.remFilaEspera(codAluno,codUC,codTurnoD,codTurnoS);
+    }
+
+    public String[] getAluno(String chave) {
+        Aluno a = (Aluno) utilizadores.get(chave);
+        String[] res = new String[3];
+        res[0] = a.getNumero();
+        res[1] = a.getNome();
+        res[2] = a.getEmail();
+        return res;
+    }
+
+    public HashMap<String,String[]> getSolicitacoesAluno() {
+        Aluno aluno = (Aluno) sessao;
+
+        return aluno.getSolicitacoes(aluno.getNumero());
+    }
 }

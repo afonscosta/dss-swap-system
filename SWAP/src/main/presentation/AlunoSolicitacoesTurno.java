@@ -20,7 +20,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
 	private SWAP s;
-	private HashMap<String, SolicitacaoTroca> solicitacoes;
+	private HashMap<String, String[]> solicitacoes;
 	private String uc;
 	private String turnoD;
 	
@@ -39,7 +39,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 		this.uc = null;
 		this.turnoD = null;
 		this.s = s;
-		this.solicitacoes = s.getSolicitacoes();
+		this.solicitacoes = s.getSolicitacoesAluno();
 		t = new DefaultTableModel();
 		t.addColumn("UC");
 		t.addColumn("Turno destino");
@@ -49,7 +49,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(479);
 		solicitacoes.entrySet()
-					.forEach(e -> t.addRow(new Object[]{e.getKey(), e.getValue().getCod_turnoD()}));
+					.forEach(e -> t.addRow(new Object[]{e.getKey(), e.getValue()[2]}));
     }
 
     /**

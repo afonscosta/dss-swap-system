@@ -34,7 +34,8 @@ public class TurnoDAO {
                         rs.getInt("Horario_numero"),
                         rs.getTime("horaInicio").toLocalTime(),
                         rs.getTime("duracao").toLocalTime(),
-                        rs.getInt("aulasPrevistas"));
+                        rs.getInt("aulasPrevistas"),
+                        rs.getInt("diaSemana"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,115 +73,149 @@ public class TurnoDAO {
         return codTurnoS;
     }
 
-    public Turno put(int key, Turno value) throws SQLException {
+    public Turno put(int key, Turno value) {
 
-        conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Horario_numero,Sala_numero,horaI,duracao)\n" +
-                "VALUES (?,?,?,?,?,?);");
-        stm.setString(1,value.getId());
-        stm.setString(2,value.getUC_codigo());
-        stm.setInt(3, value.getCapacidade());
-        stm.setInt(4,value.getHorarioId());
-        stm.setString(5, value.getSala());
-        stm.setObject(6, value.getHoraInicio());
-        stm.setObject(7,value.getDuracao());
-        stm.executeUpdate();
+        try {
 
-        Connect.close(conn);
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Horario_numero,Sala_numero,horaI,duracao)\n" +
+                    "VALUES (?,?,?,?,?,?);");
+            stm.setString(1, value.getId());
+            stm.setString(2, value.getUC_codigo());
+            stm.setInt(3, value.getCapacidade());
+            stm.setInt(4, value.getHorarioId());
+            stm.setString(5, value.getSala());
+            stm.setObject(6, value.getHoraInicio());
+            stm.setObject(7, value.getDuracao());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
 
         return value;
     }
 
-    public void trocaTurnos(String codUC, String codAluno1, String codTurnoD1, String codAluno2, String codTurnoD2) throws SQLException {
+    public void trocaTurnos(String codUC, String codAluno1, String codTurnoD1, String codAluno2, String codTurnoD2) {
 
-        conn = Connect.connect();
+        try {
 
-        //Troca o turno do aluno1
-        PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
+            conn = Connect.connect();
 
-        stm.setString(1, codTurnoD1);
-        stm.setString(2, codAluno1);
-        stm.setString(3, codUC);
-        stm.executeUpdate();
+            //Troca o turno do aluno1
+            PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
 
-        //Troca o turno do aluno2
-        PreparedStatement stm1 = conn.prepareStatement("UPDATE UtilizadorTurno\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
+            stm.setString(1, codTurnoD1);
+            stm.setString(2, codAluno1);
+            stm.setString(3, codUC);
+            stm.executeUpdate();
 
-        stm1.setString(1, codTurnoD2);
-        stm1.setString(2, codAluno2);
-        stm1.setString(3, codUC);
-        stm1.executeUpdate();
+            //Troca o turno do aluno2
+            PreparedStatement stm1 = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
 
-        //Troca as faltas do aluno1
-        PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
+            stm1.setString(1, codTurnoD2);
+            stm1.setString(2, codAluno2);
+            stm1.setString(3, codUC);
+            stm1.executeUpdate();
 
-        stm2.setString(1, codTurnoD1);
-        stm2.setString(2, codAluno1);
-        stm2.setString(3, codUC);
-        stm2.executeUpdate();
+            //Troca as faltas do aluno1
+            PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
 
-        //Troca as faltas do aluno2
-        PreparedStatement stm3 = conn.prepareStatement("UPDATE Falta\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
+            stm2.setString(1, codTurnoD1);
+            stm2.setString(2, codAluno1);
+            stm2.setString(3, codUC);
+            stm2.executeUpdate();
 
-        stm3.setString(1, codTurnoD2);
-        stm3.setString(2, codAluno2);
-        stm3.setString(3, codUC);
-        stm3.executeUpdate();
+            //Troca as faltas do aluno2
+            PreparedStatement stm3 = conn.prepareStatement("UPDATE Falta\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
 
-        Connect.close(conn);
+            stm3.setString(1, codTurnoD2);
+            stm3.setString(2, codAluno2);
+            stm3.setString(3, codUC);
+            stm3.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
     }
 
-    public Turno getTurno(String codTurno,String cod_UC) throws SQLException {
+    public Turno getTurno(String codTurno,String cod_UC) {
 
-        conn = Connect.connect();
-        String sql = "SELECT * FROM Turno WHERE numero=? AND UC_codigo=?";
-        PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setString(1,codTurno);
-        stm.setString(2,cod_UC);
-        ResultSet rs = stm.executeQuery();
+        Turno t = null;
 
-        if (rs.next()) {
-            return new Turno(rs.getString("numero"),
-                    rs.getString("UC_codigo"),
-                    rs.getInt("capacidade"),
-                    rs.getString("Sala_numero"),
-                    rs.getInt("Horario_numero"),
-                    rs.getTime("horaI").toLocalTime(),
-                    rs.getTime("duracao").toLocalTime(),
-                    rs.getInt("aulasPrevistas"));
+        try {
+            conn = Connect.connect();
+            String sql = "SELECT * FROM Turno WHERE numero=? AND UC_codigo=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1,codTurno);
+            stm.setString(2,cod_UC);
+            ResultSet rs = null;
+
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+
+                t = new Turno(rs.getString("numero"),
+                        rs.getString("UC_codigo"),
+                        rs.getInt("capacidade"),
+                        rs.getString("Sala_numero"),
+                        rs.getInt("Horario_numero"),
+                        rs.getTime("horaI").toLocalTime(),
+                        rs.getTime("duracao").toLocalTime(),
+                        rs.getInt("aulasPrevistas"),
+                        rs.getInt("diaSemana"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
         }
 
-        return null;
+        return t;
     }
 
-    public ArrayList<String[]> getAlunos(String codUC, String codTurno) throws SQLException {
+    public ArrayList<String[]> getAlunos(String codUC, String codTurno) {
         ArrayList<String[]> res = new ArrayList<>();
 
-        conn = Connect.connect();
-        String sql = "SELECT * FROM UtilizadorTurno \n " +
-                "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n " +
-                "WHERE Turno_UC_codigo = ? AND Turno_numero = ? AND uc IS NULL;";
-        PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setString(1,codUC);
-        stm.setString(2,codTurno);
-        ResultSet rs = stm.executeQuery();
+        try {
 
-        while (rs.next()) {
-			String[] aluno = new String[5];
-			aluno[0] = rs.getString("idUtilizadores");
-			aluno[1] = rs.getString("nome");
-			aluno[2] = rs.getString("idUtilizadores") + "@alunos.uminho.pt";
-			aluno[3] = rs.getString("password");
-			aluno[4] = rs.getString("prioridade");
-            res.add(aluno);
+            conn = Connect.connect();
+            String sql = "SELECT * FROM UtilizadorTurno \n " +
+                    "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n " +
+                    "WHERE Turno_UC_codigo = ? AND Turno_numero = ? AND uc IS NULL;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, codUC);
+            stm.setString(2, codTurno);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String[] aluno = new String[5];
+                aluno[0] = rs.getString("idUtilizadores");
+                aluno[1] = rs.getString("nome");
+                aluno[2] = rs.getString("idUtilizadores") + "@alunos.uminho.pt";
+                aluno[3] = rs.getString("password");
+                aluno[4] = rs.getString("prioridade");
+                res.add(aluno);
+            }
+
+            return res;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
         }
 
         return res;
@@ -203,65 +238,74 @@ public class TurnoDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Connect.close(conn);
         }
         return res;
     }
 
-    public void setTurno(String codAluno, String codTurnoD, String codUC) throws SQLException {
-        conn = Connect.connect();
+    public void setTurno(String codAluno, String codTurnoD, String codUC) {
+        try {
 
-        //Troca o turno do aluno1
-        PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
+            conn = Connect.connect();
 
-        stm.setString(1, codTurnoD);
-        stm.setString(2, codAluno);
-        stm.setString(3, codUC);
-        stm.executeUpdate();
+            //Troca o turno do aluno1
+            PreparedStatement stm = conn.prepareStatement("UPDATE UtilizadorTurno\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE Utilizador_idUtilizadores = ? AND Turno_UC_codigo = ?;");
 
-        //Troca as faltas do aluno1
-        PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
-                + "SET Turno_numero = ?\n"
-                + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
+            stm.setString(1, codTurnoD);
+            stm.setString(2, codAluno);
+            stm.setString(3, codUC);
+            stm.executeUpdate();
 
-        stm2.setString(1, codTurnoD);
-        stm2.setString(2, codAluno);
-        stm2.setString(3, codUC);
-        stm2.executeUpdate();
+            //Troca as faltas do aluno1
+            PreparedStatement stm2 = conn.prepareStatement("UPDATE Falta\n"
+                    + "SET Turno_numero = ?\n"
+                    + "WHERE utilizador = ? AND Turno_UC_codigo = ?;");
 
-        Connect.close(conn);
+            stm2.setString(1, codTurnoD);
+            stm2.setString(2, codAluno);
+            stm2.setString(3, codUC);
+            stm2.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
 
     }
 
-	public ArrayList<Turno> getTurnos(String codDocente) {
-		ArrayList<Turno> res = new ArrayList<>();
+    public ArrayList<Turno> getTurnos(String codDocente) {
+        ArrayList<Turno> res = new ArrayList<>();
 
         conn = Connect.connect();
         String sql = "SELECT * "
-			+ "FROM UtilizadorTurno JOIN Turno "
-			+ "ON Turno_numero = numero AND Turno_UC_codigo = UC_codigo "
-			+ "WHERE Utilizador_idUtilizadores = ?;";
+                + "FROM UtilizadorTurno JOIN Turno "
+                + "ON Turno_numero = numero AND Turno_UC_codigo = UC_codigo "
+                + "WHERE Utilizador_idUtilizadores = ?;";
         PreparedStatement stm;
-		try {
-			stm = conn.prepareStatement(sql);
-			stm.setString(1,codDocente);
-			ResultSet rs = stm.executeQuery();
+        try {
+            stm = conn.prepareStatement(sql);
+            stm.setString(1,codDocente);
+            ResultSet rs = stm.executeQuery();
 
-			while (rs.next()) {
-				res.add(new Turno(rs.getString("numero"),
-					              rs.getString("UC_codigo"),
-								  rs.getInt("capacidade"),
-								  rs.getString("Sala_numero"),
-								  rs.getInt("Horario_numero"),
-					              rs.getTime("horaI").toLocalTime(),
-								  rs.getTime("duracao").toLocalTime(),
-				                  rs.getInt("aulasPrevistas")));
-			}
-		} catch (SQLException ex) {
-			Logger.getLogger(TurnoDAO.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		
+            while (rs.next()) {
+                res.add(new Turno(rs.getString("numero"),
+                        rs.getString("UC_codigo"),
+                        rs.getInt("capacidade"),
+                        rs.getString("Sala_numero"),
+                        rs.getInt("Horario_numero"),
+                        rs.getTime("horaI").toLocalTime(),
+                        rs.getTime("duracao").toLocalTime(),
+                        rs.getInt("aulasPrevistas"),
+                        rs.getInt("diaSemana")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TurnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return res;
-	}
+    }
 }

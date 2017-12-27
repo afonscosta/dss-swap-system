@@ -22,7 +22,7 @@ public class AlunoMain extends javax.swing.JFrame {
 	private DefaultTableModel t;
 	private SWAP s;
 	private ArrayList<Turno> turnos;
-	
+
 	/**
      * Creates new form MainInterface
      */
@@ -47,16 +47,22 @@ public class AlunoMain extends javax.swing.JFrame {
 		t = new DefaultTableModel();
 		t.addColumn("UC");
 		t.addColumn("Turno");
-//		t.addColumn("Dia");
+		t.addColumn("Dia");
 		t.addColumn("Hora");
 		jTable1.setModel(t);
 		jTable1.setDefaultEditor(Object.class, null);
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
-		jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-		jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
-//		jTable1.getColumnModel().getColumn(3).setPreferredWidth(479);
-		turnos.forEach(tn -> t.addRow(new Object[]{tn.getUC_codigo(), tn.getId(), tn.getHoraInicio()}));
+		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+		turnos.forEach(tn -> t.addRow(new Object[]{tn.getUC_codigo(), tn.getId(), parseIntDia(tn.getDiaSemana()),tn.getHoraInicio()}));
+    }
+
+    private String parseIntDia(int diaSemana) {
+        String[] arr = {"Segunda","Terça","Quarta","Quinta","Sexta"};
+
+        return (arr[diaSemana] + "-feira");
     }
 
     /**

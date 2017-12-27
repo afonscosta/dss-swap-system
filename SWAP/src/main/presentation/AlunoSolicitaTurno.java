@@ -146,8 +146,8 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
     private void jButtonSolicitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSolicitaMouseClicked
         String uc = this.jTextFieldUC.getText();
 		String turno = this.jTextFieldTurno.getText();
-		if (uc != null && !uc.equals("") && s.existeUC(uc)) {
-			if (turno != null && !turno.equals("") && s.existeTurno(uc, turno)) {
+		if (uc != null && !uc.equals("")) {
+			if (turno != null && !turno.equals("")) {
 				try {
 					s.solicitaTurno(uc, turno);
 				} catch (SQLException ex) {
