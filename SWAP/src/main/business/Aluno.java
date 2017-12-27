@@ -80,7 +80,7 @@ public class Aluno extends Utilizador {
         }
     }
 
-    public HashMap<String,String[]> getSolicitacoes(String codAluno) {
+    HashMap<String,String[]> getSolicitacoes(String codAluno) {
         return trocas.getSolicitacoesAluno(codAluno);
     }
 }
