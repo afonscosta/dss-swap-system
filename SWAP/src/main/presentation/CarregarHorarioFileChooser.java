@@ -6,6 +6,7 @@
 package main.presentation;
 
 import javax.swing.JFileChooser;
+import main.business.SWAP;
 
 /**
  *
@@ -13,11 +14,21 @@ import javax.swing.JFileChooser;
  */
 public class CarregarHorarioFileChooser extends javax.swing.JFrame {
 
+	private SWAP s;
+	
 	/**
 	 * Creates new form NewJFrame
 	 */
 	public CarregarHorarioFileChooser() {
 		initComponents();
+	}
+	
+	/**
+	 * Creates new form NewJFrame
+	 */
+	public CarregarHorarioFileChooser(SWAP s) {
+		initComponents();
+		this.s = s;
 	}
 
 	/**
@@ -56,6 +67,11 @@ public class CarregarHorarioFileChooser extends javax.swing.JFrame {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         if (JFileChooser.APPROVE_OPTION == 0) {
+			this.dispose();
+		}
+		else {
+			String filePath = this.jFileChooser1.getSelectedFile().getPath();
+			s.carregaInfo(filePath);
 			this.dispose();
 		}
     }//GEN-LAST:event_jFileChooser1ActionPerformed
