@@ -217,7 +217,7 @@ public class CarregarHorario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        new CarregarHorarioFileChooser().setVisible(true);
+        new CarregarHorarioFileChooser(s).setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
 	/**
