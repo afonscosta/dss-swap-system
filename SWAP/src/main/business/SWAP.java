@@ -143,21 +143,41 @@ public class SWAP {
         }
     }
 
-    public ArrayList<Turno> getMyTurnos() {
-        ArrayList<Turno> res = null;
+    public ArrayList<String[]> getMyTurnos() {
+        ArrayList<String[]> res = null;
+		ArrayList<Turno> resWithTurnos = null;
+		
         String chave = this.extraiChave(sessao.getEmail());
         if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
 
             Aluno a = (Aluno) utilizadores.get(this.extraiChave(sessao.getEmail()));
-            res = a.getTurnos(this.extraiChave(sessao.getEmail()));
+            resWithTurnos = a.getTurnos(this.extraiChave(sessao.getEmail()));
+			res = this.castTurnosToStringArray(resWithTurnos);
 
         } else if (!chave.equals("dcmiei")) {
             Docente d = (Docente) utilizadores.get(this.extraiChave(sessao.getEmail()));
-            res = d.getTurnos(this.extraiChave(sessao.getEmail()));
-
+            resWithTurnos = d.getTurnos(this.extraiChave(sessao.getEmail()));
+			res = this.castTurnosToStringArray(resWithTurnos);
         }
         return res;
     }
+	
+	private ArrayList<String[]> castTurnosToStringArray(ArrayList<Turno> arrTurnos) {
+		ArrayList<String[]> res = new ArrayList<>();
+		for (Turno t : arrTurnos) {
+			String[] turnoString = new String[8];
+			turnoString[0] = t.getUC_codigo();
+			turnoString[1] = t.getId();
+			turnoString[2] = t.getSala();
+			turnoString[3] = t.getCapacidade().toString();
+			turnoString[4] = Integer.toString(t.getDiaSemana());
+			turnoString[5] = t.getHoraInicio().toString();
+			turnoString[6] = t.getDuracao().toString();
+			turnoString[7] = t.getAulasPrevistas().toString();
+			res.add(turnoString);
+		}
+		return res;
+	}
 
     public boolean existeUC(String uc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -194,4 +214,6 @@ public class SWAP {
 
         return aluno.getSolicitacoes(aluno.getNumero());
     }
+
+
 }
