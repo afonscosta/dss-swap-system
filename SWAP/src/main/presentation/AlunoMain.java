@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.business.SWAP;
-import main.business.Turno;
 
 /**
  *
@@ -26,13 +25,6 @@ public class AlunoMain extends javax.swing.JFrame {
      */
     public AlunoMain() {
         initComponents();
-//		t = new DefaultTableModel();
-//		t.addColumn("Número");
-//		t.addColumn("Nome");
-//		jTable1.setModel(t);
-//		jTable1.setDefaultEditor(Object.class, null);
-//		jTable1.getColumnModel().getColumn(0).setWidth(20);
-//		this.s = new SWAP();
     }
 	
     /**
@@ -54,9 +46,9 @@ public class AlunoMain extends javax.swing.JFrame {
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(2).setPreferredWidth(125);
+		jTable1.getColumnModel().getColumn(3).setPreferredWidth(125);
+		jTable1.getColumnModel().getColumn(4).setPreferredWidth(126);
 		turnos.forEach(tn -> t.addRow(new Object[]{tn[0], tn[1], parseIntDia(Integer.parseInt(tn[4])),tn[5],tn[6]}));
     }
 

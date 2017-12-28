@@ -232,17 +232,19 @@ public class SWAP {
         try {
             Object obj = parser.parse(new FileReader(filePath));
             JSONObject jsonObject = (JSONObject) obj;
+			
+			
+			//Navegar as UCs			
             JSONArray ucs = (JSONArray) jsonObject.get("ucs");
 
-            Iterator it = ucs.iterator();
+            Iterator itUCs = ucs.iterator();
 
             Map<Double,Horario> horariosEncontrados = new HashMap<>();
             Map<Double,ArrayList<UC>> ucsEncontradas = new HashMap<>();
             Map<String,ArrayList<Turno>> turnosEncontrados = new HashMap<>();
 
-            // Navegar ucs
-            while (it.hasNext()) {
-                JSONObject curr = (JSONObject) it.next();
+            while (itUCs.hasNext()) {
+                JSONObject curr = (JSONObject) itUCs.next();
 
                 int ano = toIntExact((long)curr.get("ano"));
                 int semestre = toIntExact((long)curr.get("semestre"));
@@ -286,6 +288,17 @@ public class SWAP {
                     turnosEncontrados.get(sigla).add(t);
                 }
             }
+			
+			//Navegar as Salas
+			JSONArray salas = (JSONArray) jsonObject.get("salas");
+
+            Iterator itSalas = salas.iterator();
+			
+			while (itSalas.hasNext()) {
+                JSONObject curr = (JSONObject) itSalas.next();
+				
+				String sala = (String) curr.get("sala");
+                String capacidade = (String) curr.get("capacidade");
 
             // Procura acabou, usar as ligações SQL e colocar tudo em regist
 
