@@ -10,7 +10,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-215",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 3,
@@ -37,7 +37,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP3-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 5,
@@ -55,7 +55,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-205",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -73,7 +73,7 @@
                 {
                     "numero": "TP3",
                     "sala": "CP3-315",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -82,7 +82,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP3-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -100,7 +100,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP2-205",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -118,7 +118,7 @@
                 {
                     "numero": "TP3",
                     "sala": "CP2-315",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -127,7 +127,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP1-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -145,7 +145,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -190,7 +190,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -227,7 +227,7 @@
         },
         {
             "cod":"H501N6",
-            "nome":"Laboratorios de Informática I",
+            "nome":"Laboratórios de Informática I",
             "sigla":"LI1",
             "ano": 1,
             "semestre": 1,
@@ -235,7 +235,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -280,7 +280,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 4,
@@ -317,7 +317,7 @@
         },
         {
             "cod":"H502N2",
-            "nome":"Analise",
+            "nome":"Análise",
             "sigla":"ANALISE",
             "ano": 1,
             "semestre": 2,
@@ -325,7 +325,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -370,7 +370,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -415,7 +415,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -460,7 +460,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -505,7 +505,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -550,7 +550,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -595,7 +595,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-201",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -730,7 +730,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -775,7 +775,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -820,7 +820,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -910,7 +910,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -955,7 +955,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1000,7 +1000,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1090,7 +1090,7 @@
                 {
                     "numero": "TP1",
                     "sala": "DI-0.05",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "01:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1108,7 +1108,7 @@
                 {
                     "numero": "TP3",
                     "sala": "DI-0.05",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "01:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -1144,7 +1144,7 @@
                 {
                     "numero": "TP2",
                     "sala": "CP1-302",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 3,
@@ -1172,7 +1172,7 @@
         },
         {
             "cod":"H505N4",
-            "nome":"Sistemas Distribuidos",
+            "nome":"Sistemas Distribuídos",
             "sigla":"SD",
             "ano": 3,
             "semestre": 1,
@@ -1252,7 +1252,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP1-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -1315,7 +1315,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1450,7 +1450,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1495,7 +1495,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1540,7 +1540,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
