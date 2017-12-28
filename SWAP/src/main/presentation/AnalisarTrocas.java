@@ -75,7 +75,7 @@ public class AnalisarTrocas extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Analisar trocas");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -198,6 +198,11 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 
         jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem1.setText("Sair");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -329,6 +334,10 @@ public class AnalisarTrocas extends javax.swing.JFrame {
         this.solicitacaoON++;
 		this.printSolicitacaoTroca();
     }//GEN-LAST:event_jButtonAvancarMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 	/**
 	 * @param args the command line arguments

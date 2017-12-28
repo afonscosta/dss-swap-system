@@ -6,10 +6,8 @@
 package main.presentation;
 
 import java.util.ArrayList;
-import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import main.business.Aluno;
 import main.business.SWAP;
 
 /**
@@ -41,6 +39,9 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 	
     /**
      * Creates new form MainInterface
+	 * @param s
+	 * @param codUC
+	 * @param codTurno
      */
     public ListaAlunosTurno(SWAP s, String codUC, String codTurno) {
         initComponents();
@@ -76,15 +77,10 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
         setLocation(new java.awt.Point(200, 200));
         setLocationByPlatform(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                windowClosingCustom(evt);
-            }
-        });
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, java.awt.Color.lightGray, null, null));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -184,10 +180,6 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 			}
 		}
     }//GEN-LAST:event_jTable1MousePressed
-
-    private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
-		System.exit(0);
-    }//GEN-LAST:event_windowClosingCustom
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         s.marcaFaltas(codUC, codTurno, alunosFalta);

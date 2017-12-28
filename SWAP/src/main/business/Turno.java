@@ -17,7 +17,7 @@ public class Turno {
     private String id;
     private String UC_codigo;    
     private Integer capacidade;
-    private String sala;
+    private Sala sala;
     private LocalTime horaInicio;
     private LocalTime duracao;
     private Integer aulasPrevistas;
@@ -25,7 +25,7 @@ public class Turno {
 
     private FaltaDAO faltas;
    
-    public Turno (String id, String UC_codigo, Integer capacidade, String sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
+    public Turno (String id, String UC_codigo, Integer capacidade, Sala sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
         this.id = id;
         this.capacidade = capacidade;
         this.UC_codigo = UC_codigo;
@@ -79,11 +79,11 @@ public class Turno {
         this.tipo = tipo;
     }*/
 
-    public String getSala() {
+    public Sala getSala() {
         return sala;
     }
 
-    public void setSala(String sala) {
+    public void setSala(Sala sala) {
         this.sala = sala;
     }
 

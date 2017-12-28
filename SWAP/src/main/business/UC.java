@@ -102,7 +102,7 @@ public class UC {
         return codUC;
     }
 
-    public void putAllTurnos(ArrayList<Turno> turnosArg) {
+    void putAllTurnos(ArrayList<Turno> turnosArg) {
         turnos.putAllTurnos(turnosArg);
     }
 }

@@ -16,7 +16,7 @@ public class ModificarTurno extends javax.swing.JFrame {
 
 	private SWAP s;
 	private boolean isRegente;
-	private Turno turno;
+	private String[] turno;
 	
 	/**
 	 * Creates new form ModificarTurno
@@ -27,19 +27,23 @@ public class ModificarTurno extends javax.swing.JFrame {
 	
 	/**
 	 * Creates new form ModificarTurno
+	 * @param s
+	 * @param isRegente
+	 * @param turno
 	 */
-	public ModificarTurno(SWAP s, boolean isRegente, Turno turno) {
+	public ModificarTurno(SWAP s, boolean isRegente, String[] turno) {
         initComponents();
 		this.s = s;
 		
 		this.turno = turno;
-		this.jTextFieldCodUC.setText(turno.getUC_codigo());
-		this.jTextFieldCodTurno.setText(turno.getId());
-		this.jTextFieldCapacidade.setText(turno.getCapacidade().toString());
-		this.jTextFieldSala.setText(turno.getSala());
-		this.jTextFieldHoraInicio.setText(turno.getHoraInicio().toString());
-		this.jTextFieldDuracao.setText(turno.getDuracao().toString());
-		this.jTextFieldAulasPrevistas.setText(turno.getAulasPrevistas().toString());
+		this.jTextFieldCodUC.setText(turno[0]);
+		this.jTextFieldCodTurno.setText(turno[1]);
+		this.jTextFieldSala.setText(turno[2]);
+		this.jTextFieldCapacidade.setText(turno[3]);
+		this.jTextFieldDiaSemana.setText(turno[4]);
+		this.jTextFieldHoraInicio.setText(turno[5]);
+		this.jTextFieldDuracao.setText(turno[6]);
+		this.jTextFieldAulasPrevistas.setText(turno[7]);
 		
 		this.isRegente = isRegente;
 		this.jTextFieldCodUC.setEditable(isRegente);
@@ -49,7 +53,6 @@ public class ModificarTurno extends javax.swing.JFrame {
 		this.jTextFieldHoraInicio.setEditable(isRegente);
 		this.jTextFieldDuracao.setEditable(isRegente);
 		this.jTextFieldAulasPrevistas.setEditable(isRegente);
-		this.jButtonModificar.setEnabled(isRegente);
 	}
 
 	/**
@@ -79,13 +82,14 @@ public class ModificarTurno extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextFieldAulasPrevistas = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextFieldDiaSemana = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonModificar = new javax.swing.JButton();
 
         jLabel7.setText("Código do turno");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar turno");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 204)));
@@ -112,6 +116,8 @@ public class ModificarTurno extends javax.swing.JFrame {
 
         jLabel10.setText("Aulas previstas");
 
+        jLabel11.setText("Dia da Semana");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,35 +125,27 @@ public class ModificarTurno extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonListaAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(jButtonListaAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCodUC))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCapacidade))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSala))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCodTurno))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldHoraInicio))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDuracao))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAulasPrevistas)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldAulasPrevistas)
+                            .addComponent(jTextFieldDuracao)
+                            .addComponent(jTextFieldHoraInicio)
+                            .addComponent(jTextFieldDiaSemana)
+                            .addComponent(jTextFieldSala)
+                            .addComponent(jTextFieldCapacidade)
+                            .addComponent(jTextFieldCodUC)
+                            .addComponent(jTextFieldCodTurno))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,12 +161,16 @@ public class ModificarTurno extends javax.swing.JFrame {
                     .addComponent(jTextFieldCodTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(jTextFieldDiaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -181,9 +183,9 @@ public class ModificarTurno extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextFieldAulasPrevistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonListaAlunos)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -194,14 +196,6 @@ public class ModificarTurno extends javax.swing.JFrame {
         jButtonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonCancelarMouseClicked(evt);
-            }
-        });
-
-        jButtonModificar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButtonModificar.setText("Modificar");
-        jButtonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonModificarMouseClicked(evt);
             }
         });
 
@@ -218,8 +212,6 @@ public class ModificarTurno extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonModificar)
-                        .addGap(18, 18, 18)
                         .addComponent(jButtonCancelar)))
                 .addContainerGap())
         );
@@ -230,27 +222,21 @@ public class ModificarTurno extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(13, 13, 13)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButtonModificar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonCancelar)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonListaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonListaAlunosMouseClicked
-		new ListaAlunosTurno(s, turno.getUC_codigo(), turno.getId()).setVisible(true);
-    }//GEN-LAST:event_jButtonListaAlunosMouseClicked
-
     private void jButtonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarMouseClicked
 
-    private void jButtonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModificarMouseClicked
+    private void jButtonListaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonListaAlunosMouseClicked
+        new ListaAlunosTurno(s, turno[0], turno[1]).setVisible(true);
+    }//GEN-LAST:event_jButtonListaAlunosMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -290,9 +276,9 @@ public class ModificarTurno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonListaAlunos;
-    private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -306,6 +292,7 @@ public class ModificarTurno extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCodTurno;
     private javax.swing.JTextField jTextFieldCodTurno4;
     private javax.swing.JTextField jTextFieldCodUC;
+    private javax.swing.JTextField jTextFieldDiaSemana;
     private javax.swing.JTextField jTextFieldDuracao;
     private javax.swing.JTextField jTextFieldHoraInicio;
     private javax.swing.JTextField jTextFieldSala;
