@@ -9,11 +9,13 @@ import main.data.TurnoDAO;
 public class UC {
 
     private String nome;
+    private String codUC;
     private TurnoDAO turnos;
     private SolicitacaoTrocaDAO trocas;
 
-    public UC (String nome) {
+    public UC (String nome,String codUc) {
         this.nome = nome;
+        this.codUC = codUc;
         this.turnos = new TurnoDAO();
         this.trocas = new SolicitacaoTrocaDAO();
     }
@@ -93,5 +95,9 @@ public class UC {
 
     ArrayList<String[]> getSolicitacoes(String uc) {
         return trocas.getSolicitacoes(uc);
+    }
+
+    public String getCodUC() {
+        return codUC;
     }
 }

@@ -1,13 +1,18 @@
 package main.business;
 
+import java.io.FileReader;
 import java.sql.SQLException;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.lang.Math.toIntExact;
+
 import main.data.HorarioDAO;
 import main.data.UtilizadorDAO;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class SWAP {
 
@@ -94,9 +99,9 @@ public class SWAP {
         return false;
     }
 
-    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
+    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
 
-        Turno t = new Turno(id, UC_codigo, capacidade, sala, horarioId, horaInicio, duracao,aulasPrevistas,diaSemana);
+        Turno t = new Turno(id, UC_codigo, capacidade, sala, horaInicio, duracao,aulasPrevistas,diaSemana);
         return t;
     }
 
@@ -193,5 +198,92 @@ public class SWAP {
         Aluno aluno = (Aluno) sessao;
 
         return aluno.getSolicitacoes(aluno.getNumero());
+    }
+
+    public double getHash(int[] k) {
+        return (Math.pow(k[0],2) / k[1]);
+    }
+
+    public void carregaInfo(String filePath) {
+
+        JSONParser parser = new JSONParser();
+
+        try {
+            Object obj = parser.parse(new FileReader(filePath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray ucs = (JSONArray) jsonObject.get("ucs");
+
+            Iterator it = ucs.iterator();
+
+            Map<Double,Horario> horariosEncontrados = new HashMap<>();
+            Map<Double,ArrayList<UC>> ucsEncontradas = new HashMap<>();
+            Map<String,Turno> turnosEncontrados = new HashMap<>();
+
+            // Navegar ucs
+            while (it.hasNext()) {
+                JSONObject curr = (JSONObject) it.next();
+
+                int ano = toIntExact((long)curr.get("ano"));
+                int semestre = toIntExact((long)curr.get("semestre"));
+
+                String sigla = (String) curr.get("sigla");
+
+                int[] k = {ano,semestre};
+
+                // é uma entrada de horário única?
+                boolean unique = true;
+                for (double d : horariosEncontrados.keySet()) {
+                    if (getHash(k) == d) {
+                        unique = false;
+                        break;
+                    }
+                }
+
+                if (unique) {
+                    horariosEncontrados.put(getHash(k),new Horario(ano,semestre));
+                    ucsEncontradas.put(getHash(k),new ArrayList<>());
+                }
+
+                ucsEncontradas.get(getHash(k)).add(new UC((String)curr.get("nome"),sigla));
+
+                // Navega turnos DENTRO da uc
+                JSONArray turnos = (JSONArray) curr.get("turnos");
+                for (int i = 0; i < turnos.size(); i++) {
+                    JSONObject currentObj = (JSONObject) turnos.get(i);
+                    Turno t = new Turno(
+                            (String)currentObj.get("numero"),
+                            sigla,
+                            toIntExact((long)currentObj.get("capacidade")),
+                            (String)currentObj.get("sala"),
+                            LocalTime.parse((String)currentObj.get("horaI")),
+                            LocalTime.parse((String)currentObj.get("duracao")),
+                            toIntExact((long)currentObj.get("aulasPrevistas")),
+                            toIntExact((long)currentObj.get("diaSemana")));
+                    turnosEncontrados.put(sigla,t);
+                }
+            }
+
+            horarios.putAllHash(horariosEncontrados);
+
+            for (int i = 1; i <= 3; i++) {
+                for (int j = 1; j <= 2; j++) {
+                    int[] k = {i,j};
+                    if (horarios.containsKey(getHash(k))) {
+                        Horario h = horarios.get(k);
+                        String idNum = horarios.getId(h);
+                        h.putAll(idNum,ucsEncontradas.get(getHash(k)));
+                    }
+                }
+            }
+
+            // for (double k : ucsEncontradas.keySet()) {
+            //    Horario h = horarios.get(k);
+            //    h.putAll(horarios.getId(h),ucsEncontradas.get(k));
+            // }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

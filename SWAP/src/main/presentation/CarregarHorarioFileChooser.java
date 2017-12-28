@@ -66,14 +66,11 @@ public class CarregarHorarioFileChooser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        if (JFileChooser.APPROVE_OPTION == 0) {
-			this.dispose();
-		}
-		else {
-			String filePath = this.jFileChooser1.getSelectedFile().getPath();
-			s.carregaInfo(filePath);
-			this.dispose();
-		}
+			if (JFileChooser.APPROVE_OPTION == 0) {
+				String filePath = this.jFileChooser1.getSelectedFile().getPath();
+				s.carregaInfo(filePath);
+				this.dispose();
+			}
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
 	/**

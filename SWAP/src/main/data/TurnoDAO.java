@@ -31,7 +31,6 @@ public class TurnoDAO {
                 t = new Turno((String) key, rs.getString("UC_codigo"),
                         rs.getInt("capacidade"),
                         rs.getString("Sala_numero"),
-                        rs.getInt("Horario_numero"),
                         rs.getTime("horaInicio").toLocalTime(),
                         rs.getTime("duracao").toLocalTime(),
                         rs.getInt("aulasPrevistas"),
@@ -78,15 +77,14 @@ public class TurnoDAO {
         try {
 
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Horario_numero,Sala_numero,horaI,duracao)\n" +
-                    "VALUES (?,?,?,?,?,?);");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Sala_numero,horaI,duracao)\n" +
+                    "VALUES (?,?,?,?,?);");
             stm.setString(1, value.getId());
             stm.setString(2, value.getUC_codigo());
             stm.setInt(3, value.getCapacidade());
-            stm.setInt(4, value.getHorarioId());
-            stm.setString(5, value.getSala());
-            stm.setObject(6, value.getHoraInicio());
-            stm.setObject(7, value.getDuracao());
+            stm.setString(4, value.getSala());
+            stm.setObject(5, value.getHoraInicio());
+            stm.setObject(6, value.getDuracao());
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -170,7 +168,6 @@ public class TurnoDAO {
                         rs.getString("UC_codigo"),
                         rs.getInt("capacidade"),
                         rs.getString("Sala_numero"),
-                        rs.getInt("Horario_numero"),
                         rs.getTime("horaI").toLocalTime(),
                         rs.getTime("duracao").toLocalTime(),
                         rs.getInt("aulasPrevistas"),
@@ -296,7 +293,6 @@ public class TurnoDAO {
                         rs.getString("UC_codigo"),
                         rs.getInt("capacidade"),
                         rs.getString("Sala_numero"),
-                        rs.getInt("Horario_numero"),
                         rs.getTime("horaI").toLocalTime(),
                         rs.getTime("duracao").toLocalTime(),
                         rs.getInt("aulasPrevistas"),
