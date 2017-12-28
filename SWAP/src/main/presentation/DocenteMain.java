@@ -19,7 +19,7 @@ public class DocenteMain extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
 	private SWAP s;
-	private ArrayList<Turno> turnos;
+	private ArrayList<String[]> turnos;
 	private ArrayList<String> ucs;
 	private boolean isRegente;
 	
@@ -28,26 +28,21 @@ public class DocenteMain extends javax.swing.JFrame {
      */
     public DocenteMain() {
         initComponents();
-//		t = new DefaultTableModel();
-//		t.addColumn("Número");
-//		t.addColumn("Nome");
-//		jTable1.setModel(t);
-//		jTable1.setDefaultEditor(Object.class, null);
-//		jTable1.getColumnModel().getColumn(0).setWidth(20);
-//		this.s = new SWAP();
     }
 	
     /**
      * Creates new form MainInterface
+	 * @param s
+	 * @param regente
      */
     public DocenteMain(SWAP s, boolean regente) {
         initComponents();
 		this.s = s;
 		this.ucs = new ArrayList<>();
 		this.turnos = s.getMyTurnos();
-		for ( Turno t : turnos) {
-			if (!ucs.contains(t.getUC_codigo()))
-				ucs.add(t.getUC_codigo());
+		for ( String[] t : turnos) {
+			if (!ucs.contains(t[0]))
+				ucs.add(t[0]);
 		}
 		this.isRegente = regente;
 		this.jButtonAnalisarTrocas.setEnabled(this.isRegente);
@@ -65,9 +60,9 @@ public class DocenteMain extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-		for (int i = 0; i < turnos.size(); i++) {
-			Turno tn = turnos.get(i);
-			t.addRow(new Object[]{i, tn.getUC_codigo(), tn.getId(),parseIntDia(tn.getDiaSemana()) ,tn.getHoraInicio()});
+		int i = 0;
+		for ( String[] tn : turnos) {
+			t.addRow(new Object[]{i, tn[0], tn[1], parseIntDia(Integer.parseInt(tn[4])), tn[5]});			
 		}
 		
 		for (String uc : ucs) {
@@ -98,7 +93,7 @@ public class DocenteMain extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
         setLocation(new java.awt.Point(200, 200));
         setLocationByPlatform(true);

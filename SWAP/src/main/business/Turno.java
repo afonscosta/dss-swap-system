@@ -17,7 +17,6 @@ public class Turno {
     private String id;
     private String UC_codigo;    
     private Integer capacidade;
-    private Integer horarioId;
     private String sala;
     private LocalTime horaInicio;
     private LocalTime duracao;
@@ -26,12 +25,11 @@ public class Turno {
 
     private FaltaDAO faltas;
    
-    public Turno (String id, String UC_codigo, Integer capacidade, String sala, Integer horarioId, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
+    public Turno (String id, String UC_codigo, Integer capacidade, String sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
         this.id = id;
         this.capacidade = capacidade;
         this.UC_codigo = UC_codigo;
         this.sala = sala;
-        this.horarioId = horarioId;
         this.horaInicio = horaInicio;
         this.duracao = duracao;
         this.aulasPrevistas = aulasPrevistas;
@@ -46,14 +44,6 @@ public class Turno {
 	public void setAulasPrevistas (Integer ap) {
 		this.aulasPrevistas = ap;
 	}
-	
-    public Integer getHorarioId() {
-        return horarioId;
-    }
-
-    public void setHorarioId(Integer horarioId) {
-        this.horarioId = horarioId;
-    }
 
     public String getId() {
         return id;

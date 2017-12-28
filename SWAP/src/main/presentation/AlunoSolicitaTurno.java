@@ -56,7 +56,7 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
         jLabelInvalidoUC = new javax.swing.JLabel();
         jLabelInvalidoTurno = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Solicita turno");
@@ -153,6 +153,7 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 				} catch (SQLException ex) {
 					Logger.getLogger(AlunoSolicitaTurno.class.getName()).log(Level.SEVERE, null, ex);
 				}
+				new AlunoSolicitacoesTurno(s).setVisible(true);
 				this.dispose();
 			}
 			else

@@ -2,7 +2,7 @@
     "ucs" :[
         {
             "cod":"H501N1",
-            "nome":"Algebra Linear EI",
+            "nome":"Álgebra Linear EI",
             "sigla":"AL",
             "ano": 1,
             "semestre": 1,
@@ -10,7 +10,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-215",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 3,
@@ -37,7 +37,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP3-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 5,
@@ -47,7 +47,7 @@
         },
         {
             "cod":"H501N2",
-            "nome":"Calculo",
+            "nome":"Cálculo",
             "sigla":"Calc",
             "ano": 1,
             "semestre": 1,
@@ -55,7 +55,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-205",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -73,7 +73,7 @@
                 {
                     "numero": "TP3",
                     "sala": "CP3-315",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -82,7 +82,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP3-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -92,7 +92,7 @@
         },
         {
             "cod":"H501N3",
-            "nome":"Topicos de Matematica Discreta",
+            "nome":"Tópicos de Matemática Discreta",
             "sigla":"TMD",
             "ano": 1,
             "semestre": 1,
@@ -100,7 +100,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP2-205",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -118,7 +118,7 @@
                 {
                     "numero": "TP3",
                     "sala": "CP2-315",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -127,7 +127,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP1-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -137,7 +137,7 @@
         },
         {
             "cod":"H501N4",
-            "nome":"Programacao Funcional",
+            "nome":"Programação Funcional",
             "sigla":"PF",
             "ano" : 1,
             "semestre": 1,
@@ -145,7 +145,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -190,7 +190,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -227,7 +227,7 @@
         },
         {
             "cod":"H501N6",
-            "nome":"Laboratorios de Informatica I",
+            "nome":"Laboratórios de Informática I",
             "sigla":"LI1",
             "ano": 1,
             "semestre": 1,
@@ -235,7 +235,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -272,7 +272,7 @@
         },
         {
             "cod":"H502N1",
-            "nome":"Sistemas de Computacao",
+            "nome":"Sistemas de Computação",
             "sigla":"SC",
             "ano": 1,
             "semestre": 2,
@@ -280,7 +280,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 4,
@@ -317,7 +317,7 @@
         },
         {
             "cod":"H502N2",
-            "nome":"Analise",
+            "nome":"Análise",
             "sigla":"ANALISE",
             "ano": 1,
             "semestre": 2,
@@ -325,7 +325,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -362,7 +362,7 @@
         },
         {
             "cod":"H502N3",
-            "nome":"Topicos de Fisica Moderna",
+            "nome":"Tópicos de Física Moderna",
             "sigla":"TFM",
             "ano": 1,
             "semestre": 2,
@@ -370,7 +370,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -407,7 +407,7 @@
         },
         {
             "cod":"H502N4",
-            "nome":"Logica EI",
+            "nome":"Lógica EI",
             "sigla":"Log",
             "ano": 1,
             "semestre": 2,
@@ -415,7 +415,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -452,7 +452,7 @@
         },
         {
             "cod":"H502N5",
-            "nome":"Programacao Imperativa",
+            "nome":"Programação Imperativa",
             "sigla":"PI",
             "ano": 1,
             "semestre": 2,
@@ -460,7 +460,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -497,7 +497,7 @@
         },
         {
             "cod":"H502N6",
-            "nome":"Laboratorios de Informatica II",
+            "nome":"Laboratórios de Informática II",
             "sigla":"LI2",
             "ano": 1,
             "semestre": 2,
@@ -505,7 +505,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -542,7 +542,7 @@
         },
         {
             "cod":"H503N1",
-            "nome":"Introducao aos Sistemas Dinamicos",
+            "nome":"Introdução aos Sistemas Dinâmicos",
             "sigla":"ISD",
             "ano": 2,
             "semestre": 1,
@@ -550,7 +550,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -587,7 +587,7 @@
         },
         {
             "cod":"H503N2",
-            "nome":"Estatistica Aplicada",
+            "nome":"Estatística Aplicada",
             "sigla":"EA",
             "ano": 2,
             "semestre": 1,
@@ -595,7 +595,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-201",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -632,7 +632,7 @@
         },
         {
             "cod":"H503N3",
-            "nome":"Engenharia Economica",
+            "nome":"Engenharia Económica",
             "sigla":"EE",
             "ano": 2,
             "semestre": 1,
@@ -722,7 +722,7 @@
         },
         {
             "cod":"H503N5",
-            "nome":"Comunicacao de Dados",
+            "nome":"Comunicação de Dados",
             "sigla":"CD",
             "ano": 2,
             "semestre": 1,
@@ -730,7 +730,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -775,7 +775,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -820,7 +820,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -857,7 +857,7 @@
         },
         {
             "cod":"H504N2",
-            "nome":"Programacao Orientada aos Objetos",
+            "nome":"Programação Orientada aos Objetos",
             "sigla":"POO",
             "ano": 2,
             "semestre": 2,
@@ -910,7 +910,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -947,7 +947,7 @@
         },
         {
             "cod":"H504N5",
-            "nome":"Calculo de Programas",
+            "nome":"Cálculo de Programas",
             "sigla":"CP",
             "ano": 2,
             "semestre": 2,
@@ -955,7 +955,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -992,7 +992,7 @@
         },
         {
             "cod":"H504N6",
-            "nome":"Laboratorios de Informatica III",
+            "nome":"Laboratórios de Informática III",
             "sigla":"LI3",
             "ano": 2,
             "semestre": 2,
@@ -1000,7 +1000,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1090,7 +1090,7 @@
                 {
                     "numero": "TP1",
                     "sala": "DI-0.05",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "01:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1108,7 +1108,7 @@
                 {
                     "numero": "TP3",
                     "sala": "DI-0.05",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "01:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 2,
@@ -1127,7 +1127,7 @@
         },
         {
             "cod":"H505N3",
-            "nome":"Modelos Deterministicos de Investigacao Operacional",
+            "nome":"Modelos Determinísticos de Investigação Operacional",
             "sigla":"MDIO",
             "ano": 3,
             "semestre": 1,
@@ -1144,7 +1144,7 @@
                 {
                     "numero": "TP2",
                     "sala": "CP1-302",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 3,
@@ -1172,7 +1172,7 @@
         },
         {
             "cod":"H505N4",
-            "nome":"Sistemas Distribuidos",
+            "nome":"Sistemas Distribuídos",
             "sigla":"SD",
             "ano": 3,
             "semestre": 1,
@@ -1252,7 +1252,7 @@
                 {
                     "numero": "TP4",
                     "sala": "CP1-310",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 1,
@@ -1262,7 +1262,7 @@
         },
         {
             "cod":"H505N6",
-            "nome":"Metodos Numericos e Otimizacao nao Linear",
+            "nome":"Métodos Numéricos e Otimização não Linear",
             "sigla":"MNOnL",
             "ano": 3,
             "semestre": 1,
@@ -1307,7 +1307,7 @@
         },
         {
             "cod":"H506N1",
-            "nome":"Sistemas de Representacao de Conhecimento e Raciocinio",
+            "nome":"Sistemas de Representação de Conhecimento e Raciocínio",
             "sigla":"SRCR",
             "ano": 3,
             "semestre": 2,
@@ -1315,7 +1315,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1352,7 +1352,7 @@
         },
         {
             "cod":"H506N2",
-            "nome":"Computacao Grafica",
+            "nome":"Computação Gráfica",
             "sigla":"CG",
             "ano": 3,
             "semestre": 2,
@@ -1397,7 +1397,7 @@
         },
         {
             "cod":"H506N3",
-            "nome":"Modelos Estocasticos de Investigacao Operacional",
+            "nome":"Modelos Estocásticos de Investigação Operacional",
             "sigla":"MEIO",
             "ano": 3,
             "semestre": 2,
@@ -1442,7 +1442,7 @@
         },
         {
             "cod":"H506N4",
-            "nome":"Comunicacoes por Computador",
+            "nome":"Comunicações por Computador",
             "sigla":"CC",
             "ano": 3,
             "semestre": 2,
@@ -1450,7 +1450,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1495,7 +1495,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,
@@ -1532,7 +1532,7 @@
         },
         {
             "cod":"H506N6",
-            "nome":"Laboratorios de Informatica IV",
+            "nome":"Laboratórios de Informática IV",
             "sigla":"LI4",
             "ano": 3,
             "semestre": 2,
@@ -1540,7 +1540,7 @@
                 {
                     "numero": "TP1",
                     "sala": "CP1-301",
-                    "horaI": "9:00:00",
+                    "horaI": "09:00:00",
                     "duracao": "02:00:00",
                     "aulasPrevistas": 15,
                     "diaSemana": 0,

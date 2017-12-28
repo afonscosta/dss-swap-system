@@ -5,12 +5,10 @@
  */
 package main.presentation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.business.SWAP;
-import main.business.SolicitacaoTroca;
 
 /**
  *
@@ -33,6 +31,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 	
     /**
      * Creates new form MainInterface
+	 * @param s
      */
     public AlunoSolicitacoesTurno(SWAP s) {
         initComponents();
@@ -69,15 +68,10 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
         setLocation(new java.awt.Point(200, 200));
         setLocationByPlatform(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                windowClosingCustom(evt);
-            }
-        });
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, java.awt.Color.lightGray, null, null));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -178,7 +172,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-		System.exit(0);
+		this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
@@ -192,12 +186,9 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
-		System.exit(0);
-    }//GEN-LAST:event_windowClosingCustom
-
     private void jButtonNewSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNewSolicitacaoMouseClicked
         new AlunoSolicitaTurno(s).setVisible(true);
+		this.dispose();
     }//GEN-LAST:event_jButtonNewSolicitacaoMouseClicked
 
     private void jButtonRemSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRemSolicitacaoMouseClicked

@@ -48,8 +48,13 @@ public class Login extends javax.swing.JFrame {
         jCheckBoxShowPass = new javax.swing.JCheckBox();
         jPasswordFieldPass = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Autenticação");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                closingWindowCustom(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Insira as credenciais para entrar.");
@@ -204,6 +209,11 @@ public class Login extends javax.swing.JFrame {
     private void jPasswordFieldPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPassFocusGained
         this.jLabelInvalidoPass.setVisible(false);
     }//GEN-LAST:event_jPasswordFieldPassFocusGained
+
+    private void closingWindowCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closingWindowCustom
+        new MainWindow(s).setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_closingWindowCustom
 
 	/**
 	 * @param args the command line arguments

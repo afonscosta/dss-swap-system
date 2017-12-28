@@ -79,22 +79,17 @@ public class InfoAluno extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextFieldCount = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informação do Sócio");
         setLocation(new java.awt.Point(1000, 400));
         setLocationByPlatform(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                windowCloserCustom(evt);
-            }
-        });
 
         jLabel3.setText("Email");
 
         jButtonFechar.setText("Fechar");
-        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharActionPerformed(evt);
+        jButtonFechar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonFecharMouseClicked(evt);
             }
         });
 
@@ -208,19 +203,15 @@ public class InfoAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
-		this.dispose();
-    }//GEN-LAST:event_jButtonFecharActionPerformed
-
     private void jButtonMarcarFaltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarcarFaltaMouseClicked
 		alunosFalta.add(codAluno);
 		numFaltas++;
 		this.jTextFieldCount.setText(Integer.toString(numFaltas));
     }//GEN-LAST:event_jButtonMarcarFaltaMouseClicked
 
-    private void windowCloserCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowCloserCustom
-		this.dispose();
-    }//GEN-LAST:event_windowCloserCustom
+    private void jButtonFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jButtonFecharMouseClicked
 
 	
 	/**

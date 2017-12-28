@@ -8,7 +8,7 @@ import main.business.Horario;
 import main.business.Tuplo;
 import main.business.UC;
 
-public class HorarioDAO implements Map<Tuplo, Horario>{
+public class HorarioDAO implements Map<int[],Horario>{
 	
     private Connection conn;
 
@@ -28,7 +28,26 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
 
     @Override
     public boolean containsKey(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            conn = Connect.connect();
+
+            PreparedStatement stm = conn.prepareStatement("SELECT COUNT(*) FROM Horario WHERE (POW(ano,2)) / semestre = ?;");
+            stm.setDouble(1,(double) o);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+              return (rs.getInt("COUNT(*)") == 1);
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+
+        return false;
     }
 
     @Override
@@ -38,15 +57,14 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
 
     @Override
     public Horario get(Object key) {
-        Tuplo t = (Tuplo) key;
 	Horario h = null;
-	int ano = (int) t.getL();
-	int semestre = (int) t.getR();
+	int ano = ((int[]) key)[0];
+	int semestre = ((int[]) key)[1];
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM Horario WHERE ano=? AND semestre=?");
             stm.setInt(1, ano);
-            stm.setInt(2, ano);
+            stm.setInt(2, semestre);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 h = new Horario(rs.getInt("ano"),rs.getInt("semestre"));
@@ -59,16 +77,15 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
         return h;
 	}
 
-    @Override
-    public Horario put(Tuplo k, Horario v) {
+    public Horario put(int[] k, Horario v) {
 	Horario h = null;
         try {
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Horario\n" +
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Horario (ano,semestre)\n" +
                 "VALUES (?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE ano=VALUES(ano),  semestre=VALUES(semestre)", Statement.RETURN_GENERATED_KEYS);
-            stm.setInt(1, (int) k.getL());
-            stm.setInt(2, (int) k.getR());
+            stm.setInt(1, k[0]);
+            stm.setInt(2, k[1]);
             stm.executeUpdate();
             
             h = v;
@@ -86,8 +103,11 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
     }
 
     @Override
-    public void putAll(Map<? extends Tuplo, ? extends Horario> map) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void putAll(Map<? extends int[], ? extends Horario> m) {
+        for (Horario h : m.values()) {
+            int[] k = {h.getAno(),h.getSemestre()};
+            this.put(k,h);
+        }
     }
 
     @Override
@@ -96,8 +116,8 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
     }
 
     @Override
-    public Set<Tuplo> keySet() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Set<int[]> keySet() {
+        return null;
     }
 
     @Override
@@ -106,8 +126,8 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
     }
 
     @Override
-    public Set<Entry<Tuplo, Horario>> entrySet() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Set<Entry<int[], Horario>> entrySet() {
+        return null;
     }
 
     public UC getUC(String codUC) throws SQLException {
@@ -118,9 +138,38 @@ public class HorarioDAO implements Map<Tuplo, Horario>{
        ResultSet rs = stm.executeQuery();
 
        if (rs.next()) {
-          return new UC(rs.getString("nome"));
+          return new UC(rs.getString("nome"),rs.getString("codigo"));
        }
 
        return null;
+    }
+
+    public String getId(Horario h) {
+        try {
+            conn = Connect.connect();
+            String sql = "SELECT numero FROM Horario WHERE ano = ? AND semestre = ?;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, Integer.toString(h.getAno()));
+            stm.setString(2, Integer.toString(h.getSemestre()));
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("numero");
+            } else {
+                return "-1";
+            }
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+        return null;
+    }
+
+    public void putAllHash(Map<Double, Horario> horariosEncontrados) {
+        for (Horario h : horariosEncontrados.values()) {
+            int[] k = {h.getAno(),h.getSemestre()};
+            this.put(k,h);
+        }
     }
 }
