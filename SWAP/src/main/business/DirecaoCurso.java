@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.data;
+package main.business;
 
 import main.business.Utilizador;
 
-/**
- *
- * @author edgar
- */
 public class DirecaoCurso extends Utilizador {
 
     

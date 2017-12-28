@@ -9,7 +9,7 @@ import main.business.Tuplo;
 import main.business.UC;
 
 public class HorarioDAO implements Map<int[],Horario>{
-	
+
     private Connection conn;
 
     public Horario getHorario(Integer ano, Integer semestre) {
@@ -18,7 +18,7 @@ public class HorarioDAO implements Map<int[],Horario>{
 
     @Override
     public int size() {
-	throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class HorarioDAO implements Map<int[],Horario>{
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-              return (rs.getInt("COUNT(*)") == 1);
+                return (rs.getInt("COUNT(*)") == 1);
             } else {
                 return false;
             }
@@ -52,14 +52,14 @@ public class HorarioDAO implements Map<int[],Horario>{
 
     @Override
     public boolean containsValue(Object o) {
-	throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Horario get(Object key) {
-	Horario h = null;
-	int ano = ((int[]) key)[0];
-	int semestre = ((int[]) key)[1];
+        Horario h = null;
+        int ano = ((int[]) key)[0];
+        int semestre = ((int[]) key)[1];
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM Horario WHERE ano=? AND semestre=?");
@@ -75,19 +75,19 @@ public class HorarioDAO implements Map<int[],Horario>{
             Connect.close(conn);
         }
         return h;
-	}
+    }
 
     public Horario put(int[] k, Horario v) {
-	Horario h = null;
+        Horario h = null;
         try {
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("INSERT INTO Horario (ano,semestre)\n" +
-                "VALUES (?, ?)\n" +
-                "ON DUPLICATE KEY UPDATE ano=VALUES(ano),  semestre=VALUES(semestre)", Statement.RETURN_GENERATED_KEYS);
+                    "VALUES (?, ?)\n" +
+                    "ON DUPLICATE KEY UPDATE ano=VALUES(ano),  semestre=VALUES(semestre)", Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, k[0]);
             stm.setInt(2, k[1]);
             stm.executeUpdate();
-            
+
             h = v;
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class HorarioDAO implements Map<int[],Horario>{
             Connect.close(conn);
         }
         return h;
-	}
+    }
 
     @Override
     public Horario remove(Object o) {
@@ -130,18 +130,25 @@ public class HorarioDAO implements Map<int[],Horario>{
         return null;
     }
 
-    public UC getUC(String codUC) throws SQLException {
-       conn = Connect.connect();
-       String sql = "SELECT * FROM UC WHERE codigo=?";
-       PreparedStatement stm = conn.prepareStatement(sql);
-       stm.setString(1,codUC);
-       ResultSet rs = stm.executeQuery();
+    public UC getUC(String codUC) {
+        try {
 
-       if (rs.next()) {
-          return new UC(rs.getString("nome"),rs.getString("codigo"));
-       }
+            conn = Connect.connect();
+            String sql = "SELECT * FROM UC WHERE codigo=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, codUC);
+            ResultSet rs = stm.executeQuery();
 
-       return null;
+            if (rs.next()) {
+                return new UC(rs.getString("nome"), rs.getString("codigo"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+            return null;
+        }
     }
 
     public String getId(Horario h) {
@@ -159,7 +166,7 @@ public class HorarioDAO implements Map<int[],Horario>{
                 return "-1";
             }
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         } finally {
             Connect.close(conn);
         }

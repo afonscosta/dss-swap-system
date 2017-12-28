@@ -33,29 +33,92 @@ public class FaltaDAO {
     }
 
     //só será utilizado no caso de a instância ainda não existir na tabela
-    public void putFalta(String aluno, String codTurno, String codUc) throws SQLException {
+    public void putFalta(String aluno, String codTurno, String codUc) {
 
-        conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Falta(quant, utilizador, Turno_numero, Turno_UC_codigo)\n" +
-                "VALUES (1,?,?,?);");
+        try {
 
-        stm.setString(1, aluno);
-        stm.setString(2, codTurno);
-        stm.setString(3, codUc);
-        stm.executeUpdate();
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Falta(quant, utilizador, Turno_numero, Turno_UC_codigo)\n" +
+                    "VALUES (1,?,?,?);");
 
-        Connect.close(conn);
+            stm.setString(1, aluno);
+            stm.setString(2, codTurno);
+            stm.setString(3, codUc);
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            Connect.close(conn);
+        }
     }
 
-    public void incFalta(String a, String codTurno, String codUc) throws SQLException {
+    public void incFalta(String a, String codTurno, String codUc) {
+        try {
+
+            conn = Connect.connect();
+
+            PreparedStatement stm = conn.prepareStatement("UPDATE Falta SET quant = quant + 1 WHERE utilizador = ? AND Turno_numero = ? AND Turno_UC_codigo=?");
+            stm.setString(1, a);
+            stm.setString(2, codTurno);
+            stm.setString(3, codUc);
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+    }
+
+    public void verificaLimiteFaltas(String a, String codTurno, String codUC) {
+        try {
+
         conn = Connect.connect();
 
-        PreparedStatement stm = conn.prepareStatement("UPDATE Falta SET quant = quant + 1 WHERE utilizador = ? AND Turno_numero = ? AND Turno_UC_codigo=?");
+        PreparedStatement stm = conn.prepareStatement(" SELECT f.quant, \n " +
+                                                                    "t.aulasPrevistas, \n " +
+                                                                    "ROUND(0.20 * t.aulasPrevistas) AS 'Limite' \n " +
+                                                                    "FROM Falta f \n " +
+                                                                    "JOIN Turno t ON f.Turno_numero = t.numero AND f.Turno_UC_codigo = UC_codigo; \n" +
+                                                                    "WHERE f.utilizador = ? AND t.numero = ? AND t.UC_codigo = ?");
         stm.setString(1,a);
         stm.setString(2,codTurno);
-        stm.setString(3,codUc);
-        stm.executeUpdate();
+        stm.setString(3,codUC);
+        ResultSet rs = stm.executeQuery();
 
-        Connect.close(conn);
+        int aulasPrevistas = rs.getInt("aulasPrevistas");
+        int cap = (int) Math.round(aulasPrevistas * 0.25);
+        int faltasAluno = rs.getInt("quant");
+
+        if (faltasAluno > cap) {
+            removeAlunoTurno(a,codTurno,codUC);
+        }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+    }
+
+    private void removeAlunoTurno(String a, String codTurno, String codUC) {
+        try {
+
+            conn = Connect.connect();
+
+            PreparedStatement stm = conn.prepareStatement("DELETE FROM UtilizadorTurno WHERE Utilizador_idUtilizadores = ? AND Turno_numero = ? AND Turno_UC_codigo = ?;");
+            stm.setString(1,a);
+            stm.setString(2,codTurno);
+            stm.setString(3,codUC);
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
     }
 }

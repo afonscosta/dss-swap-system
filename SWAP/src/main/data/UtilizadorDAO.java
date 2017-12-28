@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import main.business.Aluno;
+import main.business.DirecaoCurso;
 import main.business.Docente;
 import main.business.Utilizador;
 
@@ -86,47 +87,62 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         return u;
     }
 
-    public void putAluno(String key, Aluno value) throws SQLException {
+    public void putAluno(String key, Aluno value) {
+        try {
 
-        conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
-                "VALUES (?,?,?,?);");
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,prioridade)\n" +
+                    "VALUES (?,?,?,?);");
 
 
-        int bool = value.getPrioridade() == true ? 1 : 0;
+            int bool = value.getPrioridade() == true ? 1 : 0;
 
-        stm.setString(1, value.getNumero());
-        stm.setString(2,value.getNome());
-        stm.setString(3,value.getPassword());
-        stm.setString(4,String.valueOf(bool));
-        stm.executeUpdate();
+            stm.setString(1, value.getNumero());
+            stm.setString(2, value.getNome());
+            stm.setString(3, value.getPassword());
+            stm.setString(4, String.valueOf(bool));
+            stm.executeUpdate();
 
-        Connect.close(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
     }
 
 
-    public void putDocente(String key, Docente value) throws SQLException {
-        conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,uc,regente) VALUES(?,?,?,?,?);");
-        stm.setString(1,key);
-        stm.setString(2,value.getNome());
-        stm.setString(3,value.getPassword());
-        stm.setString(4,value.getUC());
-        stm.setInt(5,value.getRegente());
-        stm.executeUpdate();
+    public void putDocente(String key, Docente value) {
+        try {
 
-        Connect.close(conn);
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,uc,regente) VALUES(?,?,?,?,?);");
+            stm.setString(1, key);
+            stm.setString(2, value.getNome());
+            stm.setString(3, value.getPassword());
+            stm.setString(4, value.getUC());
+            stm.setInt(5, value.getRegente());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
     }
 
-    public void putDirecaoCurso(String chave, String nome, String password) throws SQLException {
-        conn = Connect.connect();
-        PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
-        stm.setString(1,chave);
-        stm.setString(2,nome);
-        stm.setString(3,password);
-        stm.executeUpdate();
+    public void putDirecaoCurso(String chave, String nome, String password) {
+        try {
 
-        Connect.close(conn);
+            conn = Connect.connect();
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
+            stm.setString(1, chave);
+            stm.setString(2, nome);
+            stm.setString(3, password);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
     }
 
 
@@ -169,19 +185,25 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public int isRegente(String chave) throws SQLException {
+    public int isRegente(String chave) {
+        int res = -1;
 
-        conn = Connect.connect();
-        String sql = "SELECT regente FROM Utilizador WHERE idUtilizadores=?";
-        PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setString(1, chave);
-        ResultSet rs = stm.executeQuery();
+        try {
 
-        int res = (rs.next()) ? rs.getInt("regente") : -1;
+            conn = Connect.connect();
+            String sql = "SELECT regente FROM Utilizador WHERE idUtilizadores=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, chave);
+            ResultSet rs = stm.executeQuery();
 
-        Connect.close(conn);
+            res = (rs.next()) ? rs.getInt("regente") : -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+            return res;
+        }
 
-        return res;
     }
 
 

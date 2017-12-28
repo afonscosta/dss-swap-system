@@ -4,8 +4,6 @@ import java.io.FileReader;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static java.lang.Math.toIntExact;
 
 import main.data.HorarioDAO;
@@ -49,11 +47,7 @@ public class SWAP {
     public boolean isRegente(String chave) {
         int isRegente = -1;
 
-        try {
-            isRegente = utilizadores.isRegente(chave);
-        } catch (SQLException ex) {
-            Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        isRegente = utilizadores.isRegente(chave);
 
         return (isRegente == 1);
     }
@@ -67,20 +61,16 @@ public class SWAP {
         if (chave == null || utilizadores.containsKey(chave)) {
             return false;
         } else {
-            try {
-                if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
+            if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
 
-                    utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
+                utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
 
-                } else if (chave.equals("dcmiei")) { // é direção de curso
-                    utilizadores.putDirecaoCurso(chave,nome,password);
+            } else if (chave.equals("dcmiei")) { // é direção de curso
+                utilizadores.putDirecaoCurso(chave,nome,password);
 
-                } else { // é docente regente
+            } else { // é docente regente
 
-                    utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(SWAP.class.getName()).log(Level.SEVERE, null, ex);
+                utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
             }
 
             return true;
@@ -99,7 +89,7 @@ public class SWAP {
         return false;
     }
 
-    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, String sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
+    public Turno adicionaTurno (String id, String UC_codigo, Integer capacidade, Sala sala, LocalTime horaInicio, LocalTime duracao,Integer aulasPrevistas,int diaSemana) {
 
         Turno t = new Turno(id, UC_codigo, capacidade, sala, horaInicio, duracao,aulasPrevistas,diaSemana);
         return t;
@@ -120,11 +110,7 @@ public class SWAP {
 
     public void marcaFaltas(String codUC,String codTurno, ArrayList<String> alunos) {
         UC uc = null;
-        try {
-            uc = horarios.getUC(codUC);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        uc = horarios.getUC(codUC);
 
         uc.marcaFaltas(alunos, codUC, codTurno);
 
@@ -150,39 +136,39 @@ public class SWAP {
 
     public ArrayList<String[]> getMyTurnos() {
         ArrayList<String[]> res = null;
-		ArrayList<Turno> resWithTurnos = null;
-		
+        ArrayList<Turno> resWithTurnos = null;
+
         String chave = this.extraiChave(sessao.getEmail());
         if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) { // é um aluno
 
             Aluno a = (Aluno) utilizadores.get(this.extraiChave(sessao.getEmail()));
             resWithTurnos = a.getTurnos(this.extraiChave(sessao.getEmail()));
-			res = this.castTurnosToStringArray(resWithTurnos);
+            res = this.castTurnosToStringArray(resWithTurnos);
 
         } else if (!chave.equals("dcmiei")) {
             Docente d = (Docente) utilizadores.get(this.extraiChave(sessao.getEmail()));
             resWithTurnos = d.getTurnos(this.extraiChave(sessao.getEmail()));
-			res = this.castTurnosToStringArray(resWithTurnos);
+            res = this.castTurnosToStringArray(resWithTurnos);
         }
         return res;
     }
-	
-	private ArrayList<String[]> castTurnosToStringArray(ArrayList<Turno> arrTurnos) {
-		ArrayList<String[]> res = new ArrayList<>();
-		for (Turno t : arrTurnos) {
-			String[] turnoString = new String[8];
-			turnoString[0] = t.getUC_codigo();
-			turnoString[1] = t.getId();
-			turnoString[2] = t.getSala();
-			turnoString[3] = t.getCapacidade().toString();
-			turnoString[4] = Integer.toString(t.getDiaSemana());
-			turnoString[5] = t.getHoraInicio().toString();
-			turnoString[6] = t.getDuracao().toString();
-			turnoString[7] = t.getAulasPrevistas().toString();
-			res.add(turnoString);
-		}
-		return res;
-	}
+
+    private ArrayList<String[]> castTurnosToStringArray(ArrayList<Turno> arrTurnos) {
+        ArrayList<String[]> res = new ArrayList<>();
+        for (Turno t : arrTurnos) {
+            String[] turnoString = new String[8];
+            turnoString[0] = t.getUC_codigo();
+            turnoString[1] = t.getId();
+            turnoString[2] = t.getSala().getNumero();
+            turnoString[3] = t.getCapacidade().toString();
+            turnoString[4] = Integer.toString(t.getDiaSemana());
+            turnoString[5] = t.getHoraInicio().toString();
+            turnoString[6] = t.getDuracao().toString();
+            turnoString[7] = t.getAulasPrevistas().toString();
+            res.add(turnoString);
+        }
+        return res;
+    }
 
     public boolean existeUC(String uc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -220,7 +206,7 @@ public class SWAP {
         return aluno.getSolicitacoes(aluno.getNumero());
     }
 
-	
+
     public double getHash(int[] k) {
         return (Math.pow(k[0],2) / k[1]);
     }
@@ -230,25 +216,36 @@ public class SWAP {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader(filePath));
-            JSONObject jsonObject = (JSONObject) obj;
-			
-			
-			//Navegar as UCs			
-            JSONArray ucs = (JSONArray) jsonObject.get("ucs");
-
-            Iterator itUCs = ucs.iterator();
-
+            // Informação encontrada guardada em memória temporariamente
+            Map<String,Sala> salasEncontradas = new HashMap<>();
             Map<Double,Horario> horariosEncontrados = new HashMap<>();
             Map<Double,ArrayList<UC>> ucsEncontradas = new HashMap<>();
             Map<String,ArrayList<Turno>> turnosEncontrados = new HashMap<>();
 
+            Object obj = parser.parse(new FileReader(filePath));
+            JSONObject jsonObject = (JSONObject) obj;
+
+            // Navegar as salas
+            JSONArray salas = (JSONArray) jsonObject.get("salas");
+            Iterator itSalas = salas.iterator();
+            while (itSalas.hasNext()) {
+                JSONObject curr = (JSONObject) itSalas.next();
+
+                String nome = (String) curr.get("sala");
+                int capacidade = toIntExact((long)curr.get("capacidade"));
+
+                salasEncontradas.put(nome,new Sala(nome,capacidade));
+            }
+
+
+            //Navegar as UCs
+            JSONArray ucs = (JSONArray) jsonObject.get("ucs");
+            Iterator itUCs = ucs.iterator();
             while (itUCs.hasNext()) {
                 JSONObject curr = (JSONObject) itUCs.next();
 
                 int ano = toIntExact((long)curr.get("ano"));
                 int semestre = toIntExact((long)curr.get("semestre"));
-
                 String sigla = (String) curr.get("sigla");
 
                 int[] k = {ano,semestre};
@@ -277,7 +274,7 @@ public class SWAP {
                             (String)currentObj.get("numero"),
                             sigla,
                             toIntExact((long)currentObj.get("capacidade")),
-                            (String)currentObj.get("sala"),
+                            salasEncontradas.get(currentObj.get("sala")),
                             LocalTime.parse((String)currentObj.get("horaI")),
                             LocalTime.parse((String)currentObj.get("duracao")),
                             toIntExact((long)currentObj.get("aulasPrevistas")),
@@ -288,19 +285,8 @@ public class SWAP {
                     turnosEncontrados.get(sigla).add(t);
                 }
             }
-			
-			//Navegar as Salas
-			JSONArray salas = (JSONArray) jsonObject.get("salas");
 
-            Iterator itSalas = salas.iterator();
-			
-			while (itSalas.hasNext()) {
-                JSONObject curr = (JSONObject) itSalas.next();
-				
-				String sala = (String) curr.get("sala");
-                String capacidade = (String) curr.get("capacidade");
-
-            // Procura acabou, usar as ligações SQL e colocar tudo em regist
+            // Procura acabou, usar as ligações SQL e colocar tudo em disco
 
             // Registar todos os horaŕios
             horarios.putAllHash(horariosEncontrados);
@@ -308,22 +294,20 @@ public class SWAP {
             // Registar todas as UCs
             for (int i = 1; i <= 3; i++) {
                 for (int j = 1; j <= 2; j++) {
-                    int[] k = {i,j};
+                    int[] k = {i, j};
                     if (horarios.containsKey(getHash(k))) {
                         Horario h = horarios.get(k);
                         String idNum = horarios.getId(h);
-                        h.putAll(idNum,ucsEncontradas.get(getHash(k)));
+                        h.putAll(idNum, ucsEncontradas.get(getHash(k)));
                     }
                 }
             }
-
 
             // Registar todos os turnos
             for (String ucCod : turnosEncontrados.keySet()) {
                 UC uc = horarios.getUC(ucCod);
                 uc.putAllTurnos(turnosEncontrados.get(uc.getCodUC()));
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

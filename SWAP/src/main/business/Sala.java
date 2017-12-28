@@ -5,10 +5,6 @@
  */
 package main.business;
 
-/**
- *
- * @author rokai
- */
 public class Sala {
 	
 	private String numero;
