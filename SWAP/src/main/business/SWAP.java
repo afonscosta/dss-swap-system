@@ -238,7 +238,7 @@ public class SWAP {
 
             Map<Double,Horario> horariosEncontrados = new HashMap<>();
             Map<Double,ArrayList<UC>> ucsEncontradas = new HashMap<>();
-            Map<String,Turno> turnosEncontrados = new HashMap<>();
+            Map<String,ArrayList<Turno>> turnosEncontrados = new HashMap<>();
 
             // Navegar ucs
             while (it.hasNext()) {
@@ -280,12 +280,19 @@ public class SWAP {
                             LocalTime.parse((String)currentObj.get("duracao")),
                             toIntExact((long)currentObj.get("aulasPrevistas")),
                             toIntExact((long)currentObj.get("diaSemana")));
-                    turnosEncontrados.put(sigla,t);
+                    if (!turnosEncontrados.containsKey(sigla)) {
+                        turnosEncontrados.put(sigla,new ArrayList<>());
+                    }
+                    turnosEncontrados.get(sigla).add(t);
                 }
             }
 
+            // Procura acabou, usar as ligações SQL e colocar tudo em regist
+
+            // Registar todos os horaŕios
             horarios.putAllHash(horariosEncontrados);
 
+            // Registar todas as UCs
             for (int i = 1; i <= 3; i++) {
                 for (int j = 1; j <= 2; j++) {
                     int[] k = {i,j};
@@ -297,10 +304,13 @@ public class SWAP {
                 }
             }
 
-            // for (double k : ucsEncontradas.keySet()) {
-            //    Horario h = horarios.get(k);
-            //    h.putAll(horarios.getId(h),ucsEncontradas.get(k));
-            // }
+
+            // Registar todos os turnos
+            for (String ucCod : turnosEncontrados.keySet()) {
+                UC uc = horarios.getUC(ucCod);
+                uc.putAllTurnos(turnosEncontrados.get(uc.getCodUC()));
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

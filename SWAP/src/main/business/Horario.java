@@ -32,7 +32,7 @@ public class Horario {
 		return semestre;
 	}
 
-	public void putAll(String horario,ArrayList<UC> ucsArg) {
+	void putAll(String horario,ArrayList<UC> ucsArg) {
 			ucs.putAllArrayList(horario,ucsArg);
 	}
 }

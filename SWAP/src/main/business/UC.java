@@ -100,4 +100,8 @@ public class UC {
     public String getCodUC() {
         return codUC;
     }
+
+    void putAllTurnos(ArrayList<Turno> turnosArg) {
+        turnos.putAllTurnos(turnosArg);
+    }
 }

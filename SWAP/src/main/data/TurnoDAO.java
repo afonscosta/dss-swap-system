@@ -72,19 +72,21 @@ public class TurnoDAO {
         return codTurnoS;
     }
 
-    public Turno put(int key, Turno value) {
+    public Turno put(Object key, Turno value) {
 
         try {
 
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Sala_numero,horaI,duracao)\n" +
-                    "VALUES (?,?,?,?,?);");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Sala_numero,horaI,duracao,aulasPrevistas,diaSemana)\n" +
+                    "VALUES (?,?,?,?,?,?,?,?);");
             stm.setString(1, value.getId());
-            stm.setString(2, value.getUC_codigo());
+            stm.setString(2, (String) key);
             stm.setInt(3, value.getCapacidade());
             stm.setString(4, value.getSala());
             stm.setObject(5, value.getHoraInicio());
             stm.setObject(6, value.getDuracao());
+            stm.setInt(7,value.getAulasPrevistas());
+            stm.setInt(8,value.getDiaSemana());
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -303,5 +305,12 @@ public class TurnoDAO {
         }
 
         return res;
+    }
+
+    public void putAllTurnos(ArrayList<Turno> turnos) {
+        for (Turno t : turnos) {
+            put(t.getUC_codigo(),t);
+        }
+
     }
 }
