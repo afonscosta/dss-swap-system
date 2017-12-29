@@ -6,6 +6,7 @@
 package main.presentation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.business.SWAP;
@@ -21,7 +22,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 	private ArrayList<String[]> alunosTurno;
 	private String codUC;
 	private String codTurno;
-	private ArrayList<String> alunosFalta;
+	private HashMap<String,Integer> alunosFalta;
 	
 	/**
      * Creates new form MainInterface
@@ -45,7 +46,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
      */
     public ListaAlunosTurno(SWAP s, String codUC, String codTurno) {
         initComponents();
-		this.alunosFalta = new ArrayList<>();
+		this.alunosFalta = new HashMap<>();
 		this.s = s;
 		this.codUC = codUC;
 		this.codTurno = codTurno;
@@ -175,7 +176,7 @@ public class ListaAlunosTurno extends javax.swing.JFrame {
 			int col = jTable1.columnAtPoint(evt.getPoint());
 			if (row >= 0 && col >= 0) {
 				String chave = (String) jTable1.getValueAt(row, 0);
-				InfoAluno is = new InfoAluno(s, alunosFalta, codUC, codTurno, s.getAluno(chave));
+				InfoAluno is = new InfoAluno(alunosFalta, codUC, codTurno, s.getAluno(chave));
 				is.setVisible(true);
 			}
 		}
