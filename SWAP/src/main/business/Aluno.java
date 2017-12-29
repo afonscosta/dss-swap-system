@@ -42,20 +42,27 @@ public class Aluno extends Utilizador {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    boolean solicitaTurno(String codUC, String codTurnoD, String codAluno) throws SQLException {
+    boolean solicitaTurno(String codUC, String codTurnoD, String codAluno, int fase) throws SQLException {
         boolean trocou = false;
 
         UC uct = ucs.get(codUC);
 
         String codTurnoS = turnos.getCodMyTurno(codUC, codAluno);
 
-        if (this.prioritario) {
-            trocou = uct.trataPrioritario(codUC,codTurnoS,codTurnoD,codAluno);
-        } else {
-            trocou = uct.trataTroca(codUC, codTurnoS, codTurnoD, codAluno);
-
-        }
-        return trocou;
+		// Se não tiver na fase das trocas automáticas,
+		// então simplesmente acrescenta a solicitação.
+		if(fase != 1) {
+			trocou = uct.addSolicitacao(codUC, codTurnoS, codTurnoD, codAluno);
+		}
+		// Caso contrário corre o sistema das trocas automáticas.
+		else {
+			if (this.prioritario) {
+				trocou = uct.trataPrioritario(codUC,codTurnoS,codTurnoD,codAluno);
+			} else {
+				trocou = uct.trataTroca(codUC, codTurnoS, codTurnoD, codAluno);
+			}
+		}
+		return trocou;
     }
 
     void remFilaEspera(String codUc, String id_turnoD) {

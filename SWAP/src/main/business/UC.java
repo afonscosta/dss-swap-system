@@ -106,4 +106,8 @@ public class UC {
     void putAllTurnos(ArrayList<Turno> turnosArg) {
         turnos.putAllTurnos(turnosArg);
     }
+
+	boolean addSolicitacao(String codUC, String codTurnoS, String codTurnoD, String codAluno) {
+		return trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno), codUC);
+	}
 }

@@ -5,14 +5,21 @@
  */
 package main.business;
 
-import main.business.Utilizador;
-
 public class DirecaoCurso extends Utilizador {
 
-    
+    private int fase;
 
-    public DirecaoCurso(String nome, String email, String password) {
+    public DirecaoCurso(String nome, String email, String password, int fase) {
        super(nome,email,password);
+	   this.fase = fase;
     }
-    
+
+	public int getFase() {
+		return fase;
+	}
+
+	public void setFase(int fase) {
+		this.fase = fase;
+	}
+
 }

@@ -73,7 +73,7 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
                 if (chave.startsWith("a") && Character.isDigit(chave.charAt(1))) {
                     u = new Aluno(rs.getString("nome"),chave + "@alunos.uminho.pt", rs.getString("password"), rs.getBoolean("prioridade"),chave );
                 } else if (chave.equals("dcmiei")) {
-                    u = new DirecaoCurso(rs.getString("nome"),rs.getString("idUtilizadores") + "@di.uminho.pt",rs.getString("password"));
+                    u = new DirecaoCurso(rs.getString("nome"),rs.getString("idUtilizadores") + "@di.uminho.pt",rs.getString("password"),rs.getInt("fase"));
                 } else {
                     u = new Docente(rs.getString("nome"),rs.getString("idUtilizadores") + "@di.uminho.pt",rs.getString("password"),rs.getString("uc"),rs.getInt("regente"));
                 }
@@ -129,14 +129,15 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
         }
     }
 
-    public void putDirecaoCurso(String chave, String nome, String password) {
+    public void putDirecaoCurso(String chave, String nome, String password,int fase) {
         try {
 
             conn = Connect.connect();
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password) VALUES(?,?,?);");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO Utilizador(idUtilizadores,nome,password,fase) VALUES(?,?,?,?);");
             stm.setString(1, chave);
             stm.setString(2, nome);
             stm.setString(3, password);
+            stm.setInt(4, fase);
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,7 +207,23 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
 
     }
 
+	public void updateFase(String codDirecaoCurso, int i) {
+		try {
 
+            conn = Connect.connect();
 
+            PreparedStatement stm = conn.prepareStatement("UPDATE Utilizador\n"
+                    + "SET fase = ?\n"
+                    + "WHERE idUtilizadores = ?;");
 
+            stm.setInt(1, i);
+            stm.setString(2, codDirecaoCurso);
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+	}
 }

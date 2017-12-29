@@ -40,9 +40,9 @@ public class SWAP {
         }
     }
 
-    private boolean aceitaTroca(SolicitacaoTroca t) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+//    private boolean aceitaTroca(SolicitacaoTroca t) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
     public boolean isRegente(String chave) {
         int isRegente = -1;
@@ -66,7 +66,7 @@ public class SWAP {
                 utilizadores.putAluno(chave, new Aluno(nome,email,password,(boolean) wildcard,chave));
 
             } else if (chave.equals("dcmiei")) { // é direção de curso
-                utilizadores.putDirecaoCurso(chave,nome,password);
+                utilizadores.putDirecaoCurso(chave,nome,password, 0);
 
             } else { // é docente regente
 
@@ -97,9 +97,8 @@ public class SWAP {
 
     public boolean solicitaTurno(String codUC, String codTurnoD) throws SQLException {
         Aluno alunoAtual = (Aluno) sessao;
-        return alunoAtual.solicitaTurno(codUC, codTurnoD, alunoAtual.getNumero());
-
-
+		DirecaoCurso dc = (DirecaoCurso) utilizadores.get("dcmiei");
+        return alunoAtual.solicitaTurno(codUC, codTurnoD, alunoAtual.getNumero(), dc.getFase());
     }
 
     public void removeSolicitacaoTurno(String codUc,String codTurno) {
@@ -315,4 +314,13 @@ public class SWAP {
         }
 
     }
+
+	public void inscreveNasUCs(ArrayList<String> ucsEscolhidas, String codAluno) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public void changeState(int i) {
+		DirecaoCurso dc = (DirecaoCurso) sessao;
+		utilizadores.updateFase(this.extraiChave(dc.getEmail()), i);
+	}
 }

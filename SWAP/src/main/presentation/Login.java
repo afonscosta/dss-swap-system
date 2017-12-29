@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
 			if (password != null && !password.equals("")) {
 				if (s.autentica(email, password)) {
 					if (chave.startsWith("a") && Character.isDigit(chave.charAt(1)))
-						new AlunoMain(s).setVisible(true);
+						new Inscricao(s, chave).setVisible(true);
 					else if (chave.equals("dcmiei"))
 						new CarregarHorario(s).setVisible(true);
 					else {

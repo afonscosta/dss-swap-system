@@ -4,17 +4,15 @@
  * and open the template in the editor.
  */
 
+package main.presentation;
 
 import java.util.ArrayList;
 import main.business.SWAP;
 
-/**
- *
- * @author rokai
- */
 public class Inscricao extends javax.swing.JFrame {
 
 	private SWAP s;
+	private String codAluno;
 	private ArrayList<String> ucsEscolhidas;
 	
 	/**
@@ -27,10 +25,12 @@ public class Inscricao extends javax.swing.JFrame {
 	/**
 	 * Creates new form Inscricao
 	 * @param s
+	 * @param codAluno
 	 */
-	public Inscricao(SWAP s) {
+	public Inscricao(SWAP s, String codAluno) {
 		initComponents();
 		this.s = s;
+		this.codAluno = codAluno;
 		this.ucsEscolhidas = new ArrayList<>();
 	}
 
@@ -751,7 +751,7 @@ public class Inscricao extends javax.swing.JFrame {
         if (this.jCheckBoxTMD.isSelected())
 			ucsEscolhidas.add("TMD");
 		
-		s.inscreveNasUCs(ucsEscolhidas);
+		s.inscreveNasUCs(ucsEscolhidas, codAluno);
 		this.dispose();
     }//GEN-LAST:event_jButtonInscreverMouseClicked
 

@@ -9,13 +9,13 @@ public class Horario {
 	private int ano;
 	private int semestre;
 	private UcDAO ucs;
-    private TurmaDAO turmas;
+//    private TurmaDAO turmas;
 
 	public Horario(int ano, int semestre) {
 		this.ano = ano;
 		this.semestre = semestre;
 		ucs = new UcDAO();
-        turmas = new TurmaDAO();
+//        turmas = new TurmaDAO();
 	}
 
 	public UC getUC(String codUc) {

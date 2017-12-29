@@ -42,7 +42,7 @@ public class CarregarHorarioFileChooser extends javax.swing.JFrame {
 
         jFileChooser1 = new javax.swing.JFileChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jFileChooser1.setCurrentDirectory(new java.io.File("/home"));
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,11 +66,11 @@ public class CarregarHorarioFileChooser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-			if (JFileChooser.APPROVE_OPTION == 0) {
-				String filePath = this.jFileChooser1.getSelectedFile().getPath();
-				s.carregaInfo(filePath);
-				this.dispose();
-			}
+		if (JFileChooser.APPROVE_OPTION == 0) {
+			String filePath = this.jFileChooser1.getSelectedFile().getPath();
+			s.carregaInfo(filePath);
+			this.dispose();
+		}
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
 	/**
