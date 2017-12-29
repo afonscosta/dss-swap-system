@@ -178,13 +178,11 @@ public class TurnoDAO {
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-                System.out.println("entrei nivel 1");
 				String numSala = rs.getString("Sala_numero");
 				stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
 				stm.setString(1, numSala);
 				ResultSet rs1 = stm.executeQuery();
 				if (rs1.next()) {
-                    System.out.println("entrei nivel 2");
 					Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
 					t = new Turno(rs.getString("numero"),
                         rs.getString("UC_codigo"),
@@ -214,7 +212,7 @@ public class TurnoDAO {
             conn = Connect.connect();
             String sql = "SELECT * FROM UtilizadorTurno \n " +
                     "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n " +
-                    "WHERE Turno_UC_codigo = ? AND Turno_numero = ? AND uc IS NULL;";
+                    "WHERE Turno_UC_codigo = ? AND Turno_numero = ? AND prioridade IS NOT NULL;";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, codUC);
             stm.setString(2, codTurno);
@@ -301,9 +299,10 @@ public class TurnoDAO {
         ArrayList<Turno> res = new ArrayList<>();
 
         conn = Connect.connect();
-        String sql = "SELECT * "
-                + "FROM UtilizadorTurno JOIN Turno "
-                + "ON Turno_numero = numero AND Turno_UC_codigo = UC_codigo "
+        String sql = "SELECT * \n"
+                + "FROM UtilizadorTurno JOIN Turno \n"
+                + "ON Turno_numero = numero AND Turno_UC_codigo = UC_codigo \n"
+                + "JOIN Utilizador ON Utilizador_idUtilizadores = idUtilizadores \n"
                 + "WHERE Utilizador_idUtilizadores = ?;";
         PreparedStatement stm;
         try {
