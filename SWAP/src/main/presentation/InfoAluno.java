@@ -5,7 +5,7 @@
  */
 package main.presentation;
 
-import java.util.List;
+import java.util.HashMap;
 import main.business.SWAP;
 
 /**
@@ -14,14 +14,10 @@ import main.business.SWAP;
  */
 public class InfoAluno extends javax.swing.JFrame {
 
-	private SWAP s;
-	private String chaveAluno;
 	private String codAluno;
 	private String nome;
 	private String email;
-	private String codUC;
-	private String codTurno;
-	private List<String> alunosFalta;
+	private HashMap<String, Integer> alunosFalta;
 	private int numFaltas;
 	
 	/**
@@ -33,14 +29,16 @@ public class InfoAluno extends javax.swing.JFrame {
 	
 	/**
 	 * Creates new form InfoSocioInterface
+	 * @param s
+	 * @param alunosFalta
+	 * @param codUC
+	 * @param codTurno
+	 * @param aluno
 	 */
-	public InfoAluno(SWAP s, List<String> alunosFalta, String codUC, String codTurno, String[] aluno) {
+	public InfoAluno(HashMap<String, Integer> alunosFalta, String codUC, String codTurno, String[] aluno) {
 		initComponents();
 		this.numFaltas = 0;
-		this.s = s;
 		this.alunosFalta = alunosFalta;
-		this.codUC = codUC;
-		this.codTurno = codTurno;
 		this.codAluno = aluno[0];
 		this.nome = aluno[1];
 		this.email = aluno[2];
@@ -204,13 +202,17 @@ public class InfoAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMarcarFaltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonMarcarFaltaMouseClicked
-		alunosFalta.add(codAluno);
 		numFaltas++;
 		this.jTextFieldCount.setText(Integer.toString(numFaltas));
     }//GEN-LAST:event_jButtonMarcarFaltaMouseClicked
 
     private void jButtonFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonFecharMouseClicked
-        this.dispose();
+		if (numFaltas > 0)
+			if (alunosFalta.containsKey(codAluno))
+				alunosFalta.put(codAluno, alunosFalta.get(codAluno) + numFaltas);
+			else
+				alunosFalta.put(codAluno, numFaltas);
+		this.dispose();
     }//GEN-LAST:event_jButtonFecharMouseClicked
 
 	
