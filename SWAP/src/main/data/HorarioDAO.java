@@ -147,8 +147,9 @@ public class HorarioDAO implements Map<int[],Horario>{
             e.printStackTrace();
         } finally {
             Connect.close(conn);
-            return null;
         }
+
+        return null;
     }
 
     public String getId(Horario h) {

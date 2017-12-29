@@ -33,17 +33,18 @@ public class FaltaDAO {
     }
 
     //só será utilizado no caso de a instância ainda não existir na tabela
-    public void putFalta(String aluno, String codTurno, String codUc) {
+    public void putFalta(String aluno, String codTurno, String codUc,Integer vezes) {
 
         try {
 
             conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("INSERT INTO Falta(quant, utilizador, Turno_numero, Turno_UC_codigo)\n" +
-                    "VALUES (1,?,?,?);");
+                    "VALUES (?,?,?,?);");
 
-            stm.setString(1, aluno);
-            stm.setString(2, codTurno);
-            stm.setString(3, codUc);
+            stm.setInt(1, vezes);
+            stm.setString(2, aluno);
+            stm.setString(3, codTurno);
+            stm.setString(4, codUc);
             stm.executeUpdate();
 
         } catch (SQLException e) {
@@ -54,15 +55,16 @@ public class FaltaDAO {
         }
     }
 
-    public void incFalta(String a, String codTurno, String codUc) {
+    public void incFalta(String a, String codTurno, String codUc,Integer vezes) {
         try {
 
             conn = Connect.connect();
 
-            PreparedStatement stm = conn.prepareStatement("UPDATE Falta SET quant = quant + 1 WHERE utilizador = ? AND Turno_numero = ? AND Turno_UC_codigo=?");
-            stm.setString(1, a);
-            stm.setString(2, codTurno);
-            stm.setString(3, codUc);
+            PreparedStatement stm = conn.prepareStatement("UPDATE Falta SET quant = quant + ? WHERE utilizador = ? AND Turno_numero = ? AND Turno_UC_codigo=?");
+            stm.setInt(1,vezes);
+            stm.setString(2, a);
+            stm.setString(3, codTurno);
+            stm.setString(4, codUc);
             stm.executeUpdate();
 
         } catch (SQLException e) {
@@ -77,25 +79,27 @@ public class FaltaDAO {
 
         conn = Connect.connect();
 
-        PreparedStatement stm = conn.prepareStatement(" SELECT f.quant, \n " +
-                                                                    "t.aulasPrevistas, \n " +
-                                                                    "ROUND(0.20 * t.aulasPrevistas) AS 'Limite' \n " +
+        PreparedStatement stm = conn.prepareStatement("SELECT f.quant, \n " +
+                                                                    "t.aulasPrevistas \n " +
                                                                     "FROM Falta f \n " +
-                                                                    "JOIN Turno t ON f.Turno_numero = t.numero AND f.Turno_UC_codigo = UC_codigo; \n" +
-                                                                    "WHERE f.utilizador = ? AND t.numero = ? AND t.UC_codigo = ?");
+                                                                    "JOIN Turno t ON f.Turno_numero = t.numero AND f.Turno_UC_codigo = t.UC_codigo \n" +
+                                                                    "WHERE f.utilizador = ? AND t.numero = ? AND t.UC_codigo = ?;");
         stm.setString(1,a);
         stm.setString(2,codTurno);
         stm.setString(3,codUC);
         ResultSet rs = stm.executeQuery();
 
-        int aulasPrevistas = rs.getInt("aulasPrevistas");
-        int cap = (int) Math.round(aulasPrevistas * 0.25);
-        int faltasAluno = rs.getInt("quant");
+        if (rs.next()) {
 
-        if (faltasAluno > cap) {
-            removeAlunoTurno(a,codTurno,codUC);
+            int aulasPrevistas = rs.getInt("aulasPrevistas");
+            int cap = (int) Math.ceil(aulasPrevistas * 0.25);
+            int faltasAluno = rs.getInt("quant");
+
+            if (faltasAluno >= cap) {
+                removeAlunoTurno(a, codTurno, codUC);
+            }
+
         }
-
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package main.business;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import main.data.SolicitacaoTrocaDAO;
 import main.data.TurnoDAO;
@@ -72,7 +73,7 @@ public class UC {
         trocas.remFilaEspera(codAluno,id_turnoD,id_turnoS,codUc);
     }
 
-    void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
+    void marcaFaltas(HashMap<String,Integer> alunos, String codUC, String codTurno) {
         Turno t = null;
         t = turnos.getTurno(codTurno,codUC);
         t.marcaFaltas(alunos, codUC, codTurno);

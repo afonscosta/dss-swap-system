@@ -108,7 +108,7 @@ public class SWAP {
         alunoAtual.remFilaEspera(codUc,codTurno);
     }
 
-    public void marcaFaltas(String codUC,String codTurno, ArrayList<String> alunos) {
+    public void marcaFaltas(String codUC,String codTurno, HashMap<String,Integer> alunos) {
         UC uc = null;
         uc = horarios.getUC(codUC);
 
@@ -150,6 +150,7 @@ public class SWAP {
             resWithTurnos = d.getTurnos(this.extraiChave(sessao.getEmail()));
             res = this.castTurnosToStringArray(resWithTurnos);
         }
+
         return res;
     }
 

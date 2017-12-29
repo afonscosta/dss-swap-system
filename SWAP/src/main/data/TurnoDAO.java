@@ -177,19 +177,20 @@ public class TurnoDAO {
             stm.setString(2,cod_UC);
             ResultSet rs = stm.executeQuery();
 
-            rs = stm.executeQuery();
-
             if (rs.next()) {
+                System.out.println("entrei nivel 1");
 				String numSala = rs.getString("Sala_numero");
 				stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
 				stm.setString(1, numSala);
 				ResultSet rs1 = stm.executeQuery();
 				if (rs1.next()) {
+                    System.out.println("entrei nivel 2");
 					Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
-					t = new Turno(rs.getString("numero"), rs.getString("UC_codigo"),
+					t = new Turno(rs.getString("numero"),
+                        rs.getString("UC_codigo"),
                         rs.getInt("capacidade"),
                         sala,
-                        rs.getTime("horaInicio").toLocalTime(),
+                        rs.getTime("horaI").toLocalTime(),
                         rs.getTime("duracao").toLocalTime(),
                         rs.getInt("aulasPrevistas"),
                         rs.getInt("diaSemana"));

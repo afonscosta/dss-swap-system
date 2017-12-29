@@ -3,7 +3,8 @@ package main.business;
 import main.data.FaltaDAO;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Turno {
 
@@ -86,17 +87,19 @@ public class Turno {
         this.duracao = duracao;
     }
 
-    void marcaFaltas(ArrayList<String> alunos, String codUC, String codTurno) {
-        for (String a : alunos) {
-            if (faltas.containsKey(codTurno, codUC, a)) {
+    void marcaFaltas(HashMap<String,Integer> alunos, String codUC, String codTurno) {
+        for (Map.Entry<String, Integer> entry : alunos.entrySet()) {
+            String aluno = entry.getKey();
+            Integer vezes = entry.getValue();
+            if (faltas.containsKey(codTurno, codUC, aluno)) {
                 // linha ja existe, incrementar nr
-                faltas.incFalta(a, codTurno, codUC);
+                faltas.incFalta(aluno, codTurno, codUC,vezes);
 
                 // verificar se faltas comprometem a estadia do aluno no turno
-                faltas.verificaLimiteFaltas(a,codTurno,codUC);
+                faltas.verificaLimiteFaltas(aluno,codTurno,codUC);
             } else {
                 // primeira falta, adicionar registo
-                faltas.putFalta(a,codTurno,codUC);
+                faltas.putFalta(aluno,codTurno,codUC,vezes);
             }
 
         }

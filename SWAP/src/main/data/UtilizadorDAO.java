@@ -201,8 +201,8 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             e.printStackTrace();
         } finally {
             Connect.close(conn);
-            return res;
         }
+        return res;
 
     }
 
