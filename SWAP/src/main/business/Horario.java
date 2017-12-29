@@ -15,7 +15,7 @@ public class Horario {
 		this.ano = ano;
 		this.semestre = semestre;
 		ucs = new UcDAO();
-        turmas = new TUrmaDAO();
+        turmas = new TurmaDAO();
 	}
 
 	public UC getUC(String codUc) {

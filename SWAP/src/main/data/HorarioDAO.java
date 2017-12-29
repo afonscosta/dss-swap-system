@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import main.business.Horario;
-import main.business.Tuplo;
 import main.business.UC;
 
 public class HorarioDAO implements Map<int[],Horario>{
