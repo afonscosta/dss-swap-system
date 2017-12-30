@@ -84,11 +84,11 @@ public class Aluno extends Utilizador {
         }
     }
 
-    HashMap<String,String[]> getSolicitacoes(String codAluno) {
+    HashMap<String,ArrayList<String[]>> getSolicitacoes(String codAluno) {
         return trocas.getSolicitacoesAluno(codAluno);
     }
 
-    HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
+    HashMap<String,ArrayList<String[]>> getNotMyTurnos(String chave) {
         return turnos.getNotMyTurnos(chave);
     }
 }

@@ -23,7 +23,8 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 
 	private SWAP s;
 	private DefaultTableModel t;
-	private HashMap<String, ArrayList<String>> notMyTurnos;
+	private HashMap<String, ArrayList<String[]>> notMyTurnos;
+	private HashMap<String, ArrayList<String[]>> solicitacoes;
 	
 	/**
 	 * Creates new form AlunoMain
@@ -36,12 +37,23 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 	/**
 	 * Creates new form AlunoMain
 	 * @param s
+	 * @param solicitacoes
 	 */
-	public AlunoSolicitaTurno(SWAP s) {
+	public AlunoSolicitaTurno(SWAP s, HashMap<String, ArrayList<String[]>> solicitacoes) {
 		initComponents();
 		this.s = s;
-		
+		this.solicitacoes = solicitacoes;		
 		this.notMyTurnos = s.getNotMyTurnos();
+		
+		
+		for (String ucSolicitada : solicitacoes.keySet())
+			if (notMyTurnos.containsKey(ucSolicitada))
+				for (int i = 0; i < solicitacoes.get(ucSolicitada).size(); i++)
+					for (int j = 0; j < notMyTurnos.get(ucSolicitada).size(); j++)
+						if (solicitacoes.get(ucSolicitada).get(i)[2].equals(notMyTurnos.get(ucSolicitada).get(j)[0]))
+							notMyTurnos.get(ucSolicitada).remove(j);
+		
+
 		for (String uc : notMyTurnos.keySet()) {
 			this.jComboBoxUCs.addItem(uc);
 		}
@@ -66,8 +78,19 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
         jLabelInvalidoTurno = new javax.swing.JLabel();
         jComboBoxUCs = new javax.swing.JComboBox<>();
         jComboBoxTurnos = new javax.swing.JComboBox<>();
+        jTextFieldDiaDaSemana = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldHoraI = new javax.swing.JTextField();
+        jTextFieldDuracao = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                windowClosingCustom(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Solicita turno");
@@ -95,33 +118,54 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxTurnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTurnosActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Dia da Semana");
+
+        jLabel3.setText("Hora de Início");
+
+        jLabel6.setText("Duração");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSolicita, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelInvalidoUC))
-                                    .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelInvalidoTurno)))))
-                        .addGap(0, 43, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelInvalidoUC))
+                            .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelInvalidoTurno))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldDiaDaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addComponent(jButtonSolicita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,15 +178,22 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabelInvalidoUC)
                     .addComponent(jLabelInvalidoTurno))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jButtonSolicita))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDiaDaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSolicita)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,15 +214,14 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 						this.dispose();
 						JOptionPane.showMessageDialog(this.rootPane,
 							"A sua troca foi realizada com sucesso.");
-						
 					}
 					else {
 						this.dispose();
 						JOptionPane.showMessageDialog(this.rootPane,
 							"Neste momento não existe nenhuma troca compativel.\n"
 							+ "A sua solicitação foi adicionada à fila de espera.");
-						new AlunoSolicitacoesTurno(s).setVisible(true);
 					}
+					new AlunoSolicitacoesTurno(s).setVisible(true);
 				} catch (SQLException ex) {
 					Logger.getLogger(AlunoSolicitaTurno.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -187,11 +237,33 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
     private void jComboBoxUCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUCsActionPerformed
         String ucSelected = (String) this.jComboBoxUCs.getSelectedItem();
 		this.jComboBoxTurnos.removeAllItems();
-		for (String turno : notMyTurnos.get(ucSelected)) {
-			this.jComboBoxTurnos.addItem(turno);
+		for (String[] turno : notMyTurnos.get(ucSelected)) {
+			this.jComboBoxTurnos.addItem(turno[0]);
 		}
     }//GEN-LAST:event_jComboBoxUCsActionPerformed
 
+    private void jComboBoxTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTurnosActionPerformed
+        String ucSelected = (String) this.jComboBoxUCs.getSelectedItem();
+		String turnoSelected = (String) this.jComboBoxTurnos.getSelectedItem();
+		for (String[] turno : notMyTurnos.get(ucSelected))
+			if (turno[0].equals(turnoSelected)) {
+				this.jTextFieldDiaDaSemana.setText(parseIntDia(Integer.parseInt(turno[1])));
+				this.jTextFieldHoraI.setText(turno[2]);
+				this.jTextFieldDuracao.setText(turno[3]);
+			}
+    }//GEN-LAST:event_jComboBoxTurnosActionPerformed
+
+    private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
+        this.dispose();
+		new AlunoSolicitacoesTurno(s).setVisible(true);
+    }//GEN-LAST:event_windowClosingCustom
+
+	private String parseIntDia(int diaSemana) {
+        String[] arr = {"Segunda","Terça","Quarta","Quinta","Sexta"};
+
+        return (arr[diaSemana] + "-feira");
+    }
+	
 	/**
 	 * @param args the command line arguments
 	 */
@@ -235,9 +307,15 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTurnos;
     private javax.swing.JComboBox<String> jComboBoxUCs;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelInvalidoTurno;
     private javax.swing.JLabel jLabelInvalidoUC;
+    private javax.swing.JTextField jTextFieldDiaDaSemana;
+    private javax.swing.JTextField jTextFieldDuracao;
+    private javax.swing.JTextField jTextFieldHoraI;
     // End of variables declaration//GEN-END:variables
 }

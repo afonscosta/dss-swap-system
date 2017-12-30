@@ -153,7 +153,7 @@ public class SWAP {
         return res;
     }
 
-    public HashMap<String,ArrayList<String>> getNotMyTurnos() {
+    public HashMap<String,ArrayList<String[]>> getNotMyTurnos() {
        Aluno a = (Aluno) sessao;
        String chave = a.getNumero();
 
@@ -207,7 +207,7 @@ public class SWAP {
         return res;
     }
 
-    public HashMap<String,String[]> getSolicitacoesAluno() {
+    public HashMap<String,ArrayList<String[]>> getSolicitacoesAluno() {
         Aluno aluno = (Aluno) sessao;
 
         return aluno.getSolicitacoes(aluno.getNumero());

@@ -216,8 +216,8 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
         return res;
     }
 
-    public HashMap<String,String[]> getSolicitacoesAluno(String codAluno) {
-        HashMap<String,String[]> res = new HashMap<>();
+    public HashMap<String,ArrayList<String[]>> getSolicitacoesAluno(String codAluno) {
+        HashMap<String, ArrayList<String[]>> res = new HashMap<>();
 
         try {
             conn = Connect.connect();
@@ -229,13 +229,20 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
+				String uc = rs.getString("UC_codigo");
                 String[] arr = new String[3];
 
                 arr[0] = rs.getString("aluno");
                 arr[1] = rs.getString("turnoS");
                 arr[2] = rs.getString("turnoD");
 
-                res.put(rs.getString("UC_codigo"),arr);
+				if (res.containsKey(uc))
+					res.get(uc).add(arr);
+				else {
+					ArrayList<String[]> aux = new ArrayList<>();
+					aux.add(arr);
+					res.put(uc, aux);
+				}
             }
 
             conn.close();

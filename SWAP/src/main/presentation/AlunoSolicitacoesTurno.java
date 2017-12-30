@@ -5,7 +5,9 @@
  */
 package main.presentation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.business.SWAP;
@@ -18,7 +20,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 
 	private DefaultTableModel t;
 	private SWAP s;
-	private HashMap<String, String[]> solicitacoes;
+	private HashMap<String, ArrayList<String[]>> solicitacoes;
 	private String uc;
 	private String turnoD;
 	
@@ -38,7 +40,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 		this.uc = null;
 		this.turnoD = null;
 		this.s = s;
-		this.solicitacoes = s.getSolicitacoesAluno();
+		
 		t = new DefaultTableModel();
 		t.addColumn("UC");
 		t.addColumn("Turno destino");
@@ -47,10 +49,26 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(479);
-		solicitacoes.entrySet()
-					.forEach(e -> t.addRow(new Object[]{e.getKey(), e.getValue()[2]}));
-    }
+		
+		this.presentSolicitacoes();
+		
+	}
 
+	private void presentSolicitacoes() {
+		this.solicitacoes = s.getSolicitacoesAluno();
+		if (solicitacoes.containsKey("BD"))
+			System.out.println("Elems: " + solicitacoes.get("BD").size());
+		System.out.println("RowCount " + t.getRowCount());
+		int countRow = t.getRowCount();
+		for (int i = countRow-1; i >= 0; i--) {
+			t.removeRow(i);
+			System.out.println(i);
+		}
+		for (Entry<String, ArrayList<String[]>> e : solicitacoes.entrySet())
+			for (String[] turno : e.getValue() )
+				t.addRow(new Object[]{e.getKey(), turno[2]});
+	}
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,10 +86,15 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Quotas");
         setLocation(new java.awt.Point(200, 200));
         setLocationByPlatform(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                windowClosingCustom(evt);
+            }
+        });
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, java.awt.Color.lightGray, null, null));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -173,6 +196,7 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 		this.dispose();
+		new AlunoMain(s).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
@@ -187,14 +211,21 @@ public class AlunoSolicitacoesTurno extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jButtonNewSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNewSolicitacaoMouseClicked
-        new AlunoSolicitaTurno(s).setVisible(true);
+        new AlunoSolicitaTurno(s, solicitacoes).setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_jButtonNewSolicitacaoMouseClicked
 
     private void jButtonRemSolicitacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRemSolicitacaoMouseClicked
-		if (uc != null && turnoD != null)
+		if (uc != null && turnoD != null) {
 			s.removeSolicitacaoTurno(uc, turnoD);
+			this.presentSolicitacoes();
+		}
     }//GEN-LAST:event_jButtonRemSolicitacaoMouseClicked
+
+    private void windowClosingCustom(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosingCustom
+        this.dispose();
+		new AlunoMain(s).setVisible(true);
+    }//GEN-LAST:event_windowClosingCustom
 
 	
 	
