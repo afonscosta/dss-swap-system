@@ -40,7 +40,7 @@ public class ModificarTurno extends javax.swing.JFrame {
 		this.jTextFieldCodTurno.setText(turno[1]);
 		this.jTextFieldSala.setText(turno[2]);
 		this.jTextFieldCapacidade.setText(turno[3]);
-		this.jTextFieldDiaSemana.setText(turno[4]);
+		this.jTextFieldDiaSemana.setText(parseIntDia(Integer.parseInt(turno[4])));
 		this.jTextFieldHoraInicio.setText(turno[5]);
 		this.jTextFieldDuracao.setText(turno[6]);
 		this.jTextFieldAulasPrevistas.setText(turno[7]);
@@ -238,6 +238,12 @@ public class ModificarTurno extends javax.swing.JFrame {
         new ListaAlunosTurno(s, turno[0], turno[1]).setVisible(true);
     }//GEN-LAST:event_jButtonListaAlunosMouseClicked
 
+	    private String parseIntDia(int diaSemana) {
+        String[] arr = {"Segunda","Terça","Quarta","Quinta","Sexta"};
+
+        return (arr[diaSemana] + "-feira");
+    }
+	
 	/**
 	 * @param args the command line arguments
 	 */
