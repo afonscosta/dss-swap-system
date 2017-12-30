@@ -680,78 +680,79 @@ public class Inscricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInscreverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInscreverMouseClicked
-        if (this.jCheckBoxArqComp.isSelected())
-			ucsEscolhidas.add("AC");                                              
-        if (this.jCheckBoxAlgebra.isSelected())
-			ucsEscolhidas.add("AL");                                              
-        if (this.jCheckBoxALG.isSelected())
-			ucsEscolhidas.add("ALG");                                              
-        if (this.jCheckBoxAnalise.isSelected())
-			ucsEscolhidas.add("ANALISE");                                              
-        if (this.jCheckBoxBD.isSelected())
-			ucsEscolhidas.add("BD");                                              
-        if (this.jCheckBoxCalculo.isSelected())
-			ucsEscolhidas.add("Calc");                                              
-        if (this.jCheckBoxCC.isSelected())
-			ucsEscolhidas.add("CC");                                              
-        if (this.jCheckBoxCD.isSelected())
-			ucsEscolhidas.add("CD");                                              
-        if (this.jCheckBoxCG.isSelected())
-			ucsEscolhidas.add("CG");                                              
-        if (this.jCheckBoxCP.isSelected())
-			ucsEscolhidas.add("CP");                                              
-        if (this.jCheckBoxDSS.isSelected())
-			ucsEscolhidas.add("DSS");                                              
-        if (this.jCheckBoxEA.isSelected())
-			ucsEscolhidas.add("EA");                                              
-        if (this.jCheckBoxEE.isSelected())
-			ucsEscolhidas.add("EE");                                              
-        if (this.jCheckBoxEES.isSelected())
-			ucsEscolhidas.add("EES");                                              
-        if (this.jCheckBoxEletro.isSelected())
-			ucsEscolhidas.add("EM");                                              
-        if (this.jCheckBoxISD.isSelected())
-			ucsEscolhidas.add("ISD");                                              
-        if (this.jCheckBoxLI1.isSelected())
-			ucsEscolhidas.add("LI1");                                              
-        if (this.jCheckBoxLI2.isSelected())
-			ucsEscolhidas.add("LI2");                                              
-        if (this.jCheckBoxLI3.isSelected())
-			ucsEscolhidas.add("LI3");                                              
-        if (this.jCheckBoxLI4.isSelected())
-			ucsEscolhidas.add("LI4");                                              
-        if (this.jCheckBoxLogica.isSelected())
-			ucsEscolhidas.add("LOG");                                              
-        if (this.jCheckBoxMDIO.isSelected())
-			ucsEscolhidas.add("MDIO");                                              
-        if (this.jCheckBoxMEIO.isSelected())
-			ucsEscolhidas.add("MEIO");                                              
-        if (this.jCheckBoxMNONL.isSelected())
-			ucsEscolhidas.add("MNOnL");                                              
-        if (this.jCheckBoxPF.isSelected())
-			ucsEscolhidas.add("PF");                                              
-        if (this.jCheckBoxPI.isSelected())
-			ucsEscolhidas.add("PI");                                              
-        if (this.jCheckBoxPL.isSelected())
-			ucsEscolhidas.add("PL");                                              
-        if (this.jCheckBoxPOO.isSelected())
-			ucsEscolhidas.add("POO");                                              
-        if (this.jCheckBoxRC.isSelected())
-			ucsEscolhidas.add("RC");                                              
-        if (this.jCheckBoxSC.isSelected())
-			ucsEscolhidas.add("SC");                                              
-        if (this.jCheckBoxSD.isSelected())
-			ucsEscolhidas.add("SD");                                              
-        if (this.jCheckBoxSO.isSelected())
-			ucsEscolhidas.add("SO");                                              
-        if (this.jCheckBoxSRCR.isSelected())
-			ucsEscolhidas.add("SRCR");                                              
-        if (this.jCheckBoxTFM.isSelected())
-			ucsEscolhidas.add("TFM");                                              
-        if (this.jCheckBoxTMD.isSelected())
-			ucsEscolhidas.add("TMD");
-		
-		s.inscreveNasUCs(ucsEscolhidas, codAluno);
+//        if (this.jCheckBoxArqComp.isSelected())
+//			ucsEscolhidas.add("AC");                                              
+//        if (this.jCheckBoxAlgebra.isSelected())
+//			ucsEscolhidas.add("AL");                                              
+//        if (this.jCheckBoxALG.isSelected())
+//			ucsEscolhidas.add("ALG");                                              
+//        if (this.jCheckBoxAnalise.isSelected())
+//			ucsEscolhidas.add("ANALISE");                                              
+//        if (this.jCheckBoxBD.isSelected())
+//			ucsEscolhidas.add("BD");                                              
+//        if (this.jCheckBoxCalculo.isSelected())
+//			ucsEscolhidas.add("Calc");                                              
+//        if (this.jCheckBoxCC.isSelected())
+//			ucsEscolhidas.add("CC");                                              
+//        if (this.jCheckBoxCD.isSelected())
+//			ucsEscolhidas.add("CD");                                              
+//        if (this.jCheckBoxCG.isSelected())
+//			ucsEscolhidas.add("CG");                                              
+//        if (this.jCheckBoxCP.isSelected())
+//			ucsEscolhidas.add("CP");                                              
+//        if (this.jCheckBoxDSS.isSelected())
+//			ucsEscolhidas.add("DSS");                                              
+//        if (this.jCheckBoxEA.isSelected())
+//			ucsEscolhidas.add("EA");                                              
+//        if (this.jCheckBoxEE.isSelected())
+//			ucsEscolhidas.add("EE");                                              
+//        if (this.jCheckBoxEES.isSelected())
+//			ucsEscolhidas.add("EES");                                              
+//        if (this.jCheckBoxEletro.isSelected())
+//			ucsEscolhidas.add("EM");                                              
+//        if (this.jCheckBoxISD.isSelected())
+//			ucsEscolhidas.add("ISD");                                              
+//        if (this.jCheckBoxLI1.isSelected())
+//			ucsEscolhidas.add("LI1");                                              
+//        if (this.jCheckBoxLI2.isSelected())
+//			ucsEscolhidas.add("LI2");                                              
+//        if (this.jCheckBoxLI3.isSelected())
+//			ucsEscolhidas.add("LI3");                                              
+//        if (this.jCheckBoxLI4.isSelected())
+//			ucsEscolhidas.add("LI4");                                              
+//        if (this.jCheckBoxLogica.isSelected())
+//			ucsEscolhidas.add("LOG");                                              
+//        if (this.jCheckBoxMDIO.isSelected())
+//			ucsEscolhidas.add("MDIO");                                              
+//        if (this.jCheckBoxMEIO.isSelected())
+//			ucsEscolhidas.add("MEIO");                                              
+//        if (this.jCheckBoxMNONL.isSelected())
+//			ucsEscolhidas.add("MNOnL");                                              
+//        if (this.jCheckBoxPF.isSelected())
+//			ucsEscolhidas.add("PF");                                              
+//        if (this.jCheckBoxPI.isSelected())
+//			ucsEscolhidas.add("PI");                                              
+//        if (this.jCheckBoxPL.isSelected())
+//			ucsEscolhidas.add("PL");                                              
+//        if (this.jCheckBoxPOO.isSelected())
+//			ucsEscolhidas.add("POO");                                              
+//        if (this.jCheckBoxRC.isSelected())
+//			ucsEscolhidas.add("RC");                                              
+//        if (this.jCheckBoxSC.isSelected())
+//			ucsEscolhidas.add("SC");                                              
+//        if (this.jCheckBoxSD.isSelected())
+//			ucsEscolhidas.add("SD");                                              
+//        if (this.jCheckBoxSO.isSelected())
+//			ucsEscolhidas.add("SO");                                              
+//        if (this.jCheckBoxSRCR.isSelected())
+//			ucsEscolhidas.add("SRCR");                                              
+//        if (this.jCheckBoxTFM.isSelected())
+//			ucsEscolhidas.add("TFM");                                              
+//        if (this.jCheckBoxTMD.isSelected())
+//			ucsEscolhidas.add("TMD");
+//		
+//		s.inscreveNasUCs(ucsEscolhidas, codAluno);
+		new AlunoMain(s).setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_jButtonInscreverMouseClicked
 

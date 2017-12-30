@@ -226,4 +226,26 @@ public class UtilizadorDAO implements Map<String,Utilizador> {
             Connect.close(conn);
         }
 	}
+
+	public int getFase(String chave) {
+		int res = -1;
+
+        try {
+
+            conn = Connect.connect();
+            String sql = "SELECT fase FROM Utilizador WHERE idUtilizadores=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, chave);
+            ResultSet rs = stm.executeQuery();
+
+			if (rs.next())
+				res = rs.getInt("fase");
+			
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+        return res;
+	}
 }

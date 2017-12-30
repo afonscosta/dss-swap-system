@@ -44,7 +44,7 @@ public class UC {
     }
     */
 
-    boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno) throws SQLException {
+    boolean trataTroca(String codUC, String codTurnoS, String codTurnoD, String codAluno, boolean prioritario) throws SQLException {
         boolean encontrou = false;
 
         // Vai buscar todas as solicitações que envolvem a UC codUC
@@ -63,7 +63,10 @@ public class UC {
             }
         }
         if (!encontrou) {
-            trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno),codUC);
+			if (prioritario)
+				this.trataPrioritario(codUC, codTurnoS, codTurnoD, codAluno);
+			else 
+				trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno),codUC);
         }
 
         return encontrou;

@@ -56,11 +56,7 @@ public class Aluno extends Utilizador {
 		}
 		// Caso contrário corre o sistema das trocas automáticas.
 		else {
-			if (this.prioritario) {
-				trocou = uct.trataPrioritario(codUC,codTurnoS,codTurnoD,codAluno);
-			} else {
-				trocou = uct.trataTroca(codUC, codTurnoS, codTurnoD, codAluno);
-			}
+			trocou = uct.trataTroca(codUC, codTurnoS, codTurnoD, codAluno, this.prioritario);
 		}
 		return trocou;
     }

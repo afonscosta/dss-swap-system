@@ -58,8 +58,8 @@ public class DocenteMain extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
 		jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-		jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+		jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
+		jTable1.getColumnModel().getColumn(4).setPreferredWidth(115);
 		int i = 0;
 		for ( String[] tn : turnos) {
 			t.addRow(new Object[]{i, tn[0], tn[1], parseIntDia(Integer.parseInt(tn[4])), tn[5]});			
@@ -67,6 +67,13 @@ public class DocenteMain extends javax.swing.JFrame {
 		
 		for (String uc : ucs) {
 			this.jComboBoxUCs.addItem(uc);
+		}
+		
+		int fase = s.getFase();
+		if (fase == 1 || fase == 0 ) {
+			System.out.println("Entrei");
+			this.jButtonAnalisarTrocas.setEnabled(false);
+			this.jComboBoxUCs.setEnabled(false);
 		}
     }
 
@@ -144,9 +151,9 @@ public class DocenteMain extends javax.swing.JFrame {
         }
 
         jButtonAnalisarTrocas.setText("Analisar trocas");
-        jButtonAnalisarTrocas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonAnalisarTrocasMouseClicked(evt);
+        jButtonAnalisarTrocas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnalisarTrocasActionPerformed(evt);
             }
         });
 
@@ -214,10 +221,10 @@ public class DocenteMain extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void jButtonAnalisarTrocasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAnalisarTrocasMouseClicked
+    private void jButtonAnalisarTrocasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnalisarTrocasActionPerformed
         String codUC = (String) this.jComboBoxUCs.getSelectedItem();
 		new AnalisarTrocas(s, codUC).setVisible(true);
-    }//GEN-LAST:event_jButtonAnalisarTrocasMouseClicked
+    }//GEN-LAST:event_jButtonAnalisarTrocasActionPerformed
 
 	
 	

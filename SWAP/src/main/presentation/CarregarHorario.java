@@ -96,6 +96,7 @@ public class CarregarHorario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,7 +111,6 @@ public class CarregarHorario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonPrimeiraFase)))
                 .addContainerGap())
-            .addComponent(jButtonConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +127,9 @@ public class CarregarHorario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jButtonSegundaFase))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButtonConcluido))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -139,11 +140,11 @@ public class CarregarHorario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCarregarHorarioMouseClicked
 
     private void jButtonPrimeiraFaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPrimeiraFaseMouseClicked
-        s.changeState(1);
+        s.changeFase(1);
     }//GEN-LAST:event_jButtonPrimeiraFaseMouseClicked
 
     private void jButtonSegundaFaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSegundaFaseMouseClicked
-        s.changeState(2);
+        s.changeFase(2);
     }//GEN-LAST:event_jButtonSegundaFaseMouseClicked
 
     private void jButtonConcluidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcluidoMouseClicked

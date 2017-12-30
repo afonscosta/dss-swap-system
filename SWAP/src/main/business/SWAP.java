@@ -319,8 +319,12 @@ public class SWAP {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
-	public void changeState(int i) {
+	public void changeFase(int i) {
 		DirecaoCurso dc = (DirecaoCurso) sessao;
 		utilizadores.updateFase(this.extraiChave(dc.getEmail()), i);
+	}
+	
+	public int getFase() {
+		return utilizadores.getFase("dcmiei");
 	}
 }

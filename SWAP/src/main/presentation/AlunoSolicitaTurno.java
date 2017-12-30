@@ -5,9 +5,11 @@
  */
 package main.presentation;
 
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.business.SWAP;
 
@@ -149,12 +151,21 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 		if (uc != null && !uc.equals("")) {
 			if (turno != null && !turno.equals("")) {
 				try {
-					s.solicitaTurno(uc, turno);
+					if (s.solicitaTurno(uc, turno)) {
+						this.dispose();
+						JOptionPane.showMessageDialog(this.rootPane,
+							"A sua troca foi realizada com sucesso.");
+					}
+					else {
+						this.dispose();
+						JOptionPane.showMessageDialog(this.rootPane,
+							"Neste momento não existe nenhuma troca compativel.\n"
+							+ "A sua solicitação foi adicionada à fila de espera.");
+						new AlunoSolicitacoesTurno(s).setVisible(true);
+					}
 				} catch (SQLException ex) {
 					Logger.getLogger(AlunoSolicitaTurno.class.getName()).log(Level.SEVERE, null, ex);
 				}
-				new AlunoSolicitacoesTurno(s).setVisible(true);
-				this.dispose();
 			}
 			else
 				this.jLabelInvalidoTurno.setVisible(true);
