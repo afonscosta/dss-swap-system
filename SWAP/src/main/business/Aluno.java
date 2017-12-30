@@ -88,7 +88,7 @@ public class Aluno extends Utilizador {
         return trocas.getSolicitacoesAluno(codAluno);
     }
 
-    public HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
+    HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
         return turnos.getNotMyTurnos(chave);
     }
 }
