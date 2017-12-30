@@ -5,6 +5,7 @@
  */
 package main.presentation;
 
+import javax.swing.JFileChooser;
 import main.business.SWAP;
 
 /**
@@ -28,8 +29,21 @@ public class CarregarHorario extends javax.swing.JFrame {
 	public CarregarHorario(SWAP s) {
 		initComponents();
 		this.s = s;
-		if (s.getFase() != 0)
+		int fase = s.getFase();
+		if (fase == 0)
+			this.jButtonCarregarHorario.setEnabled(true);
+			this.jButtonPrimeiraFase.setEnabled(true);
+			this.jButtonSegundaFase.setEnabled(false);
+		if (fase == 1) {
 			this.jButtonCarregarHorario.setEnabled(false);
+			this.jButtonPrimeiraFase.setEnabled(false);
+			this.jButtonSegundaFase.setEnabled(true);
+		}
+		else if (fase == 2) {
+			this.jButtonCarregarHorario.setEnabled(false);
+			this.jButtonPrimeiraFase.setEnabled(true);
+			this.jButtonSegundaFase.setEnabled(false);
+		}
 	}
 
 	/**
@@ -72,9 +86,9 @@ public class CarregarHorario extends javax.swing.JFrame {
         });
 
         jButtonPrimeiraFase.setText("Fase 1");
-        jButtonPrimeiraFase.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonPrimeiraFaseMouseClicked(evt);
+        jButtonPrimeiraFase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrimeiraFaseActionPerformed(evt);
             }
         });
 
@@ -85,9 +99,9 @@ public class CarregarHorario extends javax.swing.JFrame {
         jLabel3.setText("Começar segunda fase de trocas");
 
         jButtonSegundaFase.setText("Fase 2");
-        jButtonSegundaFase.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonSegundaFaseMouseClicked(evt);
+        jButtonSegundaFase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSegundaFaseActionPerformed(evt);
             }
         });
 
@@ -137,21 +151,35 @@ public class CarregarHorario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonPrimeiraFaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPrimeiraFaseMouseClicked
-        s.changeFase(1);
-    }//GEN-LAST:event_jButtonPrimeiraFaseMouseClicked
-
-    private void jButtonSegundaFaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSegundaFaseMouseClicked
-        s.changeFase(2);
-    }//GEN-LAST:event_jButtonSegundaFaseMouseClicked
-
     private void jButtonConcluidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcluidoMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jButtonConcluidoMouseClicked
 
     private void jButtonCarregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarHorarioActionPerformed
-        new CarregarHorarioFileChooser(s).setVisible(true);
+		this.jFileChooser1.setVisible(true);
+		int result = this.jFileChooser1.showSaveDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			String filePath = this.jFileChooser1.getSelectedFile().getPath();
+			s.carregaInfo(filePath);
+			this.dispose();
+		} else if (result == JFileChooser.CANCEL_OPTION) {
+			this.jFileChooser1.setVisible(false);
+		}
     }//GEN-LAST:event_jButtonCarregarHorarioActionPerformed
+
+    private void jButtonPrimeiraFaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiraFaseActionPerformed
+        s.changeFase(1);
+		this.jButtonCarregarHorario.setEnabled(false);
+		this.jButtonPrimeiraFase.setEnabled(false);
+		this.jButtonSegundaFase.setEnabled(true);
+    }//GEN-LAST:event_jButtonPrimeiraFaseActionPerformed
+
+    private void jButtonSegundaFaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSegundaFaseActionPerformed
+        s.changeFase(2);
+		this.jButtonCarregarHorario.setEnabled(false);
+		this.jButtonPrimeiraFase.setEnabled(true);
+		this.jButtonSegundaFase.setEnabled(false);
+    }//GEN-LAST:event_jButtonSegundaFaseActionPerformed
 
 	/**
 	 * @param args the command line arguments
