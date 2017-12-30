@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/business/SWAP.java</file>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/business/Docente.java</file>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/business/Aluno.java</file>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/business/Turno.java</file>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/data/UcDAO.java</file>
-            <file>file:/home/rokai/Dropbox/1º%20Semestre/2_DSS/4_Projecto/dss-swap-system/SWAP/src/main/business/UC.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/InfoAluno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/MainWindow.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/Registo.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/Login.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/ListaAlunosTurno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/AlunoSolicitaTurno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/CarregarHorario.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/ModificarTurno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/AnalisarTrocas.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/DocenteMain.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/AlunoSolicitacoesTurno.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/Inscricao.java</file>
+            <file>file:/home/edgar/Desktop/Escola/Licenciatura%20-%203/S1%20-%20Desenvolvimento%20Sistemas%20Software/Trabalho/dss-swap-system/SWAP/src/main/presentation/AlunoMain.java</file>
         </group>
     </open-files>
 </project-private>
