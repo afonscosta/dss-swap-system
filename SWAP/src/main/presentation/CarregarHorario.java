@@ -28,6 +28,8 @@ public class CarregarHorario extends javax.swing.JFrame {
 	public CarregarHorario(SWAP s) {
 		initComponents();
 		this.s = s;
+		if (s.getFase() != 0)
+			this.jButtonCarregarHorario.setEnabled(false);
 	}
 
 	/**
@@ -55,9 +57,9 @@ public class CarregarHorario extends javax.swing.JFrame {
 
         jButtonCarregarHorario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButtonCarregarHorario.setText("Carregar Horário");
-        jButtonCarregarHorario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonCarregarHorarioMouseClicked(evt);
+        jButtonCarregarHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarregarHorarioActionPerformed(evt);
             }
         });
 
@@ -135,10 +137,6 @@ public class CarregarHorario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCarregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCarregarHorarioMouseClicked
-        new CarregarHorarioFileChooser(s).setVisible(true);
-    }//GEN-LAST:event_jButtonCarregarHorarioMouseClicked
-
     private void jButtonPrimeiraFaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPrimeiraFaseMouseClicked
         s.changeFase(1);
     }//GEN-LAST:event_jButtonPrimeiraFaseMouseClicked
@@ -150,6 +148,10 @@ public class CarregarHorario extends javax.swing.JFrame {
     private void jButtonConcluidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcluidoMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jButtonConcluidoMouseClicked
+
+    private void jButtonCarregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarHorarioActionPerformed
+        new CarregarHorarioFileChooser(s).setVisible(true);
+    }//GEN-LAST:event_jButtonCarregarHorarioActionPerformed
 
 	/**
 	 * @param args the command line arguments
