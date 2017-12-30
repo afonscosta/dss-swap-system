@@ -62,7 +62,8 @@ public class DocenteMain extends javax.swing.JFrame {
 		jTable1.getColumnModel().getColumn(4).setPreferredWidth(115);
 		int i = 0;
 		for ( String[] tn : turnos) {
-			t.addRow(new Object[]{i, tn[0], tn[1], parseIntDia(Integer.parseInt(tn[4])), tn[5]});			
+			t.addRow(new Object[]{i, tn[0], tn[1], parseIntDia(Integer.parseInt(tn[4])), tn[5]});
+			i++;
 		}
 		
 		for (String uc : ucs) {
