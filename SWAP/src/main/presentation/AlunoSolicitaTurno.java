@@ -61,8 +61,6 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonSolicita = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldUC = new javax.swing.JTextField();
-        jTextFieldTurno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabelInvalidoUC = new javax.swing.JLabel();
         jLabelInvalidoTurno = new javax.swing.JLabel();
@@ -83,18 +81,6 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 
         jLabel4.setText("UC");
 
-        jTextFieldUC.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldUCFocusGained(evt);
-            }
-        });
-
-        jTextFieldTurno.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldTurnoFocusGained(evt);
-            }
-        });
-
         jLabel5.setText("Turno");
 
         jLabelInvalidoUC.setForeground(new java.awt.Color(255, 0, 0));
@@ -103,14 +89,11 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
         jLabelInvalidoTurno.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInvalidoTurno.setText("Inválido!");
 
-        jComboBoxUCs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxUCs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxUCsActionPerformed(evt);
             }
         });
-
-        jComboBoxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,28 +102,25 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSolicita))
+                    .addComponent(jButtonSolicita, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelInvalidoUC)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelInvalidoUC))
+                                    .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(57, 57, 57)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelInvalidoTurno)))
-                        .addGap(0, 43, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldUC, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jTextFieldTurno)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelInvalidoTurno)))))
+                        .addGap(0, 43, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -154,16 +134,12 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabelInvalidoUC)
                     .addComponent(jLabelInvalidoTurno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(47, 47, 47)
                         .addComponent(jButtonSolicita))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxUCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -207,14 +183,6 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
 			this.jLabelInvalidoUC.setVisible(true);
 			
     }//GEN-LAST:event_jButtonSolicitaMouseClicked
-
-    private void jTextFieldUCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldUCFocusGained
-        this.jLabelInvalidoUC.setVisible(false);
-    }//GEN-LAST:event_jTextFieldUCFocusGained
-
-    private void jTextFieldTurnoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTurnoFocusGained
-        this.jLabelInvalidoTurno.setVisible(false);
-    }//GEN-LAST:event_jTextFieldTurnoFocusGained
 
     private void jComboBoxUCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUCsActionPerformed
         String ucSelected = (String) this.jComboBoxUCs.getSelectedItem();
@@ -271,7 +239,5 @@ public class AlunoSolicitaTurno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelInvalidoTurno;
     private javax.swing.JLabel jLabelInvalidoUC;
-    private javax.swing.JTextField jTextFieldTurno;
-    private javax.swing.JTextField jTextFieldUC;
     // End of variables declaration//GEN-END:variables
 }
