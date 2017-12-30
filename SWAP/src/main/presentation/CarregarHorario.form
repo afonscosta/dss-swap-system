@@ -110,7 +110,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPrimeiraFase">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Come&#xe7;ar"/>
+        <Property name="text" type="java.lang.String" value="Fase 1"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonPrimeiraFaseMouseClicked"/>
@@ -134,7 +134,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSegundaFase">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Come&#xe7;ar"/>
+        <Property name="text" type="java.lang.String" value="Fase 2"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSegundaFaseMouseClicked"/>

@@ -71,7 +71,7 @@ public class CarregarHorario extends javax.swing.JFrame {
             }
         });
 
-        jButtonPrimeiraFase.setText("Começar");
+        jButtonPrimeiraFase.setText("Fase 1");
         jButtonPrimeiraFase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonPrimeiraFaseMouseClicked(evt);
@@ -84,7 +84,7 @@ public class CarregarHorario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Começar segunda fase de trocas");
 
-        jButtonSegundaFase.setText("Começar");
+        jButtonSegundaFase.setText("Fase 2");
         jButtonSegundaFase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSegundaFaseMouseClicked(evt);
