@@ -64,8 +64,8 @@ public class UC {
         }
         if (!encontrou) {
 			if (prioritario)
-				this.trataPrioritario(codUC, codTurnoS, codTurnoD, codAluno);
-			else 
+				encontrou = this.trataPrioritario(codUC, codTurnoS, codTurnoD, codAluno);
+			else
 				trocas.add(new SolicitacaoTroca(codTurnoS, codTurnoD, codAluno),codUC);
         }
 

@@ -239,7 +239,7 @@ public class Registo extends javax.swing.JFrame {
 		String pass = new String(this.jPasswordFieldPass.getPassword());
 		String passVerifica = new String(this.jPasswordFieldPassConf.getPassword());
 //		String chave = s.extraiChave(email);
-		String uc = null;
+		String uc = this.jTextFieldUC.getText();
 
 		if (pass.equals(passVerifica)) {
 			if (aluno) {

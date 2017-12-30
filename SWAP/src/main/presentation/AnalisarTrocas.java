@@ -337,7 +337,6 @@ public class AnalisarTrocas extends javax.swing.JFrame {
 
     private void jButtonAvancarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAvancarMouseClicked
         if (solicitacaoON < solicitacoes.size()-1) {
-			System.out.println("Entrei: " + solicitacaoON);
 			this.solicitacaoON++;
 		}
 		this.printSolicitacaoTroca();

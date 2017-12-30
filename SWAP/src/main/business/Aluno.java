@@ -3,6 +3,7 @@ package main.business;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import main.data.SolicitacaoTrocaDAO;
 import main.data.TurnoDAO;
@@ -85,5 +86,9 @@ public class Aluno extends Utilizador {
 
     HashMap<String,String[]> getSolicitacoes(String codAluno) {
         return trocas.getSolicitacoesAluno(codAluno);
+    }
+
+    public HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
+        return turnos.getNotMyTurnos(chave);
     }
 }

@@ -74,7 +74,6 @@ public class SolicitacaoTrocaDAO implements List<SolicitacaoTroca> {
             stm.setString(4, codUC);
             stm.executeUpdate();
             Connect.close(conn);
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(SolicitacaoTrocaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

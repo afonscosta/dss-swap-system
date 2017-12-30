@@ -29,20 +29,20 @@ public class TurnoDAO {
             stm.setString(1, (String) key);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-				String numSala = rs.getString("Sala_numero");
-				stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
-				stm.setString(1, numSala);
-				ResultSet rs1 = stm.executeQuery();
-				if (rs1.next()) {
-					Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
-					t = new Turno((String) key, rs.getString("UC_codigo"),
-                        rs.getInt("capacidade"),
-                        sala,
-                        rs.getTime("horaInicio").toLocalTime(),
-                        rs.getTime("duracao").toLocalTime(),
-                        rs.getInt("aulasPrevistas"),
-                        rs.getInt("diaSemana"));
-				}
+                String numSala = rs.getString("Sala_numero");
+                stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
+                stm.setString(1, numSala);
+                ResultSet rs1 = stm.executeQuery();
+                if (rs1.next()) {
+                    Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
+                    t = new Turno((String) key, rs.getString("UC_codigo"),
+                            rs.getInt("capacidade"),
+                            sala,
+                            rs.getTime("horaInicio").toLocalTime(),
+                            rs.getTime("duracao").toLocalTime(),
+                            rs.getInt("aulasPrevistas"),
+                            rs.getInt("diaSemana"));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,14 +83,14 @@ public class TurnoDAO {
     public Turno put(Object key, Turno value) {
 
         try {
-			conn = Connect.connect();
+            conn = Connect.connect();
             PreparedStatement stm = conn.prepareStatement("INSERT INTO Sala(numero,capacidade)\n" +
                     "VALUES (?,?)"
-				  + "ON DUPLICATE KEY UPDATE numero=VALUES(numero),  capacidade=VALUES(capacidade);");
+                    + "ON DUPLICATE KEY UPDATE numero=VALUES(numero),  capacidade=VALUES(capacidade);");
             stm.setString(1, value.getSala().getNumero());
             stm.setInt(2, value.getSala().getCapacidade());
             stm.executeUpdate();
-			
+
             conn = Connect.connect();
             stm = conn.prepareStatement("INSERT INTO Turno(numero,UC_codigo,capacidade,Sala_numero,horaI,duracao,aulasPrevistas,diaSemana)\n" +
                     "VALUES (?,?,?,?,?,?,?,?);");
@@ -167,8 +167,8 @@ public class TurnoDAO {
 
     public Turno getTurno(String codTurno,String cod_UC) {
 
-        Turno t = null;		
-		
+        Turno t = null;
+
         try {
             conn = Connect.connect();
             String sql = "SELECT * FROM Turno WHERE numero=? AND UC_codigo=?";
@@ -178,21 +178,21 @@ public class TurnoDAO {
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {
-				String numSala = rs.getString("Sala_numero");
-				stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
-				stm.setString(1, numSala);
-				ResultSet rs1 = stm.executeQuery();
-				if (rs1.next()) {
-					Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
-					t = new Turno(rs.getString("numero"),
-                        rs.getString("UC_codigo"),
-                        rs.getInt("capacidade"),
-                        sala,
-                        rs.getTime("horaI").toLocalTime(),
-                        rs.getTime("duracao").toLocalTime(),
-                        rs.getInt("aulasPrevistas"),
-                        rs.getInt("diaSemana"));
-				}
+                String numSala = rs.getString("Sala_numero");
+                stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
+                stm.setString(1, numSala);
+                ResultSet rs1 = stm.executeQuery();
+                if (rs1.next()) {
+                    Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
+                    t = new Turno(rs.getString("numero"),
+                            rs.getString("UC_codigo"),
+                            rs.getInt("capacidade"),
+                            sala,
+                            rs.getTime("horaI").toLocalTime(),
+                            rs.getTime("duracao").toLocalTime(),
+                            rs.getInt("aulasPrevistas"),
+                            rs.getInt("diaSemana"));
+                }
             }
 
         } catch (SQLException e) {
@@ -311,21 +311,21 @@ public class TurnoDAO {
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
-				String numSala = rs.getString("Sala_numero");
-				stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
-				stm.setString(1, numSala);
-				ResultSet rs1 = stm.executeQuery();
-				if (rs1.next()) {
-					Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
-					res.add(new Turno(rs.getString("numero"),
-									  rs.getString("UC_codigo"),
-									  rs.getInt("capacidade"),
-									  sala,
-									  rs.getTime("horaI").toLocalTime(),
-									  rs.getTime("duracao").toLocalTime(),
-									  rs.getInt("aulasPrevistas"),
-									  rs.getInt("diaSemana")));
-				}
+                String numSala = rs.getString("Sala_numero");
+                stm = conn.prepareStatement("SELECT * FROM Sala WHERE numero=?");
+                stm.setString(1, numSala);
+                ResultSet rs1 = stm.executeQuery();
+                if (rs1.next()) {
+                    Sala sala = new Sala(rs1.getString("numero"), rs1.getInt("capacidade"));
+                    res.add(new Turno(rs.getString("numero"),
+                            rs.getString("UC_codigo"),
+                            rs.getInt("capacidade"),
+                            sala,
+                            rs.getTime("horaI").toLocalTime(),
+                            rs.getTime("duracao").toLocalTime(),
+                            rs.getInt("aulasPrevistas"),
+                            rs.getInt("diaSemana")));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(TurnoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,5 +339,45 @@ public class TurnoDAO {
             put(t.getUC_codigo(),t);
         }
 
+    }
+
+    public HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
+        HashMap<String,ArrayList<String>> res = new HashMap<>();
+
+        try {
+
+            conn = Connect.connect();
+
+            String sql = "SELECT UtilizadorTurno.Turno_UC_codigo,Turno.numero \n"
+                       + "FROM UtilizadorTurno  \n"
+                       + "JOIN Turno ON Turno.UC_codigo = UtilizadorTurno.Turno_UC_codigo \n"
+                       + "WHERE Utilizador_idUtilizadores = ?\n"
+                       + "AND UtilizadorTurno.Turno_numero <> Turno.numero;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1,chave);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String uc = rs.getString("Turno_UC_codigo");
+
+                String turno = rs.getString("numero");
+
+                if (!res.containsKey(uc)) {
+                    ArrayList arr = new ArrayList<>();
+                    arr.add(turno);
+                    res.put(uc,arr);
+                } else {
+                    ArrayList arr = res.get(uc);
+                    arr.add(turno);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Connect.close(conn);
+        }
+        return res;
     }
 }

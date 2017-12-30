@@ -6,7 +6,6 @@
 package main.presentation;
 
 import java.util.HashMap;
-import main.business.SWAP;
 
 /**
  *
@@ -29,7 +28,6 @@ public class InfoAluno extends javax.swing.JFrame {
 	
 	/**
 	 * Creates new form InfoSocioInterface
-	 * @param s
 	 * @param alunosFalta
 	 * @param codUC
 	 * @param codTurno

@@ -71,7 +71,6 @@ public class DocenteMain extends javax.swing.JFrame {
 		
 		int fase = s.getFase();
 		if (fase == 1 || fase == 0 ) {
-			System.out.println("Entrei");
 			this.jButtonAnalisarTrocas.setEnabled(false);
 			this.jComboBoxUCs.setEnabled(false);
 		}

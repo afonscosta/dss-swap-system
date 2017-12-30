@@ -68,8 +68,8 @@ public class SWAP {
             } else if (chave.equals("dcmiei")) { // é direção de curso
                 utilizadores.putDirecaoCurso(chave,nome,password, 0);
 
-            } else { // é docente regente
-
+            } else { // é docente
+                System.out.println(wildcard);
                 utilizadores.putDocente(chave,new Docente(nome,email,password,(String) wildcard,regente));
             }
 
@@ -151,6 +151,13 @@ public class SWAP {
         }
 
         return res;
+    }
+
+    public HashMap<String,ArrayList<String>> getNotMyTurnos() {
+       Aluno a = (Aluno) sessao;
+       String chave = a.getNumero();
+
+       return a.getNotMyTurnos(chave);
     }
 
     private ArrayList<String[]> castTurnosToStringArray(ArrayList<Turno> arrTurnos) {
