@@ -341,14 +341,14 @@ public class TurnoDAO {
 
     }
 
-    public HashMap<String,ArrayList<String>> getNotMyTurnos(String chave) {
-        HashMap<String,ArrayList<String>> res = new HashMap<>();
+    public HashMap<String,ArrayList<String[]>> getNotMyTurnos(String chave) {
+        HashMap<String,ArrayList<String[]>> res = new HashMap<>();
 
         try {
 
             conn = Connect.connect();
 
-            String sql = "SELECT UtilizadorTurno.Turno_UC_codigo,Turno.numero \n"
+            String sql = "SELECT UtilizadorTurno.Turno_UC_codigo,Turno.numero, Turno.diaSemana, Turno.horaI, Turno.duracao \n"
                        + "FROM UtilizadorTurno  \n"
                        + "JOIN Turno ON Turno.UC_codigo = UtilizadorTurno.Turno_UC_codigo \n"
                        + "WHERE Utilizador_idUtilizadores = ?\n"
@@ -361,7 +361,11 @@ public class TurnoDAO {
             while (rs.next()) {
                 String uc = rs.getString("Turno_UC_codigo");
 
-                String turno = rs.getString("numero");
+				String[] turno = new String[4];
+				turno[0] = rs.getString("numero");
+				turno[1] = rs.getString("diaSemana");
+				turno[2] = rs.getTime("horaI").toString();
+				turno[3] = rs.getTime("duracao").toString();
 
                 if (!res.containsKey(uc)) {
                     ArrayList arr = new ArrayList<>();
